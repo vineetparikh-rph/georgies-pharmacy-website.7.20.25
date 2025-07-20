@@ -48,7 +48,7 @@ export class PharmacySystemIntegration {
           phone: "908-925-4567",
           fax: "908-925-8090",
           nabp: "3198098",
-          refillUrl: "https://3198098.winrxrefill.com"
+          refillUrl: "https://3198098.winrxrefill.com",
         },
         {
           name: "Georgies Specialty Pharmacy",
@@ -57,7 +57,7 @@ export class PharmacySystemIntegration {
           phone: "908-925-4566",
           fax: "908-345-5030",
           nabp: "3155973",
-          refillUrl: "https://3155973.winrxrefill.com"
+          refillUrl: "https://3155973.winrxrefill.com",
         },
         {
           name: "Georgies Parlin Pharmacy",
@@ -66,7 +66,7 @@ export class PharmacySystemIntegration {
           phone: "732-952-3022",
           fax: "407-641-8434",
           nabp: "3151482",
-          refillUrl: "https://3151482.winrxrefill.com"
+          refillUrl: "https://3151482.winrxrefill.com",
         },
         {
           name: "Georgies Outpatient Pharmacy",
@@ -75,8 +75,8 @@ export class PharmacySystemIntegration {
           phone: "609-726-5800",
           fax: "609-726-5810",
           nabp: "3156177",
-          refillUrl: "https://3156177.winrxrefill.com"
-        }
+          refillUrl: "https://3156177.winrxrefill.com",
+        },
       ],
       endpoints: {
         login: "/api/auth/login",
@@ -91,7 +91,7 @@ export class PharmacySystemIntegration {
    * Get pharmacy location by NABP number
    */
   getLocationByNabp(nabp: string): PharmacyLocation | undefined {
-    return this.config.locations.find(location => location.nabp === nabp);
+    return this.config.locations.find((location) => location.nabp === nabp);
   }
 
   /**
@@ -105,7 +105,7 @@ export class PharmacySystemIntegration {
    * Authenticate with the pharmacy system using existing credentials
    */
   async authenticateWithPharmacySystem(
-    credentials: PharmacySystemCredentials
+    credentials: PharmacySystemCredentials,
   ): Promise<PharmacySystemResponse> {
     try {
       const location = this.getLocationByNabp(credentials.nabp);
@@ -115,7 +115,7 @@ export class PharmacySystemIntegration {
 
       // First, try to authenticate with the specific pharmacy location
       const loginResponse = await this.makePharmacyRequest(
-        "/api/auth/login", 
+        "/api/auth/login",
         {
           method: "POST",
           body: JSON.stringify({
@@ -125,20 +125,23 @@ export class PharmacySystemIntegration {
             location: location.name,
           }),
         },
-        location.refillUrl
+        location.refillUrl,
       );
 
       if (loginResponse.success && loginResponse.sessionToken) {
         // Store session token with location info for future requests
-        this.sessionTokens.set(credentials.username, JSON.stringify({
-          token: loginResponse.sessionToken,
-          nabp: credentials.nabp,
-          location: location.name,
-        }));
-        
+        this.sessionTokens.set(
+          credentials.username,
+          JSON.stringify({
+            token: loginResponse.sessionToken,
+            nabp: credentials.nabp,
+            location: location.name,
+          }),
+        );
+
         // Create or update user in our system
         await this.syncUserData(credentials.username, loginResponse.data);
-        
+
         return {
           success: true,
           data: { ...loginResponse.data, location },
@@ -149,9 +152,9 @@ export class PharmacySystemIntegration {
       return { success: false, error: "Authentication failed" };
     } catch (error) {
       console.error("Pharmacy system authentication error:", error);
-      return { 
-        success: false, 
-        error: error instanceof Error ? error.message : "Unknown error" 
+      return {
+        success: false,
+        error: error instanceof Error ? error.message : "Unknown error",
       };
     }
   }
@@ -159,7 +162,10 @@ export class PharmacySystemIntegration {
   /**
    * Sync user data from pharmacy system to our database
    */
-  private async syncUserData(username: string, pharmacyUserData: any): Promise<void> {
+  private async syncUserData(
+    username: string,
+    pharmacyUserData: any,
+  ): Promise<void> {
     try {
       // Create or update user based on pharmacy system data
       const userData = {
@@ -200,56 +206,8 @@ export class PharmacySystemIntegration {
   /**
    * Fetch prescriptions from pharmacy system
    */
-  async fetchPrescriptionsFromPharmacy(username: string): Promise<PharmacySystemResponse> {
-    try {
-      const sessionData = this.sessionTokens.get(username);
-      if (!sessionData) {
-        return { success: false, error: "No active session" };
-      }
-
-      const sessionInfo = JSON.parse(sessionData);
-      const location = this.getLocationByNabp(sessionInfo.nabp);
-      if (!location) {
-        return { success: false, error: "Invalid pharmacy location" };
-      }
-
-      const response = await this.makePharmacyRequest(
-        "/api/prescriptions", 
-        {
-          method: "GET",
-          headers: {
-            "Authorization": `Bearer ${sessionInfo.token}`,
-          },
-        },
-        location.refillUrl
-      );
-
-      if (response.success && response.data) {
-        // Sync prescriptions to our database
-        await this.syncPrescriptions(username, response.data);
-      }
-
-      return response;
-    } catch (error) {
-      console.error("Error fetching prescriptions:", error);
-      return { 
-        success: false, 
-        error: error instanceof Error ? error.message : "Failed to fetch prescriptions" 
-      };
-    }
-  }
-
-  /**
-   * Submit refill request to pharmacy system
-   */
-  async submitRefillToPharmacy(
-    username: string, 
-    refillData: {
-      prescriptionId: string;
-      rxNumber: string;
-      pickupMethod: string;
-      notes?: string;
-    }
+  async fetchPrescriptionsFromPharmacy(
+    username: string,
   ): Promise<PharmacySystemResponse> {
     try {
       const sessionData = this.sessionTokens.get(username);
@@ -264,11 +222,64 @@ export class PharmacySystemIntegration {
       }
 
       const response = await this.makePharmacyRequest(
-        "/OrderRefill/OrderRefills", 
+        "/api/prescriptions",
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${sessionInfo.token}`,
+          },
+        },
+        location.refillUrl,
+      );
+
+      if (response.success && response.data) {
+        // Sync prescriptions to our database
+        await this.syncPrescriptions(username, response.data);
+      }
+
+      return response;
+    } catch (error) {
+      console.error("Error fetching prescriptions:", error);
+      return {
+        success: false,
+        error:
+          error instanceof Error
+            ? error.message
+            : "Failed to fetch prescriptions",
+      };
+    }
+  }
+
+  /**
+   * Submit refill request to pharmacy system
+   */
+  async submitRefillToPharmacy(
+    username: string,
+    refillData: {
+      prescriptionId: string;
+      rxNumber: string;
+      pickupMethod: string;
+      notes?: string;
+    },
+  ): Promise<PharmacySystemResponse> {
+    try {
+      const sessionData = this.sessionTokens.get(username);
+      if (!sessionData) {
+        return { success: false, error: "No active session" };
+      }
+
+      const sessionInfo = JSON.parse(sessionData);
+      const location = this.getLocationByNabp(sessionInfo.nabp);
+      if (!location) {
+        return { success: false, error: "Invalid pharmacy location" };
+      }
+
+      const response = await this.makePharmacyRequest(
+        "/OrderRefill/OrderRefills",
         {
           method: "POST",
           headers: {
-            "Authorization": `Bearer ${sessionInfo.token}`,
+            Authorization: `Bearer ${sessionInfo.token}`,
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
@@ -280,7 +291,7 @@ export class PharmacySystemIntegration {
             location: location.name,
           }),
         },
-        location.refillUrl
+        location.refillUrl,
       );
 
       if (response.success) {
@@ -296,9 +307,10 @@ export class PharmacySystemIntegration {
       return response;
     } catch (error) {
       console.error("Error submitting refill:", error);
-      return { 
-        success: false, 
-        error: error instanceof Error ? error.message : "Failed to submit refill" 
+      return {
+        success: false,
+        error:
+          error instanceof Error ? error.message : "Failed to submit refill",
       };
     }
   }
@@ -307,19 +319,19 @@ export class PharmacySystemIntegration {
    * Make authenticated request to pharmacy system
    */
   private async makePharmacyRequest(
-    endpoint: string, 
+    endpoint: string,
     options: RequestInit = {},
-    baseUrl?: string
+    baseUrl?: string,
   ): Promise<PharmacySystemResponse> {
     try {
       const url = `${baseUrl || "https://3156177.winrxrefill.com"}${endpoint}`;
-      
+
       const response = await fetch(url, {
         ...options,
         headers: {
           "Content-Type": "application/json",
           "User-Agent": "GeorgiesPharmacy-Portal/1.0",
-          "Accept": "application/json",
+          Accept: "application/json",
           ...options.headers,
         },
       });
@@ -333,10 +345,10 @@ export class PharmacySystemIntegration {
         } else if (response.status === 404) {
           return { success: false, error: "Endpoint not found" };
         }
-        
-        return { 
-          success: false, 
-          error: `HTTP ${response.status}: ${response.statusText}` 
+
+        return {
+          success: false,
+          error: `HTTP ${response.status}: ${response.statusText}`,
         };
       }
 
@@ -348,29 +360,28 @@ export class PharmacySystemIntegration {
       } else {
         // For HTML responses (like the actual refill page), return success with page info
         const html = await response.text();
-        return { 
-          success: true, 
-          data: { 
+        return {
+          success: true,
+          data: {
             type: "html_page",
             content: html,
             url: url,
-            message: "Refill page accessed successfully"
-          } 
+            message: "Refill page accessed successfully",
+          },
         };
       }
-      
     } catch (error) {
       // Handle network errors, timeout, etc.
-      if (error instanceof TypeError && error.message.includes('fetch')) {
-        return { 
-          success: false, 
-          error: "Network error: Unable to connect to pharmacy system" 
+      if (error instanceof TypeError && error.message.includes("fetch")) {
+        return {
+          success: false,
+          error: "Network error: Unable to connect to pharmacy system",
         };
       }
-      
-      return { 
-        success: false, 
-        error: error instanceof Error ? error.message : "Unknown error" 
+
+      return {
+        success: false,
+        error: error instanceof Error ? error.message : "Unknown error",
       };
     }
   }
@@ -378,7 +389,10 @@ export class PharmacySystemIntegration {
   /**
    * Sync prescriptions from pharmacy system to our database
    */
-  private async syncPrescriptions(username: string, prescriptions: any[]): Promise<void> {
+  private async syncPrescriptions(
+    username: string,
+    prescriptions: any[],
+  ): Promise<void> {
     try {
       for (const prescription of prescriptions) {
         const prescriptionData = {
@@ -388,7 +402,9 @@ export class PharmacySystemIntegration {
           dosage: prescription.dosage,
           instructions: prescription.instructions,
           prescribedBy: prescription.prescribedBy,
-          datePrescribed: prescription.datePrescribed ? new Date(prescription.datePrescribed) : new Date(),
+          datePrescribed: prescription.datePrescribed
+            ? new Date(prescription.datePrescribed)
+            : new Date(),
           quantity: prescription.quantity || 30,
           refillsRemaining: prescription.refillsRemaining || 0,
           status: prescription.status || "active",

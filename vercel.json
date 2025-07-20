@@ -1,0 +1,69 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist/public"
+      }
+    },
+    {
+      "src": "dist/index.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/dist/index.js"
+    },
+    {
+      "src": "/locations/(.*)",
+      "dest": "/dist/public/index.html"
+    },
+    {
+      "src": "/services/(.*)",
+      "dest": "/dist/public/index.html"
+    },
+    {
+      "src": "/support/(.*)",
+      "dest": "/dist/public/index.html"
+    },
+    {
+      "src": "/legal/(.*)",
+      "dest": "/dist/public/index.html"
+    },
+    {
+      "src": "/(contact|features|about|best-prices|pet-medications|medpack|otc-store|partners|testimonials|hours)",
+      "dest": "/dist/public/index.html"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/dist/public/index.html"
+    }
+  ],
+  "env": {
+    "NODE_ENV": "production",
+    "VERCEL": "true"
+  },
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        }
+      ]
+    }
+  ]
+}

@@ -1,19 +1,15 @@
-// routes/refills.ts
-import express, { Request, Response } from 'express';
+import { type Request, type Response, Router } from "express";
+import { refillToPdf } from "../../utils/pdf/refill_pdf";
 
-const router = express.Router();
+const router = Router();
 
-router.post('/', async (req: Request, res: Response) => {
+router.post("/api/refill", async (req: Request, res: Response) => {
   try {
-    const formData = req.body;
-    console.log('Refill Request:', formData);
-
-    // Add your PDF generation or DB logic here
-
-    res.status(200).json({ message: 'Refill request received' });
-  } catch (error) {
-    console.error('Error in refill route:', error);
-    res.status(500).json({ error: 'Internal server error' });
+    await refillToPdf(req.body);
+    res.json({ success: true });
+  } catch (err) {
+    console.error("Refill Error:", err);
+    res.status(500).json({ success: false, error: "Refill processing failed." });
   }
 });
 

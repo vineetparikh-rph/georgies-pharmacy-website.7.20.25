@@ -1,19 +1,15 @@
-// routes/vaccine.ts
-import express, { Request, Response } from 'express';
+import { type Request, type Response, Router } from "express";
+import { vaccineToPdf } from "../../utils/pdf/vaccine_pdf";
 
-const router = express.Router();
+const router = Router();
 
-router.post('/', async (req: Request, res: Response) => {
+router.post("/api/vaccine", async (req: Request, res: Response) => {
   try {
-    const formData = req.body;
-    console.log('Vaccine Consent Form:', formData);
-
-    // Add your faxing/email logic here
-
-    res.status(200).json({ message: 'Vaccine form submitted successfully' });
-  } catch (error) {
-    console.error('Error in vaccine route:', error);
-    res.status(500).json({ error: 'Internal server error' });
+    await vaccineToPdf(req.body);
+    res.json({ success: true });
+  } catch (err) {
+    console.error("Vaccine Error:", err);
+    res.status(500).json({ success: false, error: "Vaccine processing failed." });
   }
 });
 

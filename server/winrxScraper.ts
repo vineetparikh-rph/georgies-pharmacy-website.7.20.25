@@ -107,7 +107,7 @@ export class WinRxScraper {
     const selectRegex = /<select[^>]*name=['"](pickup|delivery|method)['"'][^>]*>(.*?)<\/select>/gis;
     const match = selectRegex.exec(html);
     
-    if (match && match[2]) {
+    if (match?.[2]) {
       const optionsHtml = match[2];
       const optionRegex = /<option[^>]*value=['"](.*?)['"]/gi;
       let optionMatch;
@@ -140,7 +140,7 @@ export class WinRxScraper {
     
     for (const pattern of csrfPatterns) {
       const match = pattern.exec(html);
-      if (match && match[2]) {
+      if (match?.[2]) {
         return match[2];
       }
     }

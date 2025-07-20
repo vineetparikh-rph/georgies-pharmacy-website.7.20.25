@@ -2,22 +2,37 @@
   "version": 2,
   "builds": [
     {
-      "src": "client/package.json",
-      "use": "@vercel/static-build"
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist/public"
+      }
     },
     {
-      "src": "api/**/*.ts",
+      "src": "dist/index.js",
       "use": "@vercel/node"
     }
   ],
-  "routes": [
+  "rewrites": [
     {
-      "src": "/api/(.*)",
-      "dest": "/api/$1.ts"
+      "source": "/api/:match*",
+      "destination": "/api/index.js"
     },
     {
-      "src": "/(.*)",
-      "dest": "/client/$1"
+      "source": "/refill",
+      "destination": "/"
+    },
+    {
+      "source": "/transfer",
+      "destination": "/"
+    },
+    {
+      "source": "/vaccine",
+      "destination": "/"
+    },
+    {
+      "source": "/:path*",
+      "destination": "/"
     }
   ]
 }

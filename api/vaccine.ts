@@ -1,11 +1,14 @@
-﻿import type { VercelRequest, VercelResponse } from '@vercel/node';
+﻿import { Request, Response } from "express";
 
-export default function handler(req: VercelRequest, res: VercelResponse) {
-  if (req.method === 'POST') {
-    const { name, dateOfBirth, vaccineType, consent } = req.body;
-    console.log("Vaccine Request:", { name, dateOfBirth, vaccineType, consent });
-    return res.status(200).json({ message: 'Vaccine intake form submitted successfully.' });
-  } else {
-    return res.status(405).json({ error: 'Method Not Allowed' });
+export default async function handler(req: Request, res: Response) {
+  if (req.method !== "POST") {
+    return res.status(405).json({ error: "Method Not Allowed" });
   }
+
+  const vaccineData = req.body;
+  console.log("Vaccine intake form received:", vaccineData);
+
+  // TODO: Add real processing logic here (e.g., send to email, store in DB, fax, etc.)
+
+  return res.status(200).json({ message: "Vaccine intake form submitted successfully" });
 }

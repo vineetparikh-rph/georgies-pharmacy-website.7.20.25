@@ -13,34 +13,34 @@
       "use": "@vercel/node"
     }
   ],
-  "routes": [
+  "rewrites": [
     {
-      "src": "/api/(.*)",
-      "dest": "/dist/index.js"
+      "source": "/api/:match*",
+      "destination": "/dist/index.js"
     },
     {
-      "src": "/locations/(.*)",
-      "dest": "/dist/public/index.html"
+      "source": "/locations/:match*",
+      "destination": "/dist/public/index.html"
     },
     {
-      "src": "/services/(.*)",
-      "dest": "/dist/public/index.html"
+      "source": "/services/:match*",
+      "destination": "/dist/public/index.html"
     },
     {
-      "src": "/support/(.*)",
-      "dest": "/dist/public/index.html"
+      "source": "/support/:match*",
+      "destination": "/dist/public/index.html"
     },
     {
-      "src": "/legal/(.*)",
-      "dest": "/dist/public/index.html"
+      "source": "/legal/:match*",
+      "destination": "/dist/public/index.html"
     },
     {
-      "src": "/(contact|features|about|best-prices|pet-medications|medpack|otc-store|partners|testimonials|hours)",
-      "dest": "/dist/public/index.html"
+      "source": "/:match(contact|features|about|best-prices|pet-medications|medpack|otc-store|partners|testimonials|hours)",
+      "destination": "/dist/public/index.html"
     },
     {
-      "src": "/(.*)",
-      "dest": "/dist/public/index.html"
+      "source": "/:match*",
+      "destination": "/dist/public/index.html"
     }
   ],
   "env": {
@@ -49,7 +49,7 @@
   },
   "headers": [
     {
-      "source": "/(.*)",
+      "source": "/:path*",
       "headers": [
         {
           "key": "X-Content-Type-Options",

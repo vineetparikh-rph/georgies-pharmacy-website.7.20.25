@@ -113,7 +113,7 @@ export class AmerisourceBergenService {
   /**
    * Get featured/popular OTC products
    */
-  async getFeaturedProducts(limit: number = 100): Promise<ABProduct[]> {
+  async getFeaturedProducts(limit = 100): Promise<ABProduct[]> {
     return this.searchProducts({
       category: 'OTC',
       limit,

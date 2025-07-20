@@ -55,7 +55,7 @@ interface ProcessedProduct {
 export class ShopifyService {
   private shopDomain: string;
   private accessToken: string;
-  private apiVersion: string = '2024-01';
+  private apiVersion = '2024-01';
 
   constructor() {
     this.shopDomain = process.env.SHOPIFY_SHOP_DOMAIN || 'georgiespharmacy.myshopify.com';
@@ -72,7 +72,7 @@ export class ShopifyService {
   /**
    * Fetch all products from Shopify
    */
-  async fetchProducts(limit: number = 250): Promise<ProcessedProduct[]> {
+  async fetchProducts(limit = 250): Promise<ProcessedProduct[]> {
     if (!this.isConfigured()) {
       throw new Error('Shopify credentials not configured. Please set SHOPIFY_SHOP_DOMAIN and SHOPIFY_ACCESS_TOKEN environment variables.');
     }

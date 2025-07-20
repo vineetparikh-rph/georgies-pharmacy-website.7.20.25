@@ -19,9 +19,9 @@ interface SocketResponse {
 }
 
 export class PharmacySocketProtocol {
-  private host: string = 's1.winrxrefill.com';
-  private port: number = 569;
-  private timeout: number = 10000; // 10 seconds
+  private host = 's1.winrxrefill.com';
+  private port = 569;
+  private timeout = 10000; // 10 seconds
 
   constructor(host?: string, port?: number) {
     if (host) this.host = host;

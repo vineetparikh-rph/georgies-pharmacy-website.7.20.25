@@ -2,68 +2,22 @@
   "version": 2,
   "builds": [
     {
-      "src": "package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "dist/public"
-      }
+      "src": "client/package.json",
+      "use": "@vercel/static-build"
     },
     {
-      "src": "dist/index.js",
+      "src": "api/**/*.ts",
       "use": "@vercel/node"
     }
   ],
-  "rewrites": [
+  "routes": [
     {
-      "source": "/api/:match*",
-      "destination": "/dist/index.js"
+      "src": "/api/(.*)",
+      "dest": "/api/$1.ts"
     },
     {
-      "source": "/locations/:match*",
-      "destination": "/dist/public/index.html"
-    },
-    {
-      "source": "/services/:match*",
-      "destination": "/dist/public/index.html"
-    },
-    {
-      "source": "/support/:match*",
-      "destination": "/dist/public/index.html"
-    },
-    {
-      "source": "/legal/:match*",
-      "destination": "/dist/public/index.html"
-    },
-    {
-      "source": "/:match(contact|features|about|best-prices|pet-medications|medpack|otc-store|partners|testimonials|hours)",
-      "destination": "/dist/public/index.html"
-    },
-    {
-      "source": "/:match*",
-      "destination": "/dist/public/index.html"
-    }
-  ],
-  "env": {
-    "NODE_ENV": "production",
-    "VERCEL": "true"
-  },
-  "headers": [
-    {
-      "source": "/:path*",
-      "headers": [
-        {
-          "key": "X-Content-Type-Options",
-          "value": "nosniff"
-        },
-        {
-          "key": "X-Frame-Options",
-          "value": "DENY"
-        },
-        {
-          "key": "X-XSS-Protection",
-          "value": "1; mode=block"
-        }
-      ]
+      "src": "/(.*)",
+      "dest": "/client/$1"
     }
   ]
 }

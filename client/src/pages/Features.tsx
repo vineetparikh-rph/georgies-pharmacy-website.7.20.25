@@ -1,5 +1,18 @@
 import { Button } from "@/components/ui/button";
-import { Pill, RotateCcw, ArrowRightLeft, MessageCircle, Shield, Clock, Users, Bell, Smartphone, CreditCard, MapPin, Calendar } from "lucide-react";
+import {
+  Pill,
+  RotateCcw,
+  ArrowRightLeft,
+  MessageCircle,
+  Shield,
+  Clock,
+  Users,
+  Bell,
+  Smartphone,
+  CreditCard,
+  MapPin,
+  Calendar,
+} from "lucide-react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 
@@ -15,7 +28,8 @@ export default function Features() {
             Powerful <span className="text-primary">Features</span>
           </h1>
           <p className="fluid-text-xl text-slate-600 mb-8 max-w-3xl mx-auto">
-            Everything you need to manage your health, all in one convenient platform designed with your needs in mind.
+            Everything you need to manage your health, all in one convenient
+            platform designed with your needs in mind.
           </p>
         </div>
 
@@ -27,9 +41,13 @@ export default function Features() {
               <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6">
                 <Pill className="text-primary h-8 w-8" />
               </div>
-              <h3 className="text-2xl font-semibold text-slate-900 mb-4">Prescription Management</h3>
+              <h3 className="text-2xl font-semibold text-slate-900 mb-4">
+                Prescription Management
+              </h3>
               <p className="text-slate-600 mb-6">
-                Keep track of all your medications in one place. View detailed information, dosage instructions, refill dates, and prescription history.
+                Keep track of all your medications in one place. View detailed
+                information, dosage instructions, refill dates, and prescription
+                history.
               </p>
               <ul className="space-y-2 text-slate-600">
                 <li className="flex items-center">
@@ -56,9 +74,12 @@ export default function Features() {
               <div className="w-16 h-16 bg-secondary/10 rounded-full flex items-center justify-center mb-6">
                 <RotateCcw className="text-secondary h-8 w-8" />
               </div>
-              <h3 className="text-2xl font-semibold text-slate-900 mb-4">Quick Refills</h3>
+              <h3 className="text-2xl font-semibold text-slate-900 mb-4">
+                Quick Refills
+              </h3>
               <p className="text-slate-600 mb-6">
-                Request prescription refills with just a few clicks. Choose your preferred pickup method and get notified when ready.
+                Request prescription refills with just a few clicks. Choose your
+                preferred pickup method and get notified when ready.
               </p>
               <ul className="space-y-2 text-slate-600">
                 <li className="flex items-center">
@@ -85,9 +106,12 @@ export default function Features() {
               <div className="w-16 h-16 bg-warning/10 rounded-full flex items-center justify-center mb-6">
                 <ArrowRightLeft className="text-warning h-8 w-8" />
               </div>
-              <h3 className="text-2xl font-semibold text-slate-900 mb-4">Easy Transfers</h3>
+              <h3 className="text-2xl font-semibold text-slate-900 mb-4">
+                Easy Transfers
+              </h3>
               <p className="text-slate-600 mb-6">
-                Transfer prescriptions from other pharmacies seamlessly. We handle all the paperwork and coordination for you.
+                Transfer prescriptions from other pharmacies seamlessly. We
+                handle all the paperwork and coordination for you.
               </p>
               <ul className="space-y-2 text-slate-600">
                 <li className="flex items-center">
@@ -114,9 +138,12 @@ export default function Features() {
               <div className="w-16 h-16 bg-success/10 rounded-full flex items-center justify-center mb-6">
                 <MessageCircle className="text-success h-8 w-8" />
               </div>
-              <h3 className="text-2xl font-semibold text-slate-900 mb-4">Live Support</h3>
+              <h3 className="text-2xl font-semibold text-slate-900 mb-4">
+                Live Support
+              </h3>
               <p className="text-slate-600 mb-6">
-                Connect directly with our pharmacy team through live chat. Get answers to questions and professional consultations.
+                Connect directly with our pharmacy team through live chat. Get
+                answers to questions and professional consultations.
               </p>
               <ul className="space-y-2 text-slate-600">
                 <li className="flex items-center">
@@ -143,9 +170,12 @@ export default function Features() {
               <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6">
                 <Shield className="text-primary h-8 w-8" />
               </div>
-              <h3 className="text-2xl font-semibold text-slate-900 mb-4">Secure & Private</h3>
+              <h3 className="text-2xl font-semibold text-slate-900 mb-4">
+                Secure & Private
+              </h3>
               <p className="text-slate-600 mb-6">
-                Your health information is protected with enterprise-grade security, encryption, and full HIPAA compliance.
+                Your health information is protected with enterprise-grade
+                security, encryption, and full HIPAA compliance.
               </p>
               <ul className="space-y-2 text-slate-600">
                 <li className="flex items-center">
@@ -172,9 +202,12 @@ export default function Features() {
               <div className="w-16 h-16 bg-secondary/10 rounded-full flex items-center justify-center mb-6">
                 <Clock className="text-secondary h-8 w-8" />
               </div>
-              <h3 className="text-2xl font-semibold text-slate-900 mb-4">24/7 Access</h3>
+              <h3 className="text-2xl font-semibold text-slate-900 mb-4">
+                24/7 Access
+              </h3>
               <p className="text-slate-600 mb-6">
-                Access your prescription information and request services anytime, anywhere from any device.
+                Access your prescription information and request services
+                anytime, anywhere from any device.
               </p>
               <ul className="space-y-2 text-slate-600">
                 <li className="flex items-center">
@@ -200,14 +233,20 @@ export default function Features() {
 
         {/* Additional Features */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">Additional Features</h2>
+          <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+            Additional Features
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div className="text-center">
               <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Bell className="text-primary h-6 w-6" />
               </div>
-              <h3 className="font-semibold text-slate-900 mb-2">Smart Notifications</h3>
-              <p className="text-sm text-slate-600">Get reminders for refills, pickups, and medication schedules</p>
+              <h3 className="font-semibold text-slate-900 mb-2">
+                Smart Notifications
+              </h3>
+              <p className="text-sm text-slate-600">
+                Get reminders for refills, pickups, and medication schedules
+              </p>
             </div>
 
             <div className="text-center">
@@ -215,23 +254,33 @@ export default function Features() {
                 <Smartphone className="text-secondary h-6 w-6" />
               </div>
               <h3 className="font-semibold text-slate-900 mb-2">Mobile App</h3>
-              <p className="text-sm text-slate-600">Full-featured mobile application for iOS and Android</p>
+              <p className="text-sm text-slate-600">
+                Full-featured mobile application for iOS and Android
+              </p>
             </div>
 
             <div className="text-center">
               <div className="w-12 h-12 bg-warning/10 rounded-full flex items-center justify-center mx-auto mb-4">
                 <CreditCard className="text-warning h-6 w-6" />
               </div>
-              <h3 className="font-semibold text-slate-900 mb-2">Easy Payments</h3>
-              <p className="text-sm text-slate-600">Secure online payments and insurance processing</p>
+              <h3 className="font-semibold text-slate-900 mb-2">
+                Easy Payments
+              </h3>
+              <p className="text-sm text-slate-600">
+                Secure online payments and insurance processing
+              </p>
             </div>
 
             <div className="text-center">
               <div className="w-12 h-12 bg-success/10 rounded-full flex items-center justify-center mx-auto mb-4">
                 <MapPin className="text-success h-6 w-6" />
               </div>
-              <h3 className="font-semibold text-slate-900 mb-2">Location Services</h3>
-              <p className="text-sm text-slate-600">Find nearby locations and get directions</p>
+              <h3 className="font-semibold text-slate-900 mb-2">
+                Location Services
+              </h3>
+              <p className="text-sm text-slate-600">
+                Find nearby locations and get directions
+              </p>
             </div>
           </div>
         </section>
@@ -242,10 +291,13 @@ export default function Features() {
             Ready to Experience These Features?
           </h2>
           <p className="fluid-text-lg text-red-100 mb-8">
-            Join thousands of patients who have simplified their healthcare with Georgies Pharmacy.
+            Join thousands of patients who have simplified their healthcare with
+            Georgies Pharmacy.
           </p>
           <Button
-            onClick={() => window.open('https://3156177.winrxrefill.com/', '_blank')}
+            onClick={() =>
+              window.open("https://3156177.winrxrefill.com/", "_blank")
+            }
             size="lg"
             variant="secondary"
             className="bg-white text-primary hover:bg-gray-100 px-8 py-4 text-lg"
@@ -267,43 +319,131 @@ export default function Features() {
                 <span className="font-bold">Georgies Pharmacy</span>
               </div>
               <p className="text-slate-400">
-                Your trusted healthcare partner, providing convenient prescription management and exceptional patient care.
+                Your trusted healthcare partner, providing convenient
+                prescription management and exceptional patient care.
               </p>
             </div>
-            
+
             <div>
               <h4 className="font-semibold mb-3">Services</h4>
               <ul className="space-y-2 text-slate-400">
-                <li><a href="/services/refills" className="hover:text-white transition-colors">Prescription Refills</a></li>
-                <li><a href="/services/transfers" className="hover:text-white transition-colors">Prescription Transfers</a></li>
-                <li><a href="/services/sync" className="hover:text-white transition-colors">Medication Synchronization</a></li>
-                <li><a href="/services/consultations" className="hover:text-white transition-colors">Health Consultations</a></li>
+                <li>
+                  <a
+                    href="/services/refills"
+                    className="hover:text-white transition-colors"
+                  >
+                    Prescription Refills
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/services/transfers"
+                    className="hover:text-white transition-colors"
+                  >
+                    Prescription Transfers
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/services/sync"
+                    className="hover:text-white transition-colors"
+                  >
+                    Medication Synchronization
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/services/consultations"
+                    className="hover:text-white transition-colors"
+                  >
+                    Health Consultations
+                  </a>
+                </li>
               </ul>
             </div>
-            
+
             <div>
               <h4 className="font-semibold mb-3">Support</h4>
               <ul className="space-y-2 text-slate-400">
-                <li><a href="/contact" className="hover:text-white transition-colors">Contact Us</a></li>
-                <li><a href="/support/faq" className="hover:text-white transition-colors">FAQs</a></li>
-                <li><a href="/support/hours" className="hover:text-white transition-colors">Pharmacy Hours</a></li>
-                <li><a href="/support/insurance" className="hover:text-white transition-colors">Insurance Information</a></li>
+                <li>
+                  <a
+                    href="/contact"
+                    className="hover:text-white transition-colors"
+                  >
+                    Contact Us
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/support/faq"
+                    className="hover:text-white transition-colors"
+                  >
+                    FAQs
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/support/hours"
+                    className="hover:text-white transition-colors"
+                  >
+                    Pharmacy Hours
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/support/insurance"
+                    className="hover:text-white transition-colors"
+                  >
+                    Insurance Information
+                  </a>
+                </li>
               </ul>
             </div>
-            
+
             <div>
               <h4 className="font-semibold mb-3">Legal</h4>
               <ul className="space-y-2 text-slate-400">
-                <li><a href="/legal/privacy" className="hover:text-white transition-colors">Privacy Policy</a></li>
-                <li><a href="/legal/terms" className="hover:text-white transition-colors">Terms of Service</a></li>
-                <li><a href="/legal/hipaa" className="hover:text-white transition-colors">HIPAA Notice</a></li>
-                <li><a href="/legal/accessibility" className="hover:text-white transition-colors">Accessibility</a></li>
+                <li>
+                  <a
+                    href="/legal/privacy"
+                    className="hover:text-white transition-colors"
+                  >
+                    Privacy Policy
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/legal/terms"
+                    className="hover:text-white transition-colors"
+                  >
+                    Terms of Service
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/legal/hipaa"
+                    className="hover:text-white transition-colors"
+                  >
+                    HIPAA Notice
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/legal/accessibility"
+                    className="hover:text-white transition-colors"
+                  >
+                    Accessibility
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
-          
+
           <div className="border-t border-slate-800 mt-8 pt-6 text-center">
-            <p className="text-slate-400">&copy; 2025 by Georgies Pharmacy Group. All rights reserved. Licensed Pharmacy.</p>
+            <p className="text-slate-400">
+              &copy; 2025 by Georgies Pharmacy Group. All rights reserved.
+              Licensed Pharmacy.
+            </p>
           </div>
         </div>
       </footer>

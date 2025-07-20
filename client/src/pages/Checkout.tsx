@@ -2,13 +2,32 @@ import { useState, useEffect } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import { useToast } from "@/hooks/use-toast";
 import { z } from "zod";
 import { ArrowLeft, CreditCard, Package, MapPin, Phone } from "lucide-react";
@@ -24,20 +43,22 @@ const checkoutFormSchema = z.object({
     email: z.string().email("Valid email is required"),
     phone: z.string().min(10, "Valid phone number is required"),
   }),
-  shippingAddress: z.object({
-    address1: z.string().min(1, "Address is required"),
-    address2: z.string().optional(),
-    city: z.string().min(1, "City is required"),
-    state: z.string().min(1, "State is required"),
-    zipCode: z.string().min(5, "Valid ZIP code is required"),
-  }).optional(),
+  shippingAddress: z
+    .object({
+      address1: z.string().min(1, "Address is required"),
+      address2: z.string().optional(),
+      city: z.string().min(1, "City is required"),
+      state: z.string().min(1, "State is required"),
+      zipCode: z.string().min(5, "Valid ZIP code is required"),
+    })
+    .optional(),
 });
 
 type CheckoutForm = z.infer<typeof checkoutFormSchema>;
 
 export default function Checkout() {
   const [location] = useLocation();
-  const searchParams = new URLSearchParams(location.split('?')[1] || '');
+  const searchParams = new URLSearchParams(location.split("?")[1] || "");
   const productId = searchParams.get("product");
   const store = searchParams.get("store");
   const { toast } = useToast();
@@ -68,10 +89,12 @@ export default function Checkout() {
 
   // Fetch product details
   const { data: product, isLoading: productLoading } = useQuery({
-    queryKey: ['/api/otc-products/details', productId],
+    queryKey: ["/api/otc-products/details", productId],
     queryFn: async () => {
-      const res = await fetch(`/api/otc-products/details/${productId}?store=${store}`);
-      if (!res.ok) throw new Error('Failed to fetch product details');
+      const res = await fetch(
+        `/api/otc-products/details/${productId}?store=${store}`,
+      );
+      if (!res.ok) throw new Error("Failed to fetch product details");
       return res.json();
     },
     enabled: !!(productId && store),
@@ -87,13 +110,13 @@ export default function Checkout() {
         totalAmount: calculateTotal(),
       };
 
-      const res = await fetch('/api/otc-products/order', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const res = await fetch("/api/otc-products/order", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(orderData),
       });
 
-      if (!res.ok) throw new Error('Failed to process order');
+      if (!res.ok) throw new Error("Failed to process order");
       return res.json();
     },
     onSuccess: (data) => {
@@ -101,14 +124,15 @@ export default function Checkout() {
         title: "Order Successful!",
         description: `Your order #${data.orderId} has been placed. You'll receive confirmation via email.`,
       });
-      queryClient.invalidateQueries({ queryKey: ['/api/orders'] });
+      queryClient.invalidateQueries({ queryKey: ["/api/orders"] });
       // Redirect to confirmation page
       window.location.href = `/order-confirmation?orderId=${data.orderId}`;
     },
     onError: (error: any) => {
       toast({
         title: "Order Failed",
-        description: error.message || "There was an error processing your order.",
+        description:
+          error.message || "There was an error processing your order.",
         variant: "destructive",
       });
     },
@@ -117,7 +141,7 @@ export default function Checkout() {
   const calculateTotal = () => {
     if (!product) return 0;
     const quantity = form.getValues("quantity");
-    const unitPrice = parseFloat(product.price.replace('$', ''));
+    const unitPrice = parseFloat(product.price.replace("$", ""));
     const subtotal = unitPrice * quantity;
     const tax = subtotal * 0.08; // 8% tax
     const deliveryFee = deliveryMethod === "delivery" ? 5.99 : 0;
@@ -125,13 +149,33 @@ export default function Checkout() {
   };
 
   const stores = [
-    { value: "family", label: "Family Pharmacy", address: "123 Main St, New Jersey", phone: "(908) 925-8090" },
-    { value: "specialty", label: "Specialty Pharmacy", address: "456 Oak Ave, New Jersey", phone: "(908) 345-5030" },
-    { value: "parlin", label: "Parlin Pharmacy", address: "789 Pine Rd, Parlin, NJ", phone: "(407) 641-8434" },
-    { value: "outpatient", label: "Outpatient Pharmacy", address: "321 Elm St, New Jersey", phone: "(609) 726-5810" }
+    {
+      value: "family",
+      label: "Family Pharmacy",
+      address: "123 Main St, New Jersey",
+      phone: "(908) 925-8090",
+    },
+    {
+      value: "specialty",
+      label: "Specialty Pharmacy",
+      address: "456 Oak Ave, New Jersey",
+      phone: "(908) 345-5030",
+    },
+    {
+      value: "parlin",
+      label: "Parlin Pharmacy",
+      address: "789 Pine Rd, Parlin, NJ",
+      phone: "(407) 641-8434",
+    },
+    {
+      value: "outpatient",
+      label: "Outpatient Pharmacy",
+      address: "321 Elm St, New Jersey",
+      phone: "(609) 726-5810",
+    },
   ];
 
-  const selectedStore = stores.find(s => s.value === store);
+  const selectedStore = stores.find((s) => s.value === store);
 
   if (!productId || !store) {
     return (
@@ -140,11 +184,12 @@ export default function Checkout() {
           <CardHeader>
             <CardTitle className="text-red-600">Invalid Checkout</CardTitle>
             <CardDescription>
-              Product or store information is missing. Please return to the products page.
+              Product or store information is missing. Please return to the
+              products page.
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <Button onClick={() => window.location.href = '/otc-products'}>
+            <Button onClick={() => (window.location.href = "/otc-products")}>
               <ArrowLeft className="h-4 w-4 mr-2" />
               Back to Products
             </Button>
@@ -173,7 +218,7 @@ export default function Checkout() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <Button onClick={() => window.location.href = '/otc-products'}>
+            <Button onClick={() => (window.location.href = "/otc-products")}>
               <ArrowLeft className="h-4 w-4 mr-2" />
               Back to Products
             </Button>
@@ -189,7 +234,7 @@ export default function Checkout() {
         {/* Header */}
         <div className="mb-8">
           <Button
-            onClick={() => window.location.href = '/otc-products'}
+            onClick={() => (window.location.href = "/otc-products")}
             variant="ghost"
             className="mb-4"
           >
@@ -197,7 +242,9 @@ export default function Checkout() {
             Back to Products
           </Button>
           <h1 className="text-3xl font-bold text-slate-900">Checkout</h1>
-          <p className="text-slate-600 mt-2">Complete your purchase from {selectedStore?.label}</p>
+          <p className="text-slate-600 mt-2">
+            Complete your purchase from {selectedStore?.label}
+          </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -220,7 +267,9 @@ export default function Checkout() {
                   <div className="flex-1">
                     <h3 className="font-medium text-sm">{product.title}</h3>
                     <p className="text-xs text-slate-600">{product.brand}</p>
-                    <p className="text-sm font-bold text-primary">{product.price}</p>
+                    <p className="text-sm font-bold text-primary">
+                      {product.price}
+                    </p>
                   </div>
                 </div>
 
@@ -231,11 +280,24 @@ export default function Checkout() {
                   </div>
                   <div className="flex justify-between text-sm">
                     <span>Subtotal</span>
-                    <span>${(parseFloat(product.price.replace('$', '')) * form.watch("quantity")).toFixed(2)}</span>
+                    <span>
+                      $
+                      {(
+                        parseFloat(product.price.replace("$", "")) *
+                        form.watch("quantity")
+                      ).toFixed(2)}
+                    </span>
                   </div>
                   <div className="flex justify-between text-sm">
                     <span>Tax</span>
-                    <span>${(parseFloat(product.price.replace('$', '')) * form.watch("quantity") * 0.08).toFixed(2)}</span>
+                    <span>
+                      $
+                      {(
+                        parseFloat(product.price.replace("$", "")) *
+                        form.watch("quantity") *
+                        0.08
+                      ).toFixed(2)}
+                    </span>
                   </div>
                   {deliveryMethod === "delivery" && (
                     <div className="flex justify-between text-sm">
@@ -271,7 +333,12 @@ export default function Checkout() {
           {/* Checkout Form */}
           <div className="lg:col-span-2">
             <Form {...form}>
-              <form onSubmit={form.handleSubmit((data) => orderMutation.mutate(data))} className="space-y-6">
+              <form
+                onSubmit={form.handleSubmit((data) =>
+                  orderMutation.mutate(data),
+                )}
+                className="space-y-6"
+              >
                 {/* Product Options */}
                 <Card>
                   <CardHeader>
@@ -289,7 +356,9 @@ export default function Checkout() {
                               type="number"
                               min="1"
                               {...field}
-                              onChange={(e) => field.onChange(parseInt(e.target.value) || 1)}
+                              onChange={(e) =>
+                                field.onChange(parseInt(e.target.value) || 1)
+                              }
                             />
                           </FormControl>
                           <FormMessage />
@@ -311,7 +380,10 @@ export default function Checkout() {
                       render={({ field }) => (
                         <FormItem>
                           <FormControl>
-                            <Select onValueChange={field.onChange} defaultValue={field.value}>
+                            <Select
+                              onValueChange={field.onChange}
+                              defaultValue={field.value}
+                            >
                               <SelectTrigger>
                                 <SelectValue placeholder="Select delivery method" />
                               </SelectTrigger>
@@ -485,10 +557,13 @@ export default function Checkout() {
                       ) : (
                         <CreditCard className="h-5 w-5 mr-2" />
                       )}
-                      {orderMutation.isPending ? "Processing..." : `Pay $${calculateTotal().toFixed(2)}`}
+                      {orderMutation.isPending
+                        ? "Processing..."
+                        : `Pay $${calculateTotal().toFixed(2)}`}
                     </Button>
                     <p className="text-xs text-slate-600 text-center mt-2">
-                      Secure payment processing • Your order will be automatically sent to AmerisourceBergen
+                      Secure payment processing • Your order will be
+                      automatically sent to AmerisourceBergen
                     </p>
                   </CardContent>
                 </Card>

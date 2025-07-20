@@ -1,8 +1,20 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { MapPin, Phone, Navigation, Building2, Map } from "lucide-react";
 
 interface PharmacyLocation {
@@ -22,15 +34,15 @@ interface PharmacyLocationSelectorProps {
   showMap?: boolean;
 }
 
-export default function PharmacyLocationSelector({ 
-  onLocationSelect, 
-  selectedLocation, 
+export default function PharmacyLocationSelector({
+  onLocationSelect,
+  selectedLocation,
   className = "",
-  showMap = true 
+  showMap = true,
 }: PharmacyLocationSelectorProps) {
   const [locations, setLocations] = useState<PharmacyLocation[]>([]);
   const [loading, setLoading] = useState(true);
-  const [viewMode, setViewMode] = useState<'list' | 'map'>('list');
+  const [viewMode, setViewMode] = useState<"list" | "map">("list");
 
   useEffect(() => {
     fetchPharmacyLocations();
@@ -40,7 +52,7 @@ export default function PharmacyLocationSelector({
     try {
       const response = await fetch("/api/pharmacy-system/locations");
       const data = await response.json();
-      
+
       if (data.success) {
         setLocations(data.locations);
       }
@@ -53,14 +65,17 @@ export default function PharmacyLocationSelector({
 
   const handleGetDirections = (location: PharmacyLocation) => {
     const encodedAddress = encodeURIComponent(location.address);
-    window.open(`https://www.google.com/maps/dir/?api=1&destination=${encodedAddress}`, '_blank');
+    window.open(
+      `https://www.google.com/maps/dir/?api=1&destination=${encodedAddress}`,
+      "_blank",
+    );
   };
 
   const parseAddress = (fullAddress: string) => {
     // Split the full address to extract components
-    const parts = fullAddress.split(', ');
+    const parts = fullAddress.split(", ");
     const address = parts[0];
-    const cityStateZip = parts.slice(1).join(', ');
+    const cityStateZip = parts.slice(1).join(", ");
     return { address, cityStateZip };
   };
 
@@ -91,22 +106,23 @@ export default function PharmacyLocationSelector({
               Select Pharmacy Location
             </CardTitle>
             <CardDescription>
-              Choose your preferred Georgies Pharmacy location for services and refills.
+              Choose your preferred Georgies Pharmacy location for services and
+              refills.
             </CardDescription>
           </div>
           {showMap && (
             <div className="flex space-x-2">
               <Button
-                variant={viewMode === 'list' ? 'default' : 'outline'}
+                variant={viewMode === "list" ? "default" : "outline"}
                 size="sm"
-                onClick={() => setViewMode('list')}
+                onClick={() => setViewMode("list")}
               >
                 List
               </Button>
               <Button
-                variant={viewMode === 'map' ? 'default' : 'outline'}
+                variant={viewMode === "map" ? "default" : "outline"}
                 size="sm"
-                onClick={() => setViewMode('map')}
+                onClick={() => setViewMode("map")}
               >
                 <Map className="w-4 h-4 mr-1" />
                 Map
@@ -115,17 +131,19 @@ export default function PharmacyLocationSelector({
           )}
         </div>
       </CardHeader>
-      
+
       <CardContent>
-        {viewMode === 'list' ? (
+        {viewMode === "list" ? (
           <div className="space-y-4">
             {/* Quick Selector Dropdown */}
             <div className="space-y-2">
-              <label className="text-sm font-medium text-slate-700">Quick Select:</label>
-              <Select 
-                value={selectedLocation?.nabp || ""} 
+              <label className="text-sm font-medium text-slate-700">
+                Quick Select:
+              </label>
+              <Select
+                value={selectedLocation?.nabp || ""}
                 onValueChange={(nabp) => {
-                  const location = locations.find(loc => loc.nabp === nabp);
+                  const location = locations.find((loc) => loc.nabp === nabp);
                   if (location) onLocationSelect(location);
                 }}
               >
@@ -137,7 +155,9 @@ export default function PharmacyLocationSelector({
                     <SelectItem key={location.nabp} value={location.nabp}>
                       <div className="flex flex-col">
                         <span className="font-medium">{location.name}</span>
-                        <span className="text-xs text-slate-500">{parseAddress(location.address).cityStateZip}</span>
+                        <span className="text-xs text-slate-500">
+                          {parseAddress(location.address).cityStateZip}
+                        </span>
                       </div>
                     </SelectItem>
                   ))}
@@ -148,16 +168,18 @@ export default function PharmacyLocationSelector({
             {/* Location Cards */}
             <div className="space-y-3">
               {locations.map((location) => {
-                const { address, cityStateZip } = parseAddress(location.address);
+                const { address, cityStateZip } = parseAddress(
+                  location.address,
+                );
                 const isSelected = selectedLocation?.nabp === location.nabp;
-                
+
                 return (
-                  <Card 
+                  <Card
                     key={location.nabp}
                     className={`cursor-pointer transition-all duration-200 ${
-                      isSelected 
-                        ? 'ring-2 ring-primary bg-primary/5' 
-                        : 'hover:shadow-md hover:bg-slate-50'
+                      isSelected
+                        ? "ring-2 ring-primary bg-primary/5"
+                        : "hover:shadow-md hover:bg-slate-50"
                     }`}
                     onClick={() => onLocationSelect(location)}
                   >
@@ -165,12 +187,16 @@ export default function PharmacyLocationSelector({
                       <div className="flex justify-between items-start">
                         <div className="flex-1">
                           <div className="flex items-center space-x-2 mb-2">
-                            <h3 className="font-semibold text-slate-900">{location.name}</h3>
+                            <h3 className="font-semibold text-slate-900">
+                              {location.name}
+                            </h3>
                             {isSelected && (
-                              <Badge className="bg-primary text-white text-xs">Selected</Badge>
+                              <Badge className="bg-primary text-white text-xs">
+                                Selected
+                              </Badge>
                             )}
                           </div>
-                          
+
                           <div className="space-y-1 text-sm text-slate-600">
                             <div className="flex items-center space-x-2">
                               <MapPin className="w-3 h-3 text-slate-400" />
@@ -182,7 +208,8 @@ export default function PharmacyLocationSelector({
                               <span>{location.phone}</span>
                             </div>
                             <div className="ml-5 text-xs">
-                              <span className="font-medium">NABP:</span> {location.nabp}
+                              <span className="font-medium">NABP:</span>{" "}
+                              {location.nabp}
                             </div>
                           </div>
                         </div>
@@ -235,19 +262,31 @@ export default function PharmacyLocationSelector({
                 title="Georgies Pharmacy Locations"
               ></iframe>
             </div>
-            
+
             <div className="grid grid-cols-2 gap-2">
               {locations.map((location) => (
                 <Button
                   key={location.nabp}
-                  variant={selectedLocation?.nabp === location.nabp ? "default" : "outline"}
+                  variant={
+                    selectedLocation?.nabp === location.nabp
+                      ? "default"
+                      : "outline"
+                  }
                   size="sm"
                   onClick={() => onLocationSelect(location)}
                   className="text-xs h-auto p-2"
                 >
                   <div className="text-center">
-                    <div className="font-medium">{location.name.replace("Georgies ", "")}</div>
-                    <div className="text-xs opacity-75">{parseAddress(location.address).cityStateZip.split(',')[0]}</div>
+                    <div className="font-medium">
+                      {location.name.replace("Georgies ", "")}
+                    </div>
+                    <div className="text-xs opacity-75">
+                      {
+                        parseAddress(location.address).cityStateZip.split(
+                          ",",
+                        )[0]
+                      }
+                    </div>
                   </div>
                 </Button>
               ))}
@@ -256,7 +295,9 @@ export default function PharmacyLocationSelector({
             {selectedLocation && (
               <Card className="bg-primary/5 border-primary/20">
                 <CardContent className="p-4">
-                  <h4 className="font-semibold text-primary mb-2">Selected Location</h4>
+                  <h4 className="font-semibold text-primary mb-2">
+                    Selected Location
+                  </h4>
                   <p className="text-sm text-slate-700 mb-3">
                     <strong>{selectedLocation.name}</strong>
                     <br />
@@ -276,7 +317,9 @@ export default function PharmacyLocationSelector({
                     <Button
                       variant="outline"
                       size="sm"
-                      onClick={() => window.open(`tel:${selectedLocation.phone}`)}
+                      onClick={() =>
+                        window.open(`tel:${selectedLocation.phone}`)
+                      }
                     >
                       <Phone className="w-3 h-3 mr-1" />
                       Call

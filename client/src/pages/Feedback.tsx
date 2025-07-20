@@ -3,15 +3,34 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Star, MessageCircle, ThumbsUp, Award, Send } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 
 const feedbackSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -44,7 +63,9 @@ export default function Feedback() {
 
   const onSubmit = (data: z.infer<typeof feedbackSchema>) => {
     console.log("Feedback submitted:", data);
-    alert("Thank you for your feedback! We appreciate your input and will use it to improve our services.");
+    alert(
+      "Thank you for your feedback! We appreciate your input and will use it to improve our services.",
+    );
     form.reset();
     setRating(0);
   };
@@ -53,7 +74,10 @@ export default function Feedback() {
     { value: "family", label: "Georgies Family Pharmacy - Linden" },
     { value: "specialty", label: "Georgies Specialty Pharmacy - Linden" },
     { value: "parlin", label: "Georgies Parlin Pharmacy - Parlin" },
-    { value: "outpatient", label: "Georgies Outpatient Pharmacy - Browns Mills" },
+    {
+      value: "outpatient",
+      label: "Georgies Outpatient Pharmacy - Browns Mills",
+    },
   ];
 
   const serviceTypes = [
@@ -78,7 +102,8 @@ export default function Feedback() {
             Your Feedback <span className="text-primary">Matters</span>
           </h1>
           <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-            Help us improve our services by sharing your experience. Your feedback helps us serve you better.
+            Help us improve our services by sharing your experience. Your
+            feedback helps us serve you better.
           </p>
         </div>
 
@@ -93,13 +118,17 @@ export default function Feedback() {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="text-3xl font-bold text-primary mb-2">4.9/5</div>
+                <div className="text-3xl font-bold text-primary mb-2">
+                  4.9/5
+                </div>
                 <div className="flex items-center mb-2">
                   {[1, 2, 3, 4, 5].map((star) => (
                     <Star
                       key={star}
                       className={`h-5 w-5 ${
-                        star <= 4 ? "text-yellow-400 fill-current" : "text-gray-300"
+                        star <= 4
+                          ? "text-yellow-400 fill-current"
+                          : "text-gray-300"
                       }`}
                     />
                   ))}
@@ -118,15 +147,21 @@ export default function Feedback() {
               <CardContent>
                 <div className="space-y-4">
                   <div className="border-l-4 border-primary pl-4">
-                    <p className="text-sm text-slate-600">"Excellent service and friendly staff!"</p>
+                    <p className="text-sm text-slate-600">
+                      "Excellent service and friendly staff!"
+                    </p>
                     <p className="text-xs text-slate-400">- Sarah M.</p>
                   </div>
                   <div className="border-l-4 border-primary pl-4">
-                    <p className="text-sm text-slate-600">"Quick prescription turnaround time."</p>
+                    <p className="text-sm text-slate-600">
+                      "Quick prescription turnaround time."
+                    </p>
                     <p className="text-xs text-slate-400">- John D.</p>
                   </div>
                   <div className="border-l-4 border-primary pl-4">
-                    <p className="text-sm text-slate-600">"Very knowledgeable pharmacists."</p>
+                    <p className="text-sm text-slate-600">
+                      "Very knowledgeable pharmacists."
+                    </p>
                     <p className="text-xs text-slate-400">- Maria L.</p>
                   </div>
                 </div>
@@ -157,12 +192,16 @@ export default function Feedback() {
               <CardHeader>
                 <CardTitle>Share Your Experience</CardTitle>
                 <CardDescription>
-                  We value your feedback and use it to continuously improve our pharmacy services.
+                  We value your feedback and use it to continuously improve our
+                  pharmacy services.
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <Form {...form}>
-                  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                  <form
+                    onSubmit={form.handleSubmit(onSubmit)}
+                    className="space-y-6"
+                  >
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <FormField
                         control={form.control}
@@ -184,7 +223,11 @@ export default function Feedback() {
                           <FormItem>
                             <FormLabel>Email Address</FormLabel>
                             <FormControl>
-                              <Input type="email" placeholder="your@email.com" {...field} />
+                              <Input
+                                type="email"
+                                placeholder="your@email.com"
+                                {...field}
+                              />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -212,7 +255,10 @@ export default function Feedback() {
                         render={({ field }) => (
                           <FormItem>
                             <FormLabel>Pharmacy Location</FormLabel>
-                            <Select onValueChange={field.onChange} defaultValue={field.value}>
+                            <Select
+                              onValueChange={field.onChange}
+                              defaultValue={field.value}
+                            >
                               <FormControl>
                                 <SelectTrigger>
                                   <SelectValue placeholder="Select location" />
@@ -220,7 +266,10 @@ export default function Feedback() {
                               </FormControl>
                               <SelectContent>
                                 {locations.map((location) => (
-                                  <SelectItem key={location.value} value={location.value}>
+                                  <SelectItem
+                                    key={location.value}
+                                    value={location.value}
+                                  >
                                     {location.label}
                                   </SelectItem>
                                 ))}
@@ -238,7 +287,10 @@ export default function Feedback() {
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>Service Type</FormLabel>
-                          <Select onValueChange={field.onChange} defaultValue={field.value}>
+                          <Select
+                            onValueChange={field.onChange}
+                            defaultValue={field.value}
+                          >
                             <FormControl>
                               <SelectTrigger>
                                 <SelectValue placeholder="Select service type" />
@@ -246,7 +298,10 @@ export default function Feedback() {
                             </FormControl>
                             <SelectContent>
                               {serviceTypes.map((service) => (
-                                <SelectItem key={service.value} value={service.value}>
+                                <SelectItem
+                                  key={service.value}
+                                  value={service.value}
+                                >
                                   {service.label}
                                 </SelectItem>
                               ))}
@@ -287,7 +342,8 @@ export default function Feedback() {
                                 </button>
                               ))}
                               <span className="text-sm text-slate-600 ml-2">
-                                {rating > 0 && `${rating} star${rating > 1 ? 's' : ''}`}
+                                {rating > 0 &&
+                                  `${rating} star${rating > 1 ? "s" : ""}`}
                               </span>
                             </div>
                           </FormControl>
@@ -319,7 +375,9 @@ export default function Feedback() {
                       name="suggestions"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Suggestions for Improvement (Optional)</FormLabel>
+                          <FormLabel>
+                            Suggestions for Improvement (Optional)
+                          </FormLabel>
                           <FormControl>
                             <Textarea
                               placeholder="Any suggestions on how we can serve you better?"

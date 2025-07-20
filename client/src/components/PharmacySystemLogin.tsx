@@ -2,9 +2,21 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Loader2, Building2, Key, User, MapPin } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
@@ -23,7 +35,10 @@ interface PharmacyLocation {
   refillUrl: string;
 }
 
-export default function PharmacySystemLogin({ onAuthSuccess, className = "" }: PharmacySystemLoginProps) {
+export default function PharmacySystemLogin({
+  onAuthSuccess,
+  className = "",
+}: PharmacySystemLoginProps) {
   const [credentials, setCredentials] = useState({
     username: "",
     password: "",
@@ -44,7 +59,7 @@ export default function PharmacySystemLogin({ onAuthSuccess, className = "" }: P
     try {
       const response = await fetch("/api/pharmacy-system/locations");
       const data = await response.json();
-      
+
       if (data.success) {
         setLocations(data.locations);
       }
@@ -80,8 +95,9 @@ export default function PharmacySystemLogin({ onAuthSuccess, className = "" }: P
       } else {
         setError(data.message || "Authentication failed");
         toast({
-          title: "Authentication Failed", 
-          description: data.message || "Please check your credentials and try again.",
+          title: "Authentication Failed",
+          description:
+            data.message || "Please check your credentials and try again.",
           variant: "destructive",
         });
       }
@@ -99,7 +115,7 @@ export default function PharmacySystemLogin({ onAuthSuccess, className = "" }: P
   };
 
   const handleInputChange = (field: string, value: string) => {
-    setCredentials(prev => ({ ...prev, [field]: value }));
+    setCredentials((prev) => ({ ...prev, [field]: value }));
     if (error) setError("");
   };
 
@@ -111,35 +127,46 @@ export default function PharmacySystemLogin({ onAuthSuccess, className = "" }: P
         </div>
         <CardTitle className="text-xl">Connect to Pharmacy System</CardTitle>
         <CardDescription>
-          Sign in with your existing pharmacy system credentials to sync your prescription data.
+          Sign in with your existing pharmacy system credentials to sync your
+          prescription data.
         </CardDescription>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="location">Pharmacy Location</Label>
-            <Select 
-              value={credentials.nabp} 
+            <Select
+              value={credentials.nabp}
               onValueChange={(value) => {
-                const selectedLocation = locations.find(loc => loc.nabp === value);
-                setCredentials(prev => ({
+                const selectedLocation = locations.find(
+                  (loc) => loc.nabp === value,
+                );
+                setCredentials((prev) => ({
                   ...prev,
                   nabp: value,
-                  locationName: selectedLocation?.name || ""
+                  locationName: selectedLocation?.name || "",
                 }));
                 if (error) setError("");
               }}
               disabled={loading || locationsLoading}
             >
               <SelectTrigger>
-                <SelectValue placeholder={locationsLoading ? "Loading locations..." : "Select pharmacy location"} />
+                <SelectValue
+                  placeholder={
+                    locationsLoading
+                      ? "Loading locations..."
+                      : "Select pharmacy location"
+                  }
+                />
               </SelectTrigger>
               <SelectContent>
                 {locations.map((location) => (
                   <SelectItem key={location.nabp} value={location.nabp}>
                     <div className="flex flex-col">
                       <span className="font-medium">{location.name}</span>
-                      <span className="text-xs text-slate-500">{location.address}</span>
+                      <span className="text-xs text-slate-500">
+                        {location.address}
+                      </span>
                     </div>
                   </SelectItem>
                 ))}
@@ -190,7 +217,12 @@ export default function PharmacySystemLogin({ onAuthSuccess, className = "" }: P
           <Button
             type="submit"
             className="w-full bg-primary text-white hover:bg-primary/90"
-            disabled={loading || !credentials.username || !credentials.password || !credentials.nabp}
+            disabled={
+              loading ||
+              !credentials.username ||
+              !credentials.password ||
+              !credentials.nabp
+            }
           >
             {loading ? (
               <>
@@ -204,7 +236,9 @@ export default function PharmacySystemLogin({ onAuthSuccess, className = "" }: P
         </form>
 
         <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-          <h4 className="text-sm font-semibold text-blue-900 mb-2">Integration Benefits:</h4>
+          <h4 className="text-sm font-semibold text-blue-900 mb-2">
+            Integration Benefits:
+          </h4>
           <ul className="text-sm text-blue-800 space-y-1">
             <li>• Real-time prescription synchronization</li>
             <li>• Direct refill requests to your pharmacy</li>

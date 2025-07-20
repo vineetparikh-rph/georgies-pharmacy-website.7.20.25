@@ -1,14 +1,36 @@
 import { useState, useEffect, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { useToast } from "@/hooks/use-toast";
-import { ShoppingCart, Search, Filter, Star, Package, Truck, Shield, RefreshCw, ExternalLink } from "lucide-react";
+import {
+  ShoppingCart,
+  Search,
+  Filter,
+  Star,
+  Package,
+  Truck,
+  Shield,
+  RefreshCw,
+  ExternalLink,
+} from "lucide-react";
 import { Link } from "wouter";
 import MultiPlatformManager from "@/components/MultiPlatformManager";
 
@@ -33,40 +55,44 @@ export default function OTCProducts() {
   const [selectedStore, setSelectedStore] = useState("");
   const [showStoreSelection, setShowStoreSelection] = useState(true);
   const { toast } = useToast();
-  
+
   const stores = [
-    { 
-      value: "family", 
-      label: "Georgies Family Pharmacy", 
+    {
+      value: "family",
+      label: "Georgies Family Pharmacy",
       address: "332 W. St. Georges Avenue, Linden, NJ 07036-5638",
-      phone: "(908) 925-4567"
+      phone: "(908) 925-4567",
     },
-    { 
-      value: "outpatient", 
-      label: "Georgies Outpatient Pharmacy", 
+    {
+      value: "outpatient",
+      label: "Georgies Outpatient Pharmacy",
       address: "6 Earlin Drive, Suite 130, Browns Mills, NJ 08015-1768",
-      phone: "(609) 726-5800"
+      phone: "(609) 726-5800",
     },
-    { 
-      value: "parlin", 
-      label: "Georgies Parlin Pharmacy", 
+    {
+      value: "parlin",
+      label: "Georgies Parlin Pharmacy",
       address: "499 Ernston Road, Parlin, NJ 08859-1406",
-      phone: "(732) 952-3022"
+      phone: "(732) 952-3022",
     },
-    { 
-      value: "specialty", 
-      label: "Georgies Specialty Pharmacy", 
+    {
+      value: "specialty",
+      label: "Georgies Specialty Pharmacy",
       address: "521 N Wood Avenue, Linden, NJ 07036-4146",
-      phone: "(908) 925-4566"
-    }
+      phone: "(908) 925-4566",
+    },
   ];
 
-  const { data: response, isLoading, error } = useQuery({
-    queryKey: ['/api/otc-products', selectedStore],
+  const {
+    data: response,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["/api/otc-products", selectedStore],
     queryFn: async () => {
       if (!selectedStore) return { products: [] };
       const res = await fetch(`/api/otc-products?store=${selectedStore}`);
-      if (!res.ok) throw new Error('Failed to fetch products');
+      if (!res.ok) throw new Error("Failed to fetch products");
       return res.json();
     },
     enabled: !!selectedStore,
@@ -81,7 +107,7 @@ export default function OTCProducts() {
     { value: "digestive", label: "Digestive Health" },
     { value: "skincare", label: "Skincare" },
     { value: "allergy", label: "Allergy Relief" },
-    { value: "baby", label: "Baby Care" }
+    { value: "baby", label: "Baby Care" },
   ];
 
   const products = response?.products || [];
@@ -91,15 +117,20 @@ export default function OTCProducts() {
 
     // Filter by category
     if (selectedCategory !== "all") {
-      filtered = filtered.filter(product => product.category === selectedCategory);
+      filtered = filtered.filter(
+        (product) => product.category === selectedCategory,
+      );
     }
 
     // Filter by search term
     if (searchTerm) {
-      filtered = filtered.filter(product =>
-        product.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        product.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        product.brand.toLowerCase().includes(searchTerm.toLowerCase())
+      filtered = filtered.filter(
+        (product) =>
+          product.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          product.description
+            .toLowerCase()
+            .includes(searchTerm.toLowerCase()) ||
+          product.brand.toLowerCase().includes(searchTerm.toLowerCase()),
       );
     }
 
@@ -136,7 +167,8 @@ export default function OTCProducts() {
                 Select Your Pharmacy Location
               </CardTitle>
               <CardDescription className="text-lg">
-                Choose which Georgies Pharmacy location you'd like to shop from for OTC products
+                Choose which Georgies Pharmacy location you'd like to shop from
+                for OTC products
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -147,9 +179,15 @@ export default function OTCProducts() {
                   variant="outline"
                   className="w-full p-6 h-auto flex flex-col items-start text-left hover:bg-primary hover:text-white transition-colors group"
                 >
-                  <div className="font-semibold text-lg text-primary group-hover:text-white">{store.label}</div>
-                  <div className="text-sm opacity-70 group-hover:text-white">{store.address}</div>
-                  <div className="text-sm opacity-70 mt-1 group-hover:text-white">{store.phone}</div>
+                  <div className="font-semibold text-lg text-primary group-hover:text-white">
+                    {store.label}
+                  </div>
+                  <div className="text-sm opacity-70 group-hover:text-white">
+                    {store.address}
+                  </div>
+                  <div className="text-sm opacity-70 mt-1 group-hover:text-white">
+                    {store.phone}
+                  </div>
                 </Button>
               ))}
             </CardContent>
@@ -172,7 +210,8 @@ export default function OTCProducts() {
                   Premium OTC Products
                 </h1>
                 <p className="text-lg md:text-xl text-red-100 max-w-2xl">
-                  Health & Wellness from {stores.find(s => s.value === selectedStore)?.label}
+                  Health & Wellness from{" "}
+                  {stores.find((s) => s.value === selectedStore)?.label}
                 </p>
               </div>
               <div className="flex-shrink-0">
@@ -182,12 +221,16 @@ export default function OTCProducts() {
                   className="bg-white/10 backdrop-blur-sm border-white/20 text-white hover:bg-white/20 hover:text-white transition-all duration-300 whitespace-nowrap"
                 >
                   <Package className="h-4 w-4 mr-2" />
-                  <span className="hidden sm:inline hover:text-white">{stores.find(s => s.value === selectedStore)?.label}</span>
-                  <span className="sm:hidden hover:text-white">Change Store</span>
+                  <span className="hidden sm:inline hover:text-white">
+                    {stores.find((s) => s.value === selectedStore)?.label}
+                  </span>
+                  <span className="sm:hidden hover:text-white">
+                    Change Store
+                  </span>
                 </Button>
               </div>
             </div>
-            
+
             {response?.source === "AmerisourceBergen" && (
               <div className="bg-green-500/20 backdrop-blur-sm border border-green-400/30 rounded-xl p-6 mb-8 max-w-2xl mx-auto">
                 <div className="flex items-center justify-center mb-2">
@@ -197,27 +240,36 @@ export default function OTCProducts() {
                   </p>
                 </div>
                 <p className="text-green-200 text-sm">
-                  Real-time pricing and availability • Automatic ordering after payment
+                  Real-time pricing and availability • Automatic ordering after
+                  payment
                 </p>
               </div>
             )}
-            
+
             {/* Enhanced Benefits */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
               <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
                 <Package className="h-8 w-8 text-red-200 mx-auto mb-3" />
                 <h3 className="font-semibold text-lg mb-2">Quality Products</h3>
-                <p className="text-red-100 text-sm">Trusted brands and pharmaceutical-grade quality</p>
+                <p className="text-red-100 text-sm">
+                  Trusted brands and pharmaceutical-grade quality
+                </p>
               </div>
               <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
                 <Truck className="h-8 w-8 text-red-200 mx-auto mb-3" />
                 <h3 className="font-semibold text-lg mb-2">Fast Delivery</h3>
-                <p className="text-red-100 text-sm">Same-day pickup or next-day delivery available</p>
+                <p className="text-red-100 text-sm">
+                  Same-day pickup or next-day delivery available
+                </p>
               </div>
               <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
                 <Shield className="h-8 w-8 text-red-200 mx-auto mb-3" />
-                <h3 className="font-semibold text-lg mb-2">Pharmacist Approved</h3>
-                <p className="text-red-100 text-sm">Expert-recommended health and wellness solutions</p>
+                <h3 className="font-semibold text-lg mb-2">
+                  Pharmacist Approved
+                </h3>
+                <p className="text-red-100 text-sm">
+                  Expert-recommended health and wellness solutions
+                </p>
               </div>
             </div>
           </div>
@@ -241,10 +293,13 @@ export default function OTCProducts() {
                 />
               </div>
             </div>
-            
+
             {/* Stylized Category Filter */}
             <div className="w-full lg:w-80">
-              <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+              <Select
+                value={selectedCategory}
+                onValueChange={setSelectedCategory}
+              >
                 <SelectTrigger className="h-14 px-4 rounded-xl border-2 border-slate-200 focus:border-red-500 focus:ring-4 focus:ring-red-500/20 transition-all duration-300">
                   <div className="flex items-center">
                     <Filter className="h-5 w-5 mr-3 text-slate-500" />
@@ -253,7 +308,11 @@ export default function OTCProducts() {
                 </SelectTrigger>
                 <SelectContent className="rounded-xl border-slate-200">
                   {categories.map((category) => (
-                    <SelectItem key={category.value} value={category.value} className="py-3 px-4 hover:bg-red-50">
+                    <SelectItem
+                      key={category.value}
+                      value={category.value}
+                      className="py-3 px-4 hover:bg-red-50"
+                    >
                       {category.label}
                     </SelectItem>
                   ))}
@@ -261,21 +320,29 @@ export default function OTCProducts() {
               </Select>
             </div>
           </div>
-          
+
           {/* Quick Filter Tags */}
           <div className="flex flex-wrap gap-2 mt-6 pt-6 border-t border-slate-200">
-            <span className="text-sm font-medium text-slate-600 mr-3">Quick filters:</span>
-            {["Pain Relief", "Vitamins", "Cold & Flu", "First Aid"].map((tag) => (
-              <Button
-                key={tag}
-                variant="outline"
-                size="sm"
-                onClick={() => setSelectedCategory(tag.toLowerCase().replace(" & ", "-").replace(" ", "-"))}
-                className="rounded-full hover:bg-red-50 hover:border-red-300 transition-all duration-200"
-              >
-                {tag}
-              </Button>
-            ))}
+            <span className="text-sm font-medium text-slate-600 mr-3">
+              Quick filters:
+            </span>
+            {["Pain Relief", "Vitamins", "Cold & Flu", "First Aid"].map(
+              (tag) => (
+                <Button
+                  key={tag}
+                  variant="outline"
+                  size="sm"
+                  onClick={() =>
+                    setSelectedCategory(
+                      tag.toLowerCase().replace(" & ", "-").replace(" ", "-"),
+                    )
+                  }
+                  className="rounded-full hover:bg-red-50 hover:border-red-300 transition-all duration-200"
+                >
+                  {tag}
+                </Button>
+              ),
+            )}
           </div>
         </div>
       </div>
@@ -291,9 +358,12 @@ export default function OTCProducts() {
                   <RefreshCw className="h-8 w-8 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold mb-2">Multi-Platform Sales</h3>
+                  <h3 className="text-2xl font-bold mb-2">
+                    Multi-Platform Sales
+                  </h3>
                   <p className="text-red-100 text-lg">
-                    Reach millions of customers across Amazon, Uber, Instacart, DoorDash, and more
+                    Reach millions of customers across Amazon, Uber, Instacart,
+                    DoorDash, and more
                   </p>
                 </div>
               </div>
@@ -302,8 +372,8 @@ export default function OTCProducts() {
                   <ExternalLink className="h-4 w-4 mr-2" />
                   Multi-Channel Ready
                 </Badge>
-                <Button 
-                  variant="secondary" 
+                <Button
+                  variant="secondary"
                   className="bg-white/10 backdrop-blur-sm border-white/20 text-white hover:bg-white/20"
                 >
                   View Platforms
@@ -334,16 +404,29 @@ export default function OTCProducts() {
             <div className="bg-slate-100 rounded-full w-24 h-24 flex items-center justify-center mx-auto mb-6">
               <Package className="h-12 w-12 text-slate-400" />
             </div>
-            <h3 className="text-2xl font-semibold text-slate-900 mb-3">No products found</h3>
-            <p className="text-slate-600 text-lg mb-6">Try adjusting your search or filter criteria</p>
-            <Button onClick={() => { setSearchTerm(""); setSelectedCategory("all"); }} variant="outline">
+            <h3 className="text-2xl font-semibold text-slate-900 mb-3">
+              No products found
+            </h3>
+            <p className="text-slate-600 text-lg mb-6">
+              Try adjusting your search or filter criteria
+            </p>
+            <Button
+              onClick={() => {
+                setSearchTerm("");
+                setSelectedCategory("all");
+              }}
+              variant="outline"
+            >
               Clear Filters
             </Button>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
             {filteredProducts.map((product) => (
-              <Card key={product.id} className="group hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 bg-white/80 backdrop-blur-sm border-0 shadow-lg overflow-hidden">
+              <Card
+                key={product.id}
+                className="group hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 bg-white/80 backdrop-blur-sm border-0 shadow-lg overflow-hidden"
+              >
                 <div className="relative overflow-hidden">
                   <img
                     src={product.image}
@@ -351,20 +434,29 @@ export default function OTCProducts() {
                     className="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  
+
                   {product.comparePrice && (
                     <div className="absolute top-3 left-3 bg-gradient-to-r from-red-500 to-red-600 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg">
-                      Save {Math.round(((parseFloat(product.comparePrice.slice(1)) - parseFloat(product.price.slice(1))) / parseFloat(product.comparePrice.slice(1))) * 100)}%
+                      Save{" "}
+                      {Math.round(
+                        ((parseFloat(product.comparePrice.slice(1)) -
+                          parseFloat(product.price.slice(1))) /
+                          parseFloat(product.comparePrice.slice(1))) *
+                          100,
+                      )}
+                      %
                     </div>
                   )}
-                  
+
                   {!product.inStock && (
                     <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
-                      <div className="bg-white text-slate-800 px-4 py-2 rounded-full text-sm font-semibold">Out of Stock</div>
+                      <div className="bg-white text-slate-800 px-4 py-2 rounded-full text-sm font-semibold">
+                        Out of Stock
+                      </div>
                     </div>
                   )}
                 </div>
-                
+
                 <CardHeader className="pb-3">
                   <div>
                     <CardTitle className="text-base font-semibold line-clamp-2 group-hover:text-primary transition-colors mb-1">
@@ -375,12 +467,12 @@ export default function OTCProducts() {
                     </CardDescription>
                   </div>
                 </CardHeader>
-                
+
                 <CardContent className="pt-0 space-y-4">
                   <p className="text-sm text-slate-600 line-clamp-2">
                     {product.description}
                   </p>
-                  
+
                   {/* Enhanced Rating */}
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-2">
@@ -401,7 +493,7 @@ export default function OTCProducts() {
                       </span>
                     </div>
                   </div>
-                  
+
                   {/* Enhanced Price */}
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-3">
@@ -415,7 +507,7 @@ export default function OTCProducts() {
                       )}
                     </div>
                   </div>
-                  
+
                   {/* Enhanced Button */}
                   <Button
                     onClick={() => handleAddToCart(product)}
@@ -434,18 +526,22 @@ export default function OTCProducts() {
       </div>
 
       {/* Multi-Platform Manager Section - Hidden from customers, admin access only */}
-      {(process.env.NODE_ENV === 'development' || window.location.search.includes('admin=true')) && (
+      {(process.env.NODE_ENV === "development" ||
+        window.location.search.includes("admin=true")) && (
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
           <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6">
             <p className="text-yellow-800 text-sm font-medium">
-              ⚠️ Admin Only - Multi-Platform Configuration (Hidden from customers)
+              ⚠️ Admin Only - Multi-Platform Configuration (Hidden from
+              customers)
             </p>
             <p className="text-yellow-600 text-xs mt-1">
               Access via: /otc-products?admin=true
             </p>
           </div>
-          <MultiPlatformManager 
-            productId={filteredProducts[0]?.id || filteredProducts[0]?.abItemNumber}
+          <MultiPlatformManager
+            productId={
+              filteredProducts[0]?.id || filteredProducts[0]?.abItemNumber
+            }
             storeLocation={selectedStore}
           />
         </div>

@@ -18,30 +18,36 @@ export const inlineCriticalCSS = () => {
       .bg-gradient-to-br { background: #ffffff; }
     }
   `;
-  
-  const style = document.createElement('style');
+
+  const style = document.createElement("style");
   style.textContent = criticalCSS;
   document.head.insertBefore(style, document.head.firstChild);
 };
 
 export const optimizeResourceHints = () => {
   // Remove non-critical preconnects
-  const links = document.querySelectorAll('link[rel="preconnect"], link[rel="dns-prefetch"]');
-  links.forEach(link => {
-    const href = link.getAttribute('href');
-    if (href && !href.includes('fonts.googleapis.com') && !href.includes('fonts.gstatic.com')) {
+  const links = document.querySelectorAll(
+    'link[rel="preconnect"], link[rel="dns-prefetch"]',
+  );
+  links.forEach((link) => {
+    const href = link.getAttribute("href");
+    if (
+      href &&
+      !href.includes("fonts.googleapis.com") &&
+      !href.includes("fonts.gstatic.com")
+    ) {
       link.remove();
     }
   });
-  
+
   // Add critical resource hints
   const criticalHints = [
-    { rel: 'preload', href: '/src/components/Header.tsx', as: 'script' },
-    { rel: 'preload', href: '/src/components/ImageCarousel.tsx', as: 'script' }
+    { rel: "preload", href: "/src/components/Header.tsx", as: "script" },
+    { rel: "preload", href: "/src/components/ImageCarousel.tsx", as: "script" },
   ];
-  
-  criticalHints.forEach(hint => {
-    const link = document.createElement('link');
+
+  criticalHints.forEach((hint) => {
+    const link = document.createElement("link");
     Object.entries(hint).forEach(([key, value]) => {
       link.setAttribute(key, value);
     });
@@ -52,10 +58,14 @@ export const optimizeResourceHints = () => {
 export const deferNonCriticalCSS = () => {
   // Defer loading of Tailwind utilities not needed above-the-fold
   const nonCriticalCSS = [
-    'animate-', 'transition-', 'duration-', 'ease-', 'delay-'
+    "animate-",
+    "transition-",
+    "duration-",
+    "ease-",
+    "delay-",
   ];
-  
-  const style = document.createElement('style');
+
+  const style = document.createElement("style");
   style.textContent = `
     @media (max-width: 768px) {
       [class*="animate-"],
@@ -74,10 +84,10 @@ export const deferNonCriticalCSS = () => {
 export const initCriticalPathOptimizations = () => {
   // Run immediately for critical path
   inlineCriticalCSS();
-  
+
   // Run after DOM loaded
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", () => {
       optimizeResourceHints();
       deferNonCriticalCSS();
     });

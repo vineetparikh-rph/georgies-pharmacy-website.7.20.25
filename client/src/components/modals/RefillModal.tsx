@@ -1,12 +1,30 @@
 import { useState } from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import { insertRefillRequestSchema } from "@shared/schema";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
@@ -42,9 +60,12 @@ export default function RefillModal({ open, onClose }: RefillModalProps) {
     onSuccess: () => {
       toast({
         title: "Refill Request Submitted",
-        description: "Your prescription refill request has been submitted successfully.",
+        description:
+          "Your prescription refill request has been submitted successfully.",
       });
-      queryClient.invalidateQueries({ queryKey: ["/api/patient/1/refill-requests"] });
+      queryClient.invalidateQueries({
+        queryKey: ["/api/patient/1/refill-requests"],
+      });
       form.reset();
       onClose();
     },
@@ -67,7 +88,7 @@ export default function RefillModal({ open, onClose }: RefillModalProps) {
         <DialogHeader>
           <DialogTitle>Request Prescription Refill</DialogTitle>
         </DialogHeader>
-        
+
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
             <FormField
@@ -83,7 +104,7 @@ export default function RefillModal({ open, onClose }: RefillModalProps) {
                 </FormItem>
               )}
             />
-            
+
             <FormField
               control={form.control}
               name="patientName"
@@ -97,7 +118,7 @@ export default function RefillModal({ open, onClose }: RefillModalProps) {
                 </FormItem>
               )}
             />
-            
+
             <FormField
               control={form.control}
               name="dateOfBirth"
@@ -118,7 +139,10 @@ export default function RefillModal({ open, onClose }: RefillModalProps) {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Pickup Preference</FormLabel>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
                     <FormControl>
                       <SelectTrigger>
                         <SelectValue placeholder="Select pickup preference" />
@@ -134,10 +158,10 @@ export default function RefillModal({ open, onClose }: RefillModalProps) {
                 </FormItem>
               )}
             />
-            
+
             <div className="flex space-x-3 pt-4">
-              <Button 
-                type="submit" 
+              <Button
+                type="submit"
                 className="flex-1 bg-primary text-white hover:bg-primary/90"
                 disabled={refillMutation.isPending}
               >

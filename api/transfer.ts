@@ -1,12 +1,12 @@
-﻿import { VercelRequest, VercelResponse } from '@vercel/node'
+﻿import { VercelRequest, VercelResponse } from "@vercel/node";
 
 export default function handler(req: VercelRequest, res: VercelResponse) {
-  if (req.method !== 'POST') {
-    res.status(405).send('Method Not Allowed')
-    return
+  if (req.method !== "POST") {
+    res.status(405).send("Method Not Allowed");
+    return;
   }
 
-  const data = req.body
-  console.log('Transfer submission:', data)
-  res.status(200).json({ message: 'Transfer submitted successfully', data })
+  const data = req.body;
+  console.log("Transfer submission:", data);
+  res.status(200).json({ message: "Transfer submitted successfully", data });
 }

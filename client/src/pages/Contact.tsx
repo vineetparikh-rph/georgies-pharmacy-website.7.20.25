@@ -8,8 +8,21 @@ import Footer from "@/components/Footer";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const contactFormSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -49,19 +62,24 @@ export default function Contact() {
             Contact <span className="text-primary">Us</span>
           </h1>
           <p className="fluid-text-xl text-slate-600 mb-8 max-w-3xl mx-auto">
-            Have questions or need assistance? We're here to help. Reach out to our team and we'll get back to you as soon as possible.
+            Have questions or need assistance? We're here to help. Reach out to
+            our team and we'll get back to you as soon as possible.
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           {/* Our Locations */}
           <div className="grid grid-rows-[auto_1fr]">
-            <h2 className="text-2xl font-bold text-slate-900 mb-8">Our Locations</h2>
-            
+            <h2 className="text-2xl font-bold text-slate-900 mb-8">
+              Our Locations
+            </h2>
+
             <div className="space-y-4">
               {/* Location 1 - Georgies Family Pharmacy */}
               <div className="bg-white rounded-xl p-4 shadow-sm border border-slate-200">
-                <h3 className="text-base font-semibold text-primary mb-2">Georgies Family Pharmacy</h3>
+                <h3 className="text-base font-semibold text-primary mb-2">
+                  Georgies Family Pharmacy
+                </h3>
                 <div className="flex items-start text-sm text-slate-600 mb-1">
                   <MapPin className="w-4 h-4 mr-2 mt-0.5 flex-shrink-0" />
                   <span>332 W. St. Georges Avenue, Linden, NJ 07036-5638</span>
@@ -71,13 +89,16 @@ export default function Contact() {
                   <span>908-925-4567</span>
                 </div>
                 <div className="text-xs text-slate-500">
-                  Mon-Fri: 9:00 AM - 7:00 PM | Sat: 9:00 AM - 5:00 PM | Sun: Closed
+                  Mon-Fri: 9:00 AM - 7:00 PM | Sat: 9:00 AM - 5:00 PM | Sun:
+                  Closed
                 </div>
               </div>
 
               {/* Location 2 - Georgies Specialty Pharmacy */}
               <div className="bg-white rounded-xl p-4 shadow-sm border border-slate-200">
-                <h3 className="text-base font-semibold text-primary mb-2">Georgies Specialty Pharmacy</h3>
+                <h3 className="text-base font-semibold text-primary mb-2">
+                  Georgies Specialty Pharmacy
+                </h3>
                 <div className="flex items-start text-sm text-slate-600 mb-1">
                   <MapPin className="w-4 h-4 mr-2 mt-0.5 flex-shrink-0" />
                   <span>521 N Wood Avenue, Linden, NJ 07036-4146</span>
@@ -93,7 +114,9 @@ export default function Contact() {
 
               {/* Location 3 - Georgies Parlin Pharmacy */}
               <div className="bg-white rounded-xl p-4 shadow-sm border border-slate-200">
-                <h3 className="text-base font-semibold text-primary mb-2">Georgies Parlin Pharmacy</h3>
+                <h3 className="text-base font-semibold text-primary mb-2">
+                  Georgies Parlin Pharmacy
+                </h3>
                 <div className="flex items-start text-sm text-slate-600 mb-1">
                   <MapPin className="w-4 h-4 mr-2 mt-0.5 flex-shrink-0" />
                   <span>499 Ernston Road, Parlin, NJ 08859-1406</span>
@@ -103,23 +126,29 @@ export default function Contact() {
                   <span>732-952-3022</span>
                 </div>
                 <div className="text-xs text-slate-500">
-                  Mon-Fri: 9:00 AM - 7:00 PM | Sat: 9:00 AM - 5:00 PM | Sun: Closed
+                  Mon-Fri: 9:00 AM - 7:00 PM | Sat: 9:00 AM - 5:00 PM | Sun:
+                  Closed
                 </div>
               </div>
 
               {/* Location 4 - Georgies Outpatient Pharmacy */}
               <div className="bg-white rounded-xl p-4 shadow-sm border border-slate-200">
-                <h3 className="text-base font-semibold text-primary mb-2">Georgies Outpatient Pharmacy</h3>
+                <h3 className="text-base font-semibold text-primary mb-2">
+                  Georgies Outpatient Pharmacy
+                </h3>
                 <div className="flex items-start text-sm text-slate-600 mb-1">
                   <MapPin className="w-4 h-4 mr-2 mt-0.5 flex-shrink-0" />
-                  <span>6 Earlin Drive, Suite 130, Browns Mills, NJ 08015-1768</span>
+                  <span>
+                    6 Earlin Drive, Suite 130, Browns Mills, NJ 08015-1768
+                  </span>
                 </div>
                 <div className="flex items-center text-sm text-slate-600 mb-2">
                   <Phone className="w-4 h-4 mr-2 flex-shrink-0" />
                   <span>609-726-5800</span>
                 </div>
                 <div className="text-xs text-slate-500">
-                  Mon-Fri: 9:30 AM - 6:00 PM | Sat: 10:00 AM - 2:00 PM | Sun: Closed
+                  Mon-Fri: 9:30 AM - 6:00 PM | Sat: 10:00 AM - 2:00 PM | Sun:
+                  Closed
                 </div>
               </div>
             </div>
@@ -127,11 +156,16 @@ export default function Contact() {
 
           {/* Contact Form */}
           <div className="grid grid-rows-[auto_1fr]">
-            <h2 className="text-2xl font-bold text-slate-900 mb-8">Send us a Message</h2>
-            
+            <h2 className="text-2xl font-bold text-slate-900 mb-8">
+              Send us a Message
+            </h2>
+
             <div className="bg-white rounded-xl p-8 shadow-sm border border-slate-200">
               <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="h-full flex flex-col space-y-6">
+                <form
+                  onSubmit={form.handleSubmit(onSubmit)}
+                  className="h-full flex flex-col space-y-6"
+                >
                   <div className="flex-1 space-y-4">
                     <FormField
                       control={form.control}
@@ -146,7 +180,7 @@ export default function Contact() {
                         </FormItem>
                       )}
                     />
-                    
+
                     <FormField
                       control={form.control}
                       name="email"
@@ -154,7 +188,11 @@ export default function Contact() {
                         <FormItem>
                           <FormLabel>Email Address</FormLabel>
                           <FormControl>
-                            <Input type="email" placeholder="john@example.com" {...field} />
+                            <Input
+                              type="email"
+                              placeholder="john@example.com"
+                              {...field}
+                            />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -168,7 +206,11 @@ export default function Contact() {
                         <FormItem>
                           <FormLabel>Phone Number</FormLabel>
                           <FormControl>
-                            <Input type="tel" placeholder="(555) 123-4567" {...field} />
+                            <Input
+                              type="tel"
+                              placeholder="(555) 123-4567"
+                              {...field}
+                            />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -181,19 +223,34 @@ export default function Contact() {
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>Subject</FormLabel>
-                          <Select onValueChange={field.onChange} defaultValue={field.value}>
+                          <Select
+                            onValueChange={field.onChange}
+                            defaultValue={field.value}
+                          >
                             <FormControl>
                               <SelectTrigger>
                                 <SelectValue placeholder="Select a subject" />
                               </SelectTrigger>
                             </FormControl>
                             <SelectContent>
-                              <SelectItem value="general">General Inquiry</SelectItem>
-                              <SelectItem value="prescription">Prescription Question</SelectItem>
-                              <SelectItem value="refill">Refill Request</SelectItem>
-                              <SelectItem value="transfer">Transfer Request</SelectItem>
-                              <SelectItem value="insurance">Insurance Question</SelectItem>
-                              <SelectItem value="complaint">Complaint/Feedback</SelectItem>
+                              <SelectItem value="general">
+                                General Inquiry
+                              </SelectItem>
+                              <SelectItem value="prescription">
+                                Prescription Question
+                              </SelectItem>
+                              <SelectItem value="refill">
+                                Refill Request
+                              </SelectItem>
+                              <SelectItem value="transfer">
+                                Transfer Request
+                              </SelectItem>
+                              <SelectItem value="insurance">
+                                Insurance Question
+                              </SelectItem>
+                              <SelectItem value="complaint">
+                                Complaint/Feedback
+                              </SelectItem>
                             </SelectContent>
                           </Select>
                           <FormMessage />
@@ -208,7 +265,7 @@ export default function Contact() {
                         <FormItem className="flex-1 flex flex-col">
                           <FormLabel>Message</FormLabel>
                           <FormControl>
-                            <Textarea 
+                            <Textarea
                               placeholder="Please describe how we can help you..."
                               className="flex-1 min-h-[200px] resize-none"
                               {...field}
@@ -220,8 +277,8 @@ export default function Contact() {
                     />
                   </div>
 
-                  <Button 
-                    type="submit" 
+                  <Button
+                    type="submit"
                     className="w-full bg-primary text-white hover:bg-primary/90"
                     size="lg"
                   >
@@ -236,14 +293,18 @@ export default function Contact() {
 
         {/* Get In Touch */}
         <section className="mt-16">
-          <h2 className="text-2xl font-bold text-center text-slate-900 mb-8">Get In Touch</h2>
+          <h2 className="text-2xl font-bold text-center text-slate-900 mb-8">
+            Get In Touch
+          </h2>
           <div className="bg-white rounded-xl p-8 shadow-sm border border-slate-200 max-w-md mx-auto text-center">
             <div className="space-y-4">
               <div>
-                <h3 className="font-semibold text-slate-900 text-lg">Georgies Pharmacy Group</h3>
+                <h3 className="font-semibold text-slate-900 text-lg">
+                  Georgies Pharmacy Group
+                </h3>
                 <p className="text-slate-600">New Jersey</p>
               </div>
-              
+
               <div className="flex items-center justify-center space-x-2">
                 <Mail className="text-primary h-5 w-5" />
                 <span className="text-slate-600">info@georgiesrx.com</span>
@@ -265,43 +326,131 @@ export default function Contact() {
                 <span className="font-bold">Georgies Pharmacy</span>
               </div>
               <p className="text-slate-400">
-                Your trusted healthcare partner, providing convenient prescription management and exceptional patient care.
+                Your trusted healthcare partner, providing convenient
+                prescription management and exceptional patient care.
               </p>
             </div>
-            
+
             <div>
               <h4 className="font-semibold mb-3">Services</h4>
               <ul className="space-y-2 text-slate-400">
-                <li><a href="/services/refills" className="hover:text-white transition-colors">Prescription Refills</a></li>
-                <li><a href="/services/transfers" className="hover:text-white transition-colors">Prescription Transfers</a></li>
-                <li><a href="/services/sync" className="hover:text-white transition-colors">Medication Synchronization</a></li>
-                <li><a href="/services/consultations" className="hover:text-white transition-colors">Health Consultations</a></li>
+                <li>
+                  <a
+                    href="/services/refills"
+                    className="hover:text-white transition-colors"
+                  >
+                    Prescription Refills
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/services/transfers"
+                    className="hover:text-white transition-colors"
+                  >
+                    Prescription Transfers
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/services/sync"
+                    className="hover:text-white transition-colors"
+                  >
+                    Medication Synchronization
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/services/consultations"
+                    className="hover:text-white transition-colors"
+                  >
+                    Health Consultations
+                  </a>
+                </li>
               </ul>
             </div>
-            
+
             <div>
               <h4 className="font-semibold mb-3">Support</h4>
               <ul className="space-y-2 text-slate-400">
-                <li><a href="/contact" className="hover:text-white transition-colors">Contact Us</a></li>
-                <li><a href="/support/faq" className="hover:text-white transition-colors">FAQs</a></li>
-                <li><a href="/support/hours" className="hover:text-white transition-colors">Pharmacy Hours</a></li>
-                <li><a href="/support/insurance" className="hover:text-white transition-colors">Insurance Information</a></li>
+                <li>
+                  <a
+                    href="/contact"
+                    className="hover:text-white transition-colors"
+                  >
+                    Contact Us
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/support/faq"
+                    className="hover:text-white transition-colors"
+                  >
+                    FAQs
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/support/hours"
+                    className="hover:text-white transition-colors"
+                  >
+                    Pharmacy Hours
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/support/insurance"
+                    className="hover:text-white transition-colors"
+                  >
+                    Insurance Information
+                  </a>
+                </li>
               </ul>
             </div>
-            
+
             <div>
               <h4 className="font-semibold mb-3">Legal</h4>
               <ul className="space-y-2 text-slate-400">
-                <li><a href="/legal/privacy" className="hover:text-white transition-colors">Privacy Policy</a></li>
-                <li><a href="/legal/terms" className="hover:text-white transition-colors">Terms of Service</a></li>
-                <li><a href="/legal/hipaa" className="hover:text-white transition-colors">HIPAA Notice</a></li>
-                <li><a href="/legal/accessibility" className="hover:text-white transition-colors">Accessibility</a></li>
+                <li>
+                  <a
+                    href="/legal/privacy"
+                    className="hover:text-white transition-colors"
+                  >
+                    Privacy Policy
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/legal/terms"
+                    className="hover:text-white transition-colors"
+                  >
+                    Terms of Service
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/legal/hipaa"
+                    className="hover:text-white transition-colors"
+                  >
+                    HIPAA Notice
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/legal/accessibility"
+                    className="hover:text-white transition-colors"
+                  >
+                    Accessibility
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
-          
+
           <div className="border-t border-slate-800 mt-8 pt-6 text-center">
-            <p className="text-slate-400">&copy; 2025 by Georgies Pharmacy Group. All rights reserved. Licensed Pharmacy.</p>
+            <p className="text-slate-400">
+              &copy; 2025 by Georgies Pharmacy Group. All rights reserved.
+              Licensed Pharmacy.
+            </p>
           </div>
         </div>
       </footer>

@@ -14,19 +14,26 @@ export default function Accessibility() {
             Accessibility <span className="text-primary">Statement</span>
           </h1>
           <p className="text-xl text-slate-600 mb-8">
-            Georgies Pharmacy is committed to ensuring digital accessibility for people with disabilities.
+            Georgies Pharmacy is committed to ensuring digital accessibility for
+            people with disabilities.
           </p>
-          <p className="text-sm text-slate-500">Last updated: January 1, 2025</p>
+          <p className="text-sm text-slate-500">
+            Last updated: January 1, 2025
+          </p>
         </div>
 
         <div className="prose prose-slate max-w-none">
           <div className="bg-white rounded-xl p-8 shadow-sm border border-slate-200 mb-8">
             <div className="flex items-center space-x-3 mb-6">
               <Heart className="text-primary h-8 w-8" />
-              <h2 className="text-2xl font-bold text-slate-900 m-0">Our Commitment</h2>
+              <h2 className="text-2xl font-bold text-slate-900 m-0">
+                Our Commitment
+              </h2>
             </div>
             <p className="text-slate-600 leading-relaxed">
-              We are committed to providing equal access to our services for all customers, including those with disabilities. We strive to ensure that our website and digital services are accessible to everyone.
+              We are committed to providing equal access to our services for all
+              customers, including those with disabilities. We strive to ensure
+              that our website and digital services are accessible to everyone.
             </p>
           </div>
 
@@ -38,16 +45,23 @@ export default function Accessibility() {
               </h3>
               <div className="space-y-4 text-slate-600">
                 <div>
-                  <h4 className="font-semibold text-slate-900 mb-2">Visual Accessibility</h4>
+                  <h4 className="font-semibold text-slate-900 mb-2">
+                    Visual Accessibility
+                  </h4>
                   <ul className="list-disc pl-6 space-y-1">
                     <li>High contrast color schemes for better visibility</li>
-                    <li>Scalable text that can be enlarged up to 200% without loss of functionality</li>
+                    <li>
+                      Scalable text that can be enlarged up to 200% without loss
+                      of functionality
+                    </li>
                     <li>Alternative text for all images and graphics</li>
                     <li>Clear, readable fonts and proper spacing</li>
                   </ul>
                 </div>
                 <div>
-                  <h4 className="font-semibold text-slate-900 mb-2">Navigation Accessibility</h4>
+                  <h4 className="font-semibold text-slate-900 mb-2">
+                    Navigation Accessibility
+                  </h4>
                   <ul className="list-disc pl-6 space-y-1">
                     <li>Consistent navigation structure throughout the site</li>
                     <li>Skip navigation links to main content</li>
@@ -64,18 +78,30 @@ export default function Accessibility() {
                 Keyboard and Motor Accessibility
               </h3>
               <div className="space-y-4 text-slate-600">
-                <p>Our website is designed to be fully navigable using only a keyboard:</p>
+                <p>
+                  Our website is designed to be fully navigable using only a
+                  keyboard:
+                </p>
                 <div>
-                  <h4 className="font-semibold text-slate-900 mb-2">Keyboard Navigation</h4>
+                  <h4 className="font-semibold text-slate-900 mb-2">
+                    Keyboard Navigation
+                  </h4>
                   <ul className="list-disc pl-6 space-y-1">
-                    <li>All interactive elements are accessible via keyboard</li>
-                    <li>Visible focus indicators show which element is currently selected</li>
+                    <li>
+                      All interactive elements are accessible via keyboard
+                    </li>
+                    <li>
+                      Visible focus indicators show which element is currently
+                      selected
+                    </li>
                     <li>Logical tab order follows the visual layout</li>
                     <li>Keyboard shortcuts for common actions</li>
                   </ul>
                 </div>
                 <div>
-                  <h4 className="font-semibold text-slate-900 mb-2">Motor Impairment Support</h4>
+                  <h4 className="font-semibold text-slate-900 mb-2">
+                    Motor Impairment Support
+                  </h4>
                   <ul className="list-disc pl-6 space-y-1">
                     <li>Large click targets for easier selection</li>
                     <li>No time-sensitive actions that cannot be extended</li>
@@ -92,7 +118,9 @@ export default function Accessibility() {
               </h3>
               <div className="space-y-4 text-slate-600">
                 <div>
-                  <h4 className="font-semibold text-slate-900 mb-2">Audio Content</h4>
+                  <h4 className="font-semibold text-slate-900 mb-2">
+                    Audio Content
+                  </h4>
                   <ul className="list-disc pl-6 space-y-1">
                     <li>Captions provided for all video content</li>
                     <li>Audio descriptions available when necessary</li>
@@ -100,11 +128,15 @@ export default function Accessibility() {
                   </ul>
                 </div>
                 <div>
-                  <h4 className="font-semibold text-slate-900 mb-2">Cognitive Support</h4>
+                  <h4 className="font-semibold text-slate-900 mb-2">
+                    Cognitive Support
+                  </h4>
                   <ul className="list-disc pl-6 space-y-1">
                     <li>Clear, simple language used throughout the site</li>
                     <li>Consistent page layouts and navigation</li>
-                    <li>Error messages that clearly explain how to fix issues</li>
+                    <li>
+                      Error messages that clearly explain how to fix issues
+                    </li>
                     <li>Progress indicators for multi-step processes</li>
                   </ul>
                 </div>
@@ -112,9 +144,14 @@ export default function Accessibility() {
             </section>
 
             <section className="bg-white rounded-xl p-8 shadow-sm border border-slate-200">
-              <h3 className="text-xl font-bold text-slate-900 mb-4">Assistive Technology Support</h3>
+              <h3 className="text-xl font-bold text-slate-900 mb-4">
+                Assistive Technology Support
+              </h3>
               <div className="space-y-4 text-slate-600">
-                <p>Our website is compatible with assistive technologies including:</p>
+                <p>
+                  Our website is compatible with assistive technologies
+                  including:
+                </p>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <ul className="list-disc pl-6 space-y-1">
                     <li>Screen readers (JAWS, NVDA, VoiceOver)</li>
@@ -131,44 +168,71 @@ export default function Accessibility() {
             </section>
 
             <section className="bg-white rounded-xl p-8 shadow-sm border border-slate-200">
-              <h3 className="text-xl font-bold text-slate-900 mb-4">Standards Compliance</h3>
+              <h3 className="text-xl font-bold text-slate-900 mb-4">
+                Standards Compliance
+              </h3>
               <div className="text-slate-600">
                 <p className="mb-4">
-                  We strive to conform to the Web Content Accessibility Guidelines (WCAG) 2.1 at the AA level. These guidelines explain how to make web content more accessible for people with disabilities.
+                  We strive to conform to the Web Content Accessibility
+                  Guidelines (WCAG) 2.1 at the AA level. These guidelines
+                  explain how to make web content more accessible for people
+                  with disabilities.
                 </p>
                 <div>
-                  <h4 className="font-semibold text-slate-900 mb-2">Our Goals Include:</h4>
+                  <h4 className="font-semibold text-slate-900 mb-2">
+                    Our Goals Include:
+                  </h4>
                   <ul className="list-disc pl-6 space-y-1">
                     <li>Making content perceivable by all users</li>
                     <li>Ensuring all functionality is operable</li>
                     <li>Making information and UI operation understandable</li>
-                    <li>Maximizing compatibility with assistive technologies</li>
+                    <li>
+                      Maximizing compatibility with assistive technologies
+                    </li>
                   </ul>
                 </div>
               </div>
             </section>
 
             <section className="bg-white rounded-xl p-8 shadow-sm border border-slate-200">
-              <h3 className="text-xl font-bold text-slate-900 mb-4">Feedback and Contact</h3>
+              <h3 className="text-xl font-bold text-slate-900 mb-4">
+                Feedback and Contact
+              </h3>
               <div className="text-slate-600">
                 <p className="mb-4">
-                  We welcome your feedback on the accessibility of our website. If you encounter any accessibility barriers or have suggestions for improvement, please contact us:
+                  We welcome your feedback on the accessibility of our website.
+                  If you encounter any accessibility barriers or have
+                  suggestions for improvement, please contact us:
                 </p>
                 <div className="space-y-2">
-                  <p><strong>Email:</strong> accessibility@georgiespharmacy.com</p>
-                  <p><strong>Phone:</strong> (908) 925-4567</p>
-                  <p><strong>Address:</strong> 332 W. St. Georges Avenue, Linden, NJ 07036-5638</p>
+                  <p>
+                    <strong>Email:</strong> accessibility@georgiespharmacy.com
+                  </p>
+                  <p>
+                    <strong>Phone:</strong> (908) 925-4567
+                  </p>
+                  <p>
+                    <strong>Address:</strong> 332 W. St. Georges Avenue, Linden,
+                    NJ 07036-5638
+                  </p>
                 </div>
                 <p className="mt-4">
-                  We aim to respond to accessibility feedback within 5 business days.
+                  We aim to respond to accessibility feedback within 5 business
+                  days.
                 </p>
               </div>
             </section>
 
             <section className="bg-blue-50 border border-blue-200 rounded-xl p-8">
-              <h3 className="text-xl font-bold text-slate-900 mb-4">Ongoing Efforts</h3>
+              <h3 className="text-xl font-bold text-slate-900 mb-4">
+                Ongoing Efforts
+              </h3>
               <p className="text-slate-600">
-                Accessibility is an ongoing effort. We regularly review our website and services to identify and address accessibility barriers. We also provide training to our staff on accessibility best practices and work with disability advocacy groups to improve our services.
+                Accessibility is an ongoing effort. We regularly review our
+                website and services to identify and address accessibility
+                barriers. We also provide training to our staff on accessibility
+                best practices and work with disability advocacy groups to
+                improve our services.
               </p>
             </section>
           </div>

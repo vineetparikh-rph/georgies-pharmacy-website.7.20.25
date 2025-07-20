@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 interface OptimizedImageProps {
   src: string;
@@ -6,21 +6,21 @@ interface OptimizedImageProps {
   className?: string;
   width?: number;
   height?: number;
-  loading?: 'lazy' | 'eager';
+  loading?: "lazy" | "eager";
   priority?: boolean;
 }
 
-export default function OptimizedImage({ 
-  src, 
-  alt, 
-  className = '', 
-  width, 
-  height, 
-  loading = 'lazy',
-  priority = false 
+export default function OptimizedImage({
+  src,
+  alt,
+  className = "",
+  width,
+  height,
+  loading = "lazy",
+  priority = false,
 }: OptimizedImageProps) {
   const [isLoaded, setIsLoaded] = useState(false);
-  const [imageSrc, setImageSrc] = useState('');
+  const [imageSrc, setImageSrc] = useState("");
 
   useEffect(() => {
     if (priority) {
@@ -37,7 +37,7 @@ export default function OptimizedImage({
             }
           });
         },
-        { threshold: 0.1 }
+        { threshold: 0.1 },
       );
 
       const imageElement = document.querySelector(`[data-src="${src}"]`);
@@ -61,7 +61,7 @@ export default function OptimizedImage({
         width={width}
         height={height}
         loading={loading}
-        className={`transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0'} ${className}`}
+        className={`transition-opacity duration-300 ${isLoaded ? "opacity-100" : "opacity-0"} ${className}`}
         onLoad={() => setIsLoaded(true)}
         onError={() => setIsLoaded(true)}
       />

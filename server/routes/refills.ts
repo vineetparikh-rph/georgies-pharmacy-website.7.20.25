@@ -9,7 +9,9 @@ router.post("/api/refill", async (req: Request, res: Response) => {
     res.json({ success: true });
   } catch (err) {
     console.error("Refill Error:", err);
-    res.status(500).json({ success: false, error: "Refill processing failed." });
+    res
+      .status(500)
+      .json({ success: false, error: "Refill processing failed." });
   }
 });
 

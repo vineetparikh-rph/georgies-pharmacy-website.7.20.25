@@ -1,15 +1,44 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Handshake, Building, Users, TrendingUp, Award, Phone, Mail, MapPin, CheckCircle } from "lucide-react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  Handshake,
+  Building,
+  Users,
+  TrendingUp,
+  Award,
+  Phone,
+  Mail,
+  MapPin,
+  CheckCircle,
+} from "lucide-react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 
 const partnershipSchema = z.object({
   companyName: z.string().min(2, "Company name must be at least 2 characters"),
@@ -18,7 +47,11 @@ const partnershipSchema = z.object({
   phone: z.string().min(10, "Please enter a valid phone number"),
   partnershipType: z.string().min(1, "Please select a partnership type"),
   description: z.string().min(10, "Description must be at least 10 characters"),
-  website: z.string().url("Please enter a valid website URL").optional().or(z.literal("")),
+  website: z
+    .string()
+    .url("Please enter a valid website URL")
+    .optional()
+    .or(z.literal("")),
 });
 
 export default function PartnerWithUs() {
@@ -37,7 +70,9 @@ export default function PartnerWithUs() {
 
   const onSubmit = (data: z.infer<typeof partnershipSchema>) => {
     console.log("Partnership inquiry submitted:", data);
-    alert("Thank you for your partnership inquiry! We'll review your proposal and get back to you within 2-3 business days.");
+    alert(
+      "Thank you for your partnership inquiry! We'll review your proposal and get back to you within 2-3 business days.",
+    );
     form.reset();
   };
 
@@ -63,7 +98,8 @@ export default function PartnerWithUs() {
             Partner <span className="text-primary">With Us</span>
           </h1>
           <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-            Join forces with Georgies Pharmacy to expand healthcare access and improve patient outcomes across New Jersey.
+            Join forces with Georgies Pharmacy to expand healthcare access and
+            improve patient outcomes across New Jersey.
           </p>
         </div>
 
@@ -72,29 +108,41 @@ export default function PartnerWithUs() {
           <Card className="text-center">
             <CardContent className="pt-6">
               <Building className="h-12 w-12 text-primary mx-auto mb-4" />
-              <h3 className="font-semibold text-lg mb-2">Established Network</h3>
-              <p className="text-sm text-slate-600">4 pharmacy locations serving diverse communities</p>
+              <h3 className="font-semibold text-lg mb-2">
+                Established Network
+              </h3>
+              <p className="text-sm text-slate-600">
+                4 pharmacy locations serving diverse communities
+              </p>
             </CardContent>
           </Card>
           <Card className="text-center">
             <CardContent className="pt-6">
               <Users className="h-12 w-12 text-primary mx-auto mb-4" />
-              <h3 className="font-semibold text-lg mb-2">Patient-Centered Care</h3>
-              <p className="text-sm text-slate-600">Thousands of satisfied patients trust our services</p>
+              <h3 className="font-semibold text-lg mb-2">
+                Patient-Centered Care
+              </h3>
+              <p className="text-sm text-slate-600">
+                Thousands of satisfied patients trust our services
+              </p>
             </CardContent>
           </Card>
           <Card className="text-center">
             <CardContent className="pt-6">
               <TrendingUp className="h-12 w-12 text-primary mx-auto mb-4" />
               <h3 className="font-semibold text-lg mb-2">Growing Reach</h3>
-              <p className="text-sm text-slate-600">Expanding services and community impact</p>
+              <p className="text-sm text-slate-600">
+                Expanding services and community impact
+              </p>
             </CardContent>
           </Card>
           <Card className="text-center">
             <CardContent className="pt-6">
               <Award className="h-12 w-12 text-primary mx-auto mb-4" />
               <h3 className="font-semibold text-lg mb-2">Quality Excellence</h3>
-              <p className="text-sm text-slate-600">Committed to highest standards of care</p>
+              <p className="text-sm text-slate-600">
+                Committed to highest standards of care
+              </p>
             </CardContent>
           </Card>
         </div>
@@ -102,8 +150,10 @@ export default function PartnerWithUs() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Partnership Opportunities */}
           <div>
-            <h2 className="text-3xl font-bold text-slate-900 mb-8">Partnership Opportunities</h2>
-            
+            <h2 className="text-3xl font-bold text-slate-900 mb-8">
+              Partnership Opportunities
+            </h2>
+
             <div className="space-y-6">
               <Card>
                 <CardHeader>
@@ -229,12 +279,16 @@ export default function PartnerWithUs() {
               <CardHeader>
                 <CardTitle>Partnership Inquiry</CardTitle>
                 <CardDescription>
-                  Tell us about your organization and how we can work together to improve healthcare outcomes.
+                  Tell us about your organization and how we can work together
+                  to improve healthcare outcomes.
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <Form {...form}>
-                  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                  <form
+                    onSubmit={form.handleSubmit(onSubmit)}
+                    className="space-y-6"
+                  >
                     <FormField
                       control={form.control}
                       name="companyName"
@@ -271,7 +325,11 @@ export default function PartnerWithUs() {
                           <FormItem>
                             <FormLabel>Email Address</FormLabel>
                             <FormControl>
-                              <Input type="email" placeholder="your@email.com" {...field} />
+                              <Input
+                                type="email"
+                                placeholder="your@email.com"
+                                {...field}
+                              />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -299,7 +357,10 @@ export default function PartnerWithUs() {
                         <FormItem>
                           <FormLabel>Website (Optional)</FormLabel>
                           <FormControl>
-                            <Input placeholder="https://yourwebsite.com" {...field} />
+                            <Input
+                              placeholder="https://yourwebsite.com"
+                              {...field}
+                            />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -312,7 +373,10 @@ export default function PartnerWithUs() {
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>Partnership Type</FormLabel>
-                          <Select onValueChange={field.onChange} defaultValue={field.value}>
+                          <Select
+                            onValueChange={field.onChange}
+                            defaultValue={field.value}
+                          >
                             <FormControl>
                               <SelectTrigger>
                                 <SelectValue placeholder="Select partnership type" />
@@ -363,7 +427,8 @@ export default function PartnerWithUs() {
               <CardHeader>
                 <CardTitle>Get in Touch</CardTitle>
                 <CardDescription>
-                  Ready to discuss partnership opportunities? Contact us directly.
+                  Ready to discuss partnership opportunities? Contact us
+                  directly.
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -374,7 +439,9 @@ export default function PartnerWithUs() {
                   </div>
                   <div className="flex items-center">
                     <Mail className="h-5 w-5 mr-3 text-primary" />
-                    <span className="text-slate-600">partnerships@georgiesrx.com</span>
+                    <span className="text-slate-600">
+                      partnerships@georgiesrx.com
+                    </span>
                   </div>
                   <div className="flex items-start">
                     <MapPin className="h-5 w-5 mr-3 text-primary mt-0.5" />

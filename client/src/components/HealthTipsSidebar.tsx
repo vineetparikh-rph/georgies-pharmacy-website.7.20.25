@@ -1,7 +1,14 @@
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Brain, RefreshCw, Heart, Pill, Activity, Lightbulb } from "lucide-react";
+import {
+  Brain,
+  RefreshCw,
+  Heart,
+  Pill,
+  Activity,
+  Lightbulb,
+} from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 
@@ -36,7 +43,11 @@ const categoryColors = {
   general: "bg-purple-100 text-purple-700",
 };
 
-export default function HealthTipsSidebar({ patientId, medications = [], className = "" }: HealthTipsSidebarProps) {
+export default function HealthTipsSidebar({
+  patientId,
+  medications = [],
+  className = "",
+}: HealthTipsSidebarProps) {
   const [tips, setTips] = useState<HealthTip[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -44,7 +55,7 @@ export default function HealthTipsSidebar({ patientId, medications = [], classNa
   const generateHealthTips = async () => {
     setLoading(true);
     setError(null);
-    
+
     try {
       const response = await fetch("/api/health-tips/generate", {
         method: "POST",
@@ -65,27 +76,32 @@ export default function HealthTipsSidebar({ patientId, medications = [], classNa
       const data = await response.json();
       setTips(data.tips || []);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to load health tips");
+      setError(
+        err instanceof Error ? err.message : "Failed to load health tips",
+      );
       // Fallback tips if API fails
       setTips([
         {
           id: "1",
           title: "Take Medications as Prescribed",
-          content: "Always take your medications at the same time each day to maintain consistent levels in your system. Set reminders if needed.",
+          content:
+            "Always take your medications at the same time each day to maintain consistent levels in your system. Set reminders if needed.",
           category: "medication",
           relevance: "high",
         },
         {
           id: "2",
           title: "Stay Hydrated",
-          content: "Drink at least 8 glasses of water daily. Proper hydration helps your body process medications effectively.",
+          content:
+            "Drink at least 8 glasses of water daily. Proper hydration helps your body process medications effectively.",
           category: "wellness",
           relevance: "medium",
         },
         {
           id: "3",
           title: "Regular Exercise",
-          content: "Aim for 30 minutes of moderate exercise daily. Consult your pharmacist about any exercise restrictions with your medications.",
+          content:
+            "Aim for 30 minutes of moderate exercise daily. Consult your pharmacist about any exercise restrictions with your medications.",
           category: "exercise",
           relevance: "medium",
         },
@@ -101,22 +117,29 @@ export default function HealthTipsSidebar({ patientId, medications = [], classNa
 
   const renderTipContent = (tip: HealthTip) => {
     const IconComponent = categoryIcons[tip.category];
-    
+
     return (
       <Card key={tip.id} className="mb-4 border-l-4 border-l-primary">
         <CardHeader className="pb-3">
           <div className="flex items-start justify-between">
             <div className="flex items-center space-x-2">
               <IconComponent className="h-4 w-4 text-primary" />
-              <CardTitle className="text-sm font-semibold">{tip.title}</CardTitle>
+              <CardTitle className="text-sm font-semibold">
+                {tip.title}
+              </CardTitle>
             </div>
-            <Badge variant="outline" className={`text-xs ${categoryColors[tip.category]}`}>
+            <Badge
+              variant="outline"
+              className={`text-xs ${categoryColors[tip.category]}`}
+            >
               {tip.category}
             </Badge>
           </div>
         </CardHeader>
         <CardContent className="pt-0">
-          <p className="text-sm text-slate-600 leading-relaxed">{tip.content}</p>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            {tip.content}
+          </p>
           {tip.source && (
             <p className="text-xs text-slate-400 mt-2">Source: {tip.source}</p>
           )}
@@ -144,11 +167,15 @@ export default function HealthTipsSidebar({ patientId, medications = [], classNa
   );
 
   return (
-    <div className={`bg-white rounded-lg border border-slate-200 p-6 ${className}`}>
+    <div
+      className={`bg-white rounded-lg border border-slate-200 p-6 ${className}`}
+    >
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center space-x-2">
           <Brain className="h-5 w-5 text-primary" />
-          <h3 className="text-lg font-semibold text-slate-900">AI Health Tips</h3>
+          <h3 className="text-lg font-semibold text-slate-900">
+            AI Health Tips
+          </h3>
         </div>
         <Button
           variant="outline"
@@ -157,7 +184,9 @@ export default function HealthTipsSidebar({ patientId, medications = [], classNa
           disabled={loading}
           className="text-primary border-primary hover:bg-primary hover:text-white"
         >
-          <RefreshCw className={`h-4 w-4 mr-2 ${loading ? "animate-spin" : ""}`} />
+          <RefreshCw
+            className={`h-4 w-4 mr-2 ${loading ? "animate-spin" : ""}`}
+          />
           Refresh
         </Button>
       </div>
@@ -189,7 +218,8 @@ export default function HealthTipsSidebar({ patientId, medications = [], classNa
 
       <div className="mt-6 pt-4 border-t border-slate-200">
         <p className="text-xs text-slate-500 text-center">
-          AI-powered health tips are for informational purposes only. Always consult your healthcare provider for medical advice.
+          AI-powered health tips are for informational purposes only. Always
+          consult your healthcare provider for medical advice.
         </p>
       </div>
     </div>

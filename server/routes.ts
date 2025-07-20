@@ -254,7 +254,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Handle multiple medications (they come as an array)
       let medications = req.body.medications;
       if (Array.isArray(medications)) {
-        medications = medications.filter((med) => med && med.trim()).join('\n');
+        medications = medications.filter((med) => med?.trim()).join('\n');
       } else if (typeof medications === 'string') {
         medications = medications.trim();
       } else {
@@ -321,7 +321,7 @@ ${medications}`;
       // Handle multiple medications
       let medicationList = medications;
       if (Array.isArray(medications)) {
-        medicationList = medications.filter((med) => med && med.trim()).join('\n');
+        medicationList = medications.filter((med) => med?.trim()).join('\n');
       } else if (typeof medications === 'string') {
         medicationList = medications.trim();
       } else {

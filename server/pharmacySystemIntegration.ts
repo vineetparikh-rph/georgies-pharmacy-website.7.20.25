@@ -345,7 +345,7 @@ export class PharmacySystemIntegration {
 
       // Handle both JSON and HTML responses
       const contentType = response.headers.get('content-type');
-      if (contentType && contentType.includes('application/json')) {
+      if (contentType?.includes('application/json')) {
         const data = await response.json();
         return { success: true, data };
       } else {

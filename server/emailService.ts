@@ -6,29 +6,29 @@ import { randomUUID } from 'crypto';
 
 // Fax routing by location code
 const FAX_ROUTES = {
-  "FAMILY": "9089258090@metrofax.com",
-  "OUTPATIENT": "6097265810@metrofax.com", 
-  "PARLIN": "4076418434@metrofax.com",
-  "SPECIALTY": "9083455030@metrofax.com"
+  FAMILY: '9089258090@metrofax.com',
+  OUTPATIENT: '6097265810@metrofax.com',
+  PARLIN: '4076418434@metrofax.com',
+  SPECIALTY: '9083455030@metrofax.com',
 };
 
 interface EmailResult {
-  status: "success" | "error";
+  status: 'success' | 'error';
   message: string;
 }
 
 export async function sendFaxEmail(
-  locationCode: string, 
-  body: string, 
-  subjectPrefix: string, 
+  locationCode: string,
+  body: string,
+  subjectPrefix: string,
   pdfPath?: string
 ): Promise<EmailResult> {
   const toEmail = FAX_ROUTES[locationCode.toUpperCase() as keyof typeof FAX_ROUTES];
-  
+
   if (!toEmail) {
-    return { 
-      status: "error", 
-      message: `Invalid location code: ${locationCode}` 
+    return {
+      status: 'error',
+      message: `Invalid location code: ${locationCode}`,
     };
   }
 
@@ -37,21 +37,22 @@ export async function sendFaxEmail(
 
   if (!fromEmail || !appPassword) {
     return {
-      status: "error",
-      message: "Email credentials not configured. Please set FROM_EMAIL and APP_PASSWORD in environment variables."
+      status: 'error',
+      message:
+        'Email credentials not configured. Please set FROM_EMAIL and APP_PASSWORD in environment variables.',
     };
   }
 
   const now = new Date().toLocaleString('en-US', {
     timeZone: 'America/New_York',
     year: 'numeric',
-    month: 'long', 
+    month: 'long',
     day: 'numeric',
     hour: 'numeric',
     minute: '2-digit',
-    hour12: true
+    hour12: true,
   });
-  
+
   const subject = `${subjectPrefix} via GeorgiesRx.com - ${now}`;
 
   try {
@@ -60,8 +61,8 @@ export async function sendFaxEmail(
       service: 'gmail',
       auth: {
         user: fromEmail,
-        pass: appPassword
-      }
+        pass: appPassword,
+      },
     });
 
     // Create email options
@@ -69,35 +70,41 @@ export async function sendFaxEmail(
       from: fromEmail,
       to: toEmail,
       subject: subject,
-      text: body
+      text: body,
     };
 
     // Attach PDF if provided
     if (pdfPath && existsSync(pdfPath)) {
-      mailOptions.attachments = [{
-        filename: 'form.pdf',
-        path: pdfPath
-      }];
+      mailOptions.attachments = [
+        {
+          filename: 'form.pdf',
+          path: pdfPath,
+        },
+      ];
     }
 
     // Send email
     await transporter.sendMail(mailOptions);
-    
+
     return {
-      status: "success",
-      message: `Fax sent to ${toEmail.split('@')[0]}`
+      status: 'success',
+      message: `Fax sent to ${toEmail.split('@')[0]}`,
     };
-    
   } catch (error) {
     console.error('Email sending error:', error);
     return {
-      status: "error", 
-      message: `Email sending error: ${error}`
+      status: 'error',
+      message: `Email sending error: ${error}`,
     };
   }
 }
 
-export function generateRefillPDF(name: string, dob: string, medications: string, phone: string): string {
+export function generateRefillPDF(
+  name: string,
+  dob: string,
+  medications: string,
+  phone: string
+): string {
   const pdfDir = join(process.cwd(), 'generated_pdfs');
   if (!existsSync(pdfDir)) {
     mkdirSync(pdfDir, { recursive: true });
@@ -112,11 +119,11 @@ export function generateRefillPDF(name: string, dob: string, medications: string
   const timestamp = new Date().toLocaleString('en-US', {
     timeZone: 'America/New_York',
     year: 'numeric',
-    month: 'long', 
+    month: 'long',
     day: 'numeric',
     hour: 'numeric',
     minute: '2-digit',
-    hour12: true
+    hour12: true,
   });
 
   doc.fontSize(14).text(`Refill Request for: ${name}`, 100, 100);
@@ -124,10 +131,10 @@ export function generateRefillPDF(name: string, dob: string, medications: string
   doc.fontSize(12).text(`Date of Birth: ${dob}`, 100, 140);
   doc.text(`Phone: ${phone}`, 100, 160);
   doc.text('Medications:', 100, 190);
-  
+
   const medLines = medications.split('\n');
   medLines.forEach((line, index) => {
-    doc.text(line, 120, 210 + (index * 20));
+    doc.text(line, 120, 210 + index * 20);
   });
 
   doc.end();
@@ -149,11 +156,11 @@ export function generateTransferPDF(data: any): string {
   const timestamp = new Date().toLocaleString('en-US', {
     timeZone: 'America/New_York',
     year: 'numeric',
-    month: 'long', 
+    month: 'long',
     day: 'numeric',
     hour: 'numeric',
     minute: '2-digit',
-    hour12: true
+    hour12: true,
   });
 
   let y = 50;
@@ -204,17 +211,23 @@ export function generateVaccinePDF(data: any): string {
   const timestamp = new Date().toLocaleString('en-US', {
     timeZone: 'America/New_York',
     year: 'numeric',
-    month: 'long', 
+    month: 'long',
     day: 'numeric',
     hour: 'numeric',
     minute: '2-digit',
-    hour12: true
+    hour12: true,
   });
 
   let y = 50;
-  doc.fontSize(16).fillColor('red').text('Georgies Pharmacy Vaccine Consent Form', 30, y, { align: 'center' });
+  doc
+    .fontSize(16)
+    .fillColor('red')
+    .text('Georgies Pharmacy Vaccine Consent Form', 30, y, { align: 'center' });
   y += 30;
-  doc.fontSize(12).fillColor('black').text('Better Care. Better Health.', 30, y, { align: 'center' });
+  doc
+    .fontSize(12)
+    .fillColor('black')
+    .text('Better Care. Better Health.', 30, y, { align: 'center' });
   y += 20;
   doc.fontSize(10).text(`Submitted: ${timestamp} EST`, 30, y, { align: 'center' });
   y += 30;
@@ -242,7 +255,10 @@ export function generateVaccinePDF(data: any): string {
     ['Insurance ID', data.insurance_id || ''],
     ['Group', data.insurance_group || ''],
     ['Insured First/Last Name', `${data.insured_first || ''} ${data.insured_last || ''}`],
-    ['Policy Holder First/Last Name', `${data.policy_holder_first || ''} ${data.policy_holder_last || ''}`]
+    [
+      'Policy Holder First/Last Name',
+      `${data.policy_holder_first || ''} ${data.policy_holder_last || ''}`,
+    ],
   ];
 
   fields.forEach(([label, value]) => {
@@ -260,7 +276,7 @@ export function generateVaccinePDF(data: any): string {
     ['Serious reaction in the past', data.screening_reaction],
     ['Guillain-Barre syndrome', data.screening_gbs],
     ['Vaccines in past 30 days', data.screening_recent_vaccine],
-    ['Pregnant or breastfeeding', data.screening_pregnancy]
+    ['Pregnant or breastfeeding', data.screening_pregnancy],
   ];
 
   screening.forEach(([label, value]) => {

@@ -13,4 +13,4 @@ export type {
   InsertTransferRequest,
   InsertChatMessage,
   InsertPharmacyLocation,
-} from "@shared/schema";
+} from '@shared/schema';

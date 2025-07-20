@@ -78,21 +78,24 @@ export class AmerisourceBergenService {
    */
   async searchProducts(searchRequest: ABSearchRequest): Promise<ABProduct[]> {
     if (!this.isConfigured()) {
-      throw new Error('AmerisourceBergen credentials not configured. Please set AB_API_KEY and AB_CUSTOMER_ID environment variables.');
+      throw new Error(
+        'AmerisourceBergen credentials not configured. Please set AB_API_KEY and AB_CUSTOMER_ID environment variables.'
+      );
     }
 
     try {
       const queryParams = new URLSearchParams();
       if (searchRequest.query) queryParams.append('query', searchRequest.query);
       if (searchRequest.category) queryParams.append('category', searchRequest.category);
-      if (searchRequest.manufacturer) queryParams.append('manufacturer', searchRequest.manufacturer);
+      if (searchRequest.manufacturer)
+        queryParams.append('manufacturer', searchRequest.manufacturer);
       queryParams.append('limit', (searchRequest.limit || 100).toString());
       queryParams.append('offset', (searchRequest.offset || 0).toString());
 
       const response = await fetch(`${this.baseUrl}/products/search?${queryParams}`, {
         method: 'GET',
         headers: {
-          'Authorization': `Bearer ${this.apiKey}`,
+          Authorization: `Bearer ${this.apiKey}`,
           'Content-Type': 'application/json',
           'X-Customer-ID': this.customerId,
         },
@@ -132,7 +135,7 @@ export class AmerisourceBergenService {
       const response = await fetch(`${this.baseUrl}/products/${itemNumber}`, {
         method: 'GET',
         headers: {
-          'Authorization': `Bearer ${this.apiKey}`,
+          Authorization: `Bearer ${this.apiKey}`,
           'Content-Type': 'application/json',
           'X-Customer-ID': this.customerId,
         },
@@ -163,7 +166,7 @@ export class AmerisourceBergenService {
       const response = await fetch(`${this.baseUrl}/products/availability`, {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${this.apiKey}`,
+          Authorization: `Bearer ${this.apiKey}`,
           'Content-Type': 'application/json',
           'X-Customer-ID': this.customerId,
         },
@@ -194,7 +197,7 @@ export class AmerisourceBergenService {
       const response = await fetch(`${this.baseUrl}/orders`, {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${this.apiKey}`,
+          Authorization: `Bearer ${this.apiKey}`,
           'Content-Type': 'application/json',
           'X-Customer-ID': this.customerId,
         },
@@ -228,7 +231,7 @@ export class AmerisourceBergenService {
       const response = await fetch(`${this.baseUrl}/orders/${orderId}`, {
         method: 'GET',
         headers: {
-          'Authorization': `Bearer ${this.apiKey}`,
+          Authorization: `Bearer ${this.apiKey}`,
           'Content-Type': 'application/json',
           'X-Customer-ID': this.customerId,
         },
@@ -250,7 +253,7 @@ export class AmerisourceBergenService {
    * Process raw AB products into standardized format
    */
   private processProducts(abProducts: any[]): ABProduct[] {
-    return abProducts.map(product => this.processProduct(product));
+    return abProducts.map((product) => this.processProduct(product));
   }
 
   /**
@@ -281,14 +284,26 @@ export class AmerisourceBergenService {
   private categorizeProduct(product: any): string {
     const description = (product.description || '').toLowerCase();
     const therapeuticClass = (product.therapeuticClass || '').toLowerCase();
-    
-    if (description.includes('pain') || description.includes('analgesic') || therapeuticClass.includes('analgesic')) {
+
+    if (
+      description.includes('pain') ||
+      description.includes('analgesic') ||
+      therapeuticClass.includes('analgesic')
+    ) {
       return 'pain-relief';
     }
-    if (description.includes('vitamin') || description.includes('supplement') || therapeuticClass.includes('vitamin')) {
+    if (
+      description.includes('vitamin') ||
+      description.includes('supplement') ||
+      therapeuticClass.includes('vitamin')
+    ) {
       return 'vitamins';
     }
-    if (description.includes('cold') || description.includes('flu') || description.includes('cough')) {
+    if (
+      description.includes('cold') ||
+      description.includes('flu') ||
+      description.includes('cough')
+    ) {
       return 'cold-flu';
     }
     if (description.includes('allergy') || description.includes('antihistamine')) {
@@ -297,7 +312,11 @@ export class AmerisourceBergenService {
     if (description.includes('bandage') || description.includes('first aid')) {
       return 'first-aid';
     }
-    if (description.includes('antacid') || description.includes('digestive') || therapeuticClass.includes('gastrointestinal')) {
+    if (
+      description.includes('antacid') ||
+      description.includes('digestive') ||
+      therapeuticClass.includes('gastrointestinal')
+    ) {
       return 'digestive';
     }
     if (description.includes('skin') || description.includes('topical')) {
@@ -306,7 +325,7 @@ export class AmerisourceBergenService {
     if (description.includes('baby') || description.includes('infant')) {
       return 'baby';
     }
-    
+
     return 'general';
   }
 
@@ -316,16 +335,18 @@ export class AmerisourceBergenService {
   private getDefaultImage(category: string): string {
     const imageMap: Record<string, string> = {
       'pain-relief': 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400',
-      'vitamins': 'https://images.unsplash.com/photo-1556909114-0a5e16e77ff6?w=400',
+      vitamins: 'https://images.unsplash.com/photo-1556909114-0a5e16e77ff6?w=400',
       'cold-flu': 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400',
-      'allergy': 'https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=400',
+      allergy: 'https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=400',
       'first-aid': 'https://images.unsplash.com/photo-1603398938093-6b77de70db2c?w=400',
-      'digestive': 'https://images.unsplash.com/photo-1559181567-c3190ca9959b?w=400',
-      'skincare': 'https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=400',
-      'baby': 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400',
+      digestive: 'https://images.unsplash.com/photo-1559181567-c3190ca9959b?w=400',
+      skincare: 'https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=400',
+      baby: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400',
     };
-    
-    return imageMap[category] || 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400';
+
+    return (
+      imageMap[category] || 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400'
+    );
   }
 
   /**
@@ -333,9 +354,10 @@ export class AmerisourceBergenService {
    */
   convertToStandardProduct(abProduct: ABProduct): any {
     const finalPrice = abProduct.contractPrice || abProduct.unitPrice;
-    const savings = abProduct.contractPrice && abProduct.unitPrice > abProduct.contractPrice 
-      ? abProduct.unitPrice - abProduct.contractPrice 
-      : 0;
+    const savings =
+      abProduct.contractPrice && abProduct.unitPrice > abProduct.contractPrice
+        ? abProduct.unitPrice - abProduct.contractPrice
+        : 0;
 
     return {
       id: abProduct.itemNumber,

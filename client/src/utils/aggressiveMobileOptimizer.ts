@@ -20,8 +20,11 @@ export const eliminateRenderBlocking = () => {
 
     // Replace existing styles with minimal critical CSS
     const existingStyles = document.querySelectorAll('style, link[rel="stylesheet"]');
-    existingStyles.forEach(style => {
-      if (style.textContent?.includes('tailwind') || style.getAttribute('href')?.includes('index.css')) {
+    existingStyles.forEach((style) => {
+      if (
+        style.textContent?.includes('tailwind') ||
+        style.getAttribute('href')?.includes('index.css')
+      ) {
         return; // Keep main CSS
       }
       style.remove();
@@ -36,7 +39,7 @@ export const eliminateRenderBlocking = () => {
 
 export const optimizeImages = () => {
   const images = document.querySelectorAll('img');
-  images.forEach(img => {
+  images.forEach((img) => {
     // Convert to WebP if supported and reduce quality on mobile
     if (window.innerWidth <= 768) {
       const src = img.src;
@@ -46,7 +49,7 @@ export const optimizeImages = () => {
           .replace(/w=\d+/, 'w=400')
           .replace(/h=\d+/, 'h=250')
           .replace(/q=\d+/, 'q=50');
-        
+
         img.src = mobileOptimized;
         img.loading = 'lazy';
         img.decoding = 'async';
@@ -58,7 +61,7 @@ export const optimizeImages = () => {
 export const deferNonCriticalJS = () => {
   // Defer all non-critical JavaScript
   const scripts = document.querySelectorAll('script[src]');
-  scripts.forEach(script => {
+  scripts.forEach((script) => {
     const src = script.getAttribute('src');
     if (src && !src.includes('main.tsx') && !src.includes('react')) {
       script.setAttribute('defer', '');
@@ -70,16 +73,27 @@ export const removeUnusedCSS = () => {
   if (window.innerWidth <= 768) {
     // Remove unused CSS classes on mobile
     const unusedClasses = [
-      'shadow-xl', 'shadow-lg', 'backdrop-blur', 'blur-', 
-      'animate-', 'transition-', 'duration-', 'ease-',
-      'hover:', 'focus:', 'group-hover:', 'lg:', 'xl:', '2xl:'
+      'shadow-xl',
+      'shadow-lg',
+      'backdrop-blur',
+      'blur-',
+      'animate-',
+      'transition-',
+      'duration-',
+      'ease-',
+      'hover:',
+      'focus:',
+      'group-hover:',
+      'lg:',
+      'xl:',
+      '2xl:',
     ];
 
     const allElements = document.querySelectorAll('*');
-    allElements.forEach(el => {
+    allElements.forEach((el) => {
       if (el instanceof HTMLElement && el.className) {
         let className = el.className;
-        unusedClasses.forEach(unused => {
+        unusedClasses.forEach((unused) => {
           className = className.replace(new RegExp(`\\b[^\\s]*${unused}[^\\s]*`, 'g'), '');
         });
         el.className = className;
@@ -103,7 +117,7 @@ export const initAggressiveOptimizations = () => {
   // Run immediately for critical path
   eliminateRenderBlocking();
   optimizeFonts();
-  
+
   // Run after DOM content loaded
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {

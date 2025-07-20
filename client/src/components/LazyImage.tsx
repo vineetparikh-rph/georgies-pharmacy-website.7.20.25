@@ -8,12 +8,12 @@ interface LazyImageProps {
   placeholder?: string;
 }
 
-export default function LazyImage({ 
-  src, 
-  alt, 
-  className = '', 
+export default function LazyImage({
+  src,
+  alt,
+  className = '',
   loading = 'lazy',
-  placeholder = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect width="100%25" height="100%25" fill="%23f1f5f9"/%3E%3C/svg%3E'
+  placeholder = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect width="100%25" height="100%25" fill="%23f1f5f9"/%3E%3C/svg%3E',
 }: LazyImageProps) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);

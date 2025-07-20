@@ -19,7 +19,7 @@ interface WinRxFormFields {
 
 export class WinRxScraper {
   private baseUrl: string;
-  
+
   constructor(nabp: string) {
     this.baseUrl = `https://${nabp}.winrxrefill.com`;
   }
@@ -31,20 +31,20 @@ export class WinRxScraper {
     try {
       const response = await fetch(this.baseUrl);
       const html = await response.text();
-      
+
       // Extract form fields from HTML
       const requiredFields = this.extractRequiredFields(html);
       const optionalFields = this.extractOptionalFields(html);
       const pickupOptions = this.extractPickupOptions(html);
       const formAction = this.extractFormAction(html);
       const csrfToken = this.extractCSRFToken(html);
-      
+
       return {
         requiredFields,
         optionalFields,
         pickupOptions,
         formAction,
-        csrfToken
+        csrfToken,
       };
     } catch (error) {
       console.error('Error scraping refill form:', error);
@@ -57,14 +57,14 @@ export class WinRxScraper {
    */
   private extractRequiredFields(html: string): string[] {
     const requiredFields: string[] = [];
-    
+
     // Look for required input fields
     const requiredInputRegex = /<input[^>]*required[^>]*name=['"](.*?)['"]/gi;
     let match;
     while ((match = requiredInputRegex.exec(html)) !== null) {
       requiredFields.push(match[1]);
     }
-    
+
     // Also check for inputs with required attribute
     const requiredAttrRegex = /<input[^>]*name=['"](.*?)['"][^>]*required/gi;
     while ((match = requiredAttrRegex.exec(html)) !== null) {
@@ -72,7 +72,7 @@ export class WinRxScraper {
         requiredFields.push(match[1]);
       }
     }
-    
+
     return requiredFields;
   }
 
@@ -81,11 +81,11 @@ export class WinRxScraper {
    */
   private extractOptionalFields(html: string): string[] {
     const optionalFields: string[] = [];
-    
+
     // Look for input fields that are not required
     const inputRegex = /<input[^>]*name=['"](.*?)['"]/gi;
     const requiredFields = this.extractRequiredFields(html);
-    
+
     let match;
     while ((match = inputRegex.exec(html)) !== null) {
       const fieldName = match[1];
@@ -93,7 +93,7 @@ export class WinRxScraper {
         optionalFields.push(fieldName);
       }
     }
-    
+
     return optionalFields;
   }
 
@@ -102,11 +102,12 @@ export class WinRxScraper {
    */
   private extractPickupOptions(html: string): string[] {
     const pickupOptions: string[] = [];
-    
+
     // Look for select element with pickup-related name
-    const selectRegex = /<select[^>]*name=['"](pickup|delivery|method)['"'][^>]*>(.*?)<\/select>/gis;
+    const selectRegex =
+      /<select[^>]*name=['"](pickup|delivery|method)['"'][^>]*>(.*?)<\/select>/gis;
     const match = selectRegex.exec(html);
-    
+
     if (match && match[2]) {
       const optionsHtml = match[2];
       const optionRegex = /<option[^>]*value=['"](.*?)['"]/gi;
@@ -115,7 +116,7 @@ export class WinRxScraper {
         pickupOptions.push(optionMatch[1]);
       }
     }
-    
+
     return pickupOptions;
   }
 
@@ -135,16 +136,16 @@ export class WinRxScraper {
     // Look for common CSRF token patterns
     const csrfPatterns = [
       /<input[^>]*name=['"](csrf|_token|authenticity_token)['"'][^>]*value=['"](.*?)['"]/i,
-      /<meta[^>]*name=['"](csrf-token|_token)['"'][^>]*content=['"](.*?)['"]/i
+      /<meta[^>]*name=['"](csrf-token|_token)['"'][^>]*content=['"](.*?)['"]/i,
     ];
-    
+
     for (const pattern of csrfPatterns) {
       const match = pattern.exec(html);
       if (match && match[2]) {
         return match[2];
       }
     }
-    
+
     return undefined;
   }
 
@@ -155,52 +156,52 @@ export class WinRxScraper {
     try {
       // First scrape the form to get required fields and tokens
       const formInfo = await this.scrapeRefillForm();
-      
+
       // Prepare form data
       const submitData = new URLSearchParams();
       submitData.append('rx_number', formData.rxNumber);
       submitData.append('last_name', formData.lastName);
       submitData.append('date_of_birth', formData.dateOfBirth);
-      
+
       if (formData.phone) {
         submitData.append('phone', formData.phone);
       }
-      
+
       if (formData.pickup) {
         submitData.append('pickup_method', formData.pickup);
       }
-      
+
       if (formData.deliveryInstructions) {
         submitData.append('delivery_instructions', formData.deliveryInstructions);
       }
-      
+
       // Add CSRF token if present
       if (formInfo.csrfToken) {
         submitData.append('_token', formInfo.csrfToken);
       }
-      
+
       // Submit the form
-      const submitUrl = formInfo.formAction.startsWith('http') 
-        ? formInfo.formAction 
+      const submitUrl = formInfo.formAction.startsWith('http')
+        ? formInfo.formAction
         : `${this.baseUrl}${formInfo.formAction}`;
-        
+
       const response = await fetch(submitUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
           'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-          'Referer': this.baseUrl
+          Referer: this.baseUrl,
         },
-        body: submitData.toString()
+        body: submitData.toString(),
       });
-      
+
       const responseText = await response.text();
-      
+
       return {
         success: response.ok,
         statusCode: response.status,
         response: responseText,
-        formInfo
+        formInfo,
       };
     } catch (error) {
       console.error('Error submitting refill request:', error);
@@ -218,8 +219,8 @@ export class WinRxScraper {
 
 // Create instances for all Georgies pharmacy locations
 export const winRxScrapers = {
-  'family': new WinRxScraper('3198098'),      // Georgies Family Pharmacy
-  'specialty': new WinRxScraper('3155973'),   // Georgies Specialty Pharmacy  
-  'parlin': new WinRxScraper('3151482'),      // Georgies Parlin Pharmacy
-  'outpatient': new WinRxScraper('3156177')   // Georgies Outpatient Pharmacy
+  family: new WinRxScraper('3198098'), // Georgies Family Pharmacy
+  specialty: new WinRxScraper('3155973'), // Georgies Specialty Pharmacy
+  parlin: new WinRxScraper('3151482'), // Georgies Parlin Pharmacy
+  outpatient: new WinRxScraper('3156177'), // Georgies Outpatient Pharmacy
 };

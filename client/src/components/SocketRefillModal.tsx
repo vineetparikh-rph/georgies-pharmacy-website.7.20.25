@@ -1,17 +1,30 @@
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { useToast } from "@/hooks/use-toast";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { apiRequest } from "@/lib/queryClient";
-import { Prescription } from "@shared/schema";
-import { Wifi, Send, CheckCircle, AlertCircle, Settings } from "lucide-react";
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { useToast } from '@/hooks/use-toast';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { apiRequest } from '@/lib/queryClient';
+import { Prescription } from '@shared/schema';
+import { Wifi, Send, CheckCircle, AlertCircle, Settings } from 'lucide-react';
 
 interface SocketRefillModalProps {
   prescription?: Prescription;
@@ -39,7 +52,7 @@ export default function SocketRefillModal({ prescription, trigger }: SocketRefil
     phone: '',
     nabp: '3156177', // Default to Georgies Outpatient Pharmacy
     pickupMethod: 'IN_STORE',
-    notes: ''
+    notes: '',
   });
 
   const { toast } = useToast();
@@ -63,13 +76,13 @@ export default function SocketRefillModal({ prescription, trigger }: SocketRefil
       return await apiRequest('/api/refills/socket', {
         method: 'POST',
         body: JSON.stringify(data),
-        headers: { 'Content-Type': 'application/json' }
+        headers: { 'Content-Type': 'application/json' },
       });
     },
     onSuccess: (data) => {
       toast({
-        title: "Refill Submitted",
-        description: "Your refill request has been submitted via socket protocol.",
+        title: 'Refill Submitted',
+        description: 'Your refill request has been submitted via socket protocol.',
       });
       queryClient.invalidateQueries({ queryKey: ['/api/refills'] });
       setOpen(false);
@@ -77,9 +90,9 @@ export default function SocketRefillModal({ prescription, trigger }: SocketRefil
     },
     onError: (error: Error) => {
       toast({
-        title: "Submission Failed",
-        description: error.message || "Failed to submit refill request via socket.",
-        variant: "destructive",
+        title: 'Submission Failed',
+        description: error.message || 'Failed to submit refill request via socket.',
+        variant: 'destructive',
       });
     },
   });
@@ -93,18 +106,18 @@ export default function SocketRefillModal({ prescription, trigger }: SocketRefil
       phone: '',
       nabp: '3156177',
       pickupMethod: 'IN_STORE',
-      notes: ''
+      notes: '',
     });
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!formData.rxNumber || !formData.patientName || !formData.dob || !formData.phone) {
       toast({
-        title: "Missing Information",
-        description: "Please fill in all required fields.",
-        variant: "destructive",
+        title: 'Missing Information',
+        description: 'Please fill in all required fields.',
+        variant: 'destructive',
       });
       return;
     }
@@ -116,7 +129,7 @@ export default function SocketRefillModal({ prescription, trigger }: SocketRefil
     { nabp: '3198098', name: 'Georgies Family Pharmacy', address: 'Linden, NJ' },
     { nabp: '3155973', name: 'Georgies Specialty Pharmacy', address: 'Linden, NJ' },
     { nabp: '3151482', name: 'Georgies Parlin Pharmacy', address: 'Parlin, NJ' },
-    { nabp: '3156177', name: 'Georgies Outpatient Pharmacy', address: 'Browns Mills, NJ' }
+    { nabp: '3156177', name: 'Georgies Outpatient Pharmacy', address: 'Browns Mills, NJ' },
   ];
 
   return (
@@ -136,7 +149,8 @@ export default function SocketRefillModal({ prescription, trigger }: SocketRefil
             Socket-Based Refill Request
           </DialogTitle>
           <DialogDescription>
-            Submit refill request using direct socket communication protocol to s1.winrxrefill.com:569
+            Submit refill request using direct socket communication protocol to
+            s1.winrxrefill.com:569
           </DialogDescription>
         </DialogHeader>
 
@@ -167,7 +181,7 @@ export default function SocketRefillModal({ prescription, trigger }: SocketRefil
                   </Badge>
                 )}
               </div>
-              
+
               {/* Socket Protocol Status */}
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-2">
@@ -182,17 +196,11 @@ export default function SocketRefillModal({ prescription, trigger }: SocketRefil
                       Fallback Failed
                     </Badge>
                   ) : (
-                    <Badge variant="secondary">
-                      Fallback Available
-                    </Badge>
+                    <Badge variant="secondary">Fallback Available</Badge>
                   )}
                   <span className="text-sm text-slate-600">Socket Protocol</span>
                 </div>
-                <Button 
-                  variant="outline" 
-                  size="sm" 
-                  onClick={() => testConnection()}
-                >
+                <Button variant="outline" size="sm" onClick={() => testConnection()}>
                   Test Fallback
                 </Button>
               </div>
@@ -204,7 +212,7 @@ export default function SocketRefillModal({ prescription, trigger }: SocketRefil
           {/* Patient Information */}
           <div className="space-y-4">
             <h3 className="text-lg font-semibold">Patient Information</h3>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <Label htmlFor="patientName">Patient Name *</Label>
@@ -216,7 +224,7 @@ export default function SocketRefillModal({ prescription, trigger }: SocketRefil
                   required
                 />
               </div>
-              
+
               <div>
                 <Label htmlFor="dob">Date of Birth *</Label>
                 <Input
@@ -245,7 +253,7 @@ export default function SocketRefillModal({ prescription, trigger }: SocketRefil
           {/* Prescription Information */}
           <div className="space-y-4">
             <h3 className="text-lg font-semibold">Prescription Information</h3>
-            
+
             <div>
               <Label htmlFor="rxNumber">Prescription Number *</Label>
               <Input
@@ -259,8 +267,8 @@ export default function SocketRefillModal({ prescription, trigger }: SocketRefil
 
             <div>
               <Label htmlFor="nabp">Pharmacy Location *</Label>
-              <Select 
-                value={formData.nabp} 
+              <Select
+                value={formData.nabp}
                 onValueChange={(value) => setFormData({ ...formData, nabp: value })}
               >
                 <SelectTrigger>
@@ -278,8 +286,8 @@ export default function SocketRefillModal({ prescription, trigger }: SocketRefil
 
             <div>
               <Label htmlFor="pickupMethod">Pickup Method</Label>
-              <Select 
-                value={formData.pickupMethod} 
+              <Select
+                value={formData.pickupMethod}
                 onValueChange={(value) => setFormData({ ...formData, pickupMethod: value })}
               >
                 <SelectTrigger>
@@ -311,13 +319,13 @@ export default function SocketRefillModal({ prescription, trigger }: SocketRefil
             <Button type="button" variant="outline" onClick={() => setOpen(false)}>
               Cancel
             </Button>
-            <Button 
-              type="submit" 
+            <Button
+              type="submit"
               disabled={socketRefillMutation.isPending}
               className="bg-primary text-white hover:bg-primary/90"
             >
               {socketRefillMutation.isPending ? (
-                "Submitting..."
+                'Submitting...'
               ) : (
                 <>
                   <Send className="w-4 h-4 mr-2" />

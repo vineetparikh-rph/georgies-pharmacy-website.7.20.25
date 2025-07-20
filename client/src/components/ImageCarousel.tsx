@@ -25,7 +25,7 @@ export default function ImageCarousel({
   autoPlayInterval = 5000,
   showIndicators = true,
   showArrows = true,
-  className = ""
+  className = '',
 }: ImageCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
@@ -81,10 +81,8 @@ export default function ImageCarousel({
               src={image.src}
               alt={image.alt}
               className="w-full h-full object-cover"
-              loading={index === currentIndex ? "eager" : "lazy"}
+              loading={index === currentIndex ? 'eager' : 'lazy'}
             />
-            
-
           </div>
         ))}
       </div>
@@ -100,7 +98,7 @@ export default function ImageCarousel({
           >
             <ChevronLeft className="w-4 h-4 sm:w-6 sm:h-6 text-white" />
           </button>
-          
+
           <button
             onClick={nextSlide}
             disabled={isTransitioning}
@@ -121,9 +119,7 @@ export default function ImageCarousel({
               onClick={() => goToSlide(index)}
               disabled={isTransitioning}
               className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all duration-300 ${
-                index === currentIndex
-                  ? 'bg-white scale-125'
-                  : 'bg-white/50 hover:bg-white/75'
+                index === currentIndex ? 'bg-white scale-125' : 'bg-white/50 hover:bg-white/75'
               }`}
               aria-label={`Go to slide ${index + 1}`}
             />

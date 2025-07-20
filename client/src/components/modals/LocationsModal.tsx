@@ -1,9 +1,15 @@
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { MapPin, Phone, Clock, Navigation, Building2 } from "lucide-react";
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
+import { MapPin, Phone, Clock, Navigation, Building2 } from 'lucide-react';
 
 interface PharmacyLocation {
   id: number;
@@ -24,44 +30,44 @@ interface LocationsModalProps {
 const pharmacyLocations: PharmacyLocation[] = [
   {
     id: 1,
-    name: "Georgies Family Pharmacy",
-    address: "332 W. St. Georges Avenue",
-    city: "Linden",
-    state: "NJ",
-    zipCode: "07036-5638",
-    phone: "908-925-4567",
-    hours: "Mon-Fri: 8AM-9PM, Sat-Sun: 9AM-6PM",
+    name: 'Georgies Family Pharmacy',
+    address: '332 W. St. Georges Avenue',
+    city: 'Linden',
+    state: 'NJ',
+    zipCode: '07036-5638',
+    phone: '908-925-4567',
+    hours: 'Mon-Fri: 8AM-9PM, Sat-Sun: 9AM-6PM',
   },
   {
     id: 2,
-    name: "Georgies Specialty Pharmacy",
-    address: "521 N Wood Avenue",
-    city: "Linden",
-    state: "NJ",
-    zipCode: "07036-4146",
-    phone: "908-925-4566",
-    hours: "Mon-Fri: 8AM-9PM, Sat-Sun: 9AM-6PM",
+    name: 'Georgies Specialty Pharmacy',
+    address: '521 N Wood Avenue',
+    city: 'Linden',
+    state: 'NJ',
+    zipCode: '07036-4146',
+    phone: '908-925-4566',
+    hours: 'Mon-Fri: 8AM-9PM, Sat-Sun: 9AM-6PM',
   },
   {
     id: 3,
-    name: "Georgies Parlin Pharmacy",
-    address: "499 Ernston Road",
-    city: "Parlin",
-    state: "NJ",
-    zipCode: "08859-1406",
-    phone: "732-952-3022",
-    hours: "Mon-Fri: 8AM-9PM, Sat-Sun: 9AM-6PM",
+    name: 'Georgies Parlin Pharmacy',
+    address: '499 Ernston Road',
+    city: 'Parlin',
+    state: 'NJ',
+    zipCode: '08859-1406',
+    phone: '732-952-3022',
+    hours: 'Mon-Fri: 8AM-9PM, Sat-Sun: 9AM-6PM',
   },
   {
     id: 4,
-    name: "Georgies Outpatient Pharmacy",
-    address: "6 Earlin Drive, Suite 130",
-    city: "Browns Mills",
-    state: "NJ",
-    zipCode: "08015-1768",
-    phone: "609-726-5800",
-    hours: "Mon-Fri: 8AM-9PM, Sat-Sun: 9AM-6PM",
-  }
+    name: 'Georgies Outpatient Pharmacy',
+    address: '6 Earlin Drive, Suite 130',
+    city: 'Browns Mills',
+    state: 'NJ',
+    zipCode: '08015-1768',
+    phone: '609-726-5800',
+    hours: 'Mon-Fri: 8AM-9PM, Sat-Sun: 9AM-6PM',
+  },
 ];
 
 export default function LocationsModal({ open, onClose }: LocationsModalProps) {
@@ -86,7 +92,8 @@ export default function LocationsModal({ open, onClose }: LocationsModalProps) {
             Georgies Pharmacy Locations
           </DialogTitle>
           <DialogDescription>
-            Find and get directions to any of our convenient pharmacy locations throughout New Jersey.
+            Find and get directions to any of our convenient pharmacy locations throughout New
+            Jersey.
           </DialogDescription>
         </DialogHeader>
 
@@ -119,12 +126,12 @@ export default function LocationsModal({ open, onClose }: LocationsModalProps) {
                   {pharmacyLocations.map((location) => (
                     <Button
                       key={location.id}
-                      variant={selectedLocation?.id === location.id ? "default" : "outline"}
+                      variant={selectedLocation?.id === location.id ? 'default' : 'outline'}
                       size="sm"
                       onClick={() => setSelectedLocation(location)}
                       className="text-xs"
                     >
-                      {location.name.replace("Georgies ", "")}
+                      {location.name.replace('Georgies ', '')}
                     </Button>
                   ))}
                 </div>
@@ -134,11 +141,11 @@ export default function LocationsModal({ open, onClose }: LocationsModalProps) {
 
           {/* Location Cards */}
           {pharmacyLocations.map((location) => (
-            <Card 
-              key={location.id} 
+            <Card
+              key={location.id}
               className={`transition-all duration-200 ${
-                selectedLocation?.id === location.id 
-                  ? 'ring-2 ring-primary bg-primary/5' 
+                selectedLocation?.id === location.id
+                  ? 'ring-2 ring-primary bg-primary/5'
                   : 'hover:shadow-md cursor-pointer'
               }`}
               onClick={() => setSelectedLocation(location)}
@@ -158,7 +165,7 @@ export default function LocationsModal({ open, onClose }: LocationsModalProps) {
                   )}
                 </div>
               </CardHeader>
-              
+
               <CardContent className="space-y-4">
                 <div className="space-y-3">
                   <div className="flex items-start space-x-3">
@@ -174,7 +181,7 @@ export default function LocationsModal({ open, onClose }: LocationsModalProps) {
                   <div className="flex items-center space-x-3">
                     <Phone className="w-4 h-4 text-slate-400 flex-shrink-0" />
                     <div className="text-sm">
-                      <a 
+                      <a
                         href={`tel:${location.phone}`}
                         className="font-medium text-primary hover:text-primary/80 transition-colors"
                       >
@@ -224,7 +231,8 @@ export default function LocationsModal({ open, onClose }: LocationsModalProps) {
           <div className="mt-6 p-4 bg-primary/5 border border-primary/20 rounded-lg">
             <h4 className="font-semibold text-primary mb-2">Selected Location</h4>
             <p className="text-sm text-slate-700">
-              <strong>{selectedLocation.name}</strong> - {selectedLocation.address}, {selectedLocation.city}, {selectedLocation.state}
+              <strong>{selectedLocation.name}</strong> - {selectedLocation.address},{' '}
+              {selectedLocation.city}, {selectedLocation.state}
             </p>
             <div className="flex space-x-2 mt-3">
               <Button

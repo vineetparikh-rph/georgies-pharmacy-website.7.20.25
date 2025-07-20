@@ -1,13 +1,13 @@
-import { useState, useEffect, useRef } from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Send } from "lucide-react";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { apiRequest } from "@/lib/queryClient";
-import { format } from "date-fns";
-import type { ChatMessage } from "@/types";
+import { useState, useEffect, useRef } from 'react';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { Send } from 'lucide-react';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { apiRequest } from '@/lib/queryClient';
+import { format } from 'date-fns';
+import type { ChatMessage } from '@/types';
 
 interface ChatModalProps {
   open: boolean;
@@ -15,27 +15,27 @@ interface ChatModalProps {
 }
 
 export default function ChatModal({ open, onClose }: ChatModalProps) {
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState('');
   const scrollAreaRef = useRef<HTMLDivElement>(null);
   const queryClient = useQueryClient();
 
   const { data: messages, isLoading } = useQuery<ChatMessage[]>({
-    queryKey: ["/api/patient/1/chat-messages"],
+    queryKey: ['/api/patient/1/chat-messages'],
     enabled: open,
     refetchInterval: 2000, // Poll for new messages every 2 seconds
   });
 
   const sendMessageMutation = useMutation({
     mutationFn: async (messageText: string) => {
-      const response = await apiRequest("POST", "/api/chat-messages", {
+      const response = await apiRequest('POST', '/api/chat-messages', {
         message: messageText,
         isFromPatient: true,
       });
       return response.json();
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["/api/patient/1/chat-messages"] });
-      setMessage("");
+      queryClient.invalidateQueries({ queryKey: ['/api/patient/1/chat-messages'] });
+      setMessage('');
     },
   });
 
@@ -60,7 +60,7 @@ export default function ChatModal({ open, onClose }: ChatModalProps) {
           <DialogTitle>Chat Support</DialogTitle>
           <p className="text-sm text-slate-600">We're here to help</p>
         </DialogHeader>
-        
+
         <ScrollArea className="flex-1 pr-4" ref={scrollAreaRef}>
           <div className="space-y-4">
             {isLoading ? (
@@ -71,23 +71,21 @@ export default function ChatModal({ open, onClose }: ChatModalProps) {
               messages?.map((msg) => (
                 <div
                   key={msg.id}
-                  className={`flex ${msg.isFromPatient ? "justify-end" : "justify-start"}`}
+                  className={`flex ${msg.isFromPatient ? 'justify-end' : 'justify-start'}`}
                 >
                   <div
                     className={`max-w-xs rounded-lg p-3 ${
-                      msg.isFromPatient
-                        ? "bg-primary text-white"
-                        : "bg-slate-100 text-slate-900"
+                      msg.isFromPatient ? 'bg-primary text-white' : 'bg-slate-100 text-slate-900'
                     }`}
                   >
                     <p className="text-sm">{msg.message}</p>
                     <p
                       className={`text-xs mt-1 ${
-                        msg.isFromPatient ? "text-red-200" : "text-slate-500"
+                        msg.isFromPatient ? 'text-red-200' : 'text-slate-500'
                       }`}
                     >
-                      {msg.isFromPatient ? "You" : "Support Agent"} -{" "}
-                      {format(new Date(msg.timestamp), "h:mm a")}
+                      {msg.isFromPatient ? 'You' : 'Support Agent'} -{' '}
+                      {format(new Date(msg.timestamp), 'h:mm a')}
                     </p>
                   </div>
                 </div>
@@ -95,7 +93,7 @@ export default function ChatModal({ open, onClose }: ChatModalProps) {
             )}
           </div>
         </ScrollArea>
-        
+
         <form onSubmit={handleSubmit} className="flex space-x-2 pt-4 border-t">
           <Input
             value={message}
@@ -104,8 +102,8 @@ export default function ChatModal({ open, onClose }: ChatModalProps) {
             className="flex-1"
             disabled={sendMessageMutation.isPending}
           />
-          <Button 
-            type="submit" 
+          <Button
+            type="submit"
             size="icon"
             className="bg-success text-white hover:bg-success/90"
             disabled={!message.trim() || sendMessageMutation.isPending}

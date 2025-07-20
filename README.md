@@ -7,13 +7,14 @@ A comprehensive digital pharmacy platform for Georgies Pharmacy Group, serving 4
 Georgies Pharmacy Group operates four specialized locations:
 
 - **Georgies Family Pharmacy** - 332 W. St. Georges Ave, Linden, NJ
-- **Georgies Specialty Pharmacy** - 521 N Wood Ave, Linden, NJ  
+- **Georgies Specialty Pharmacy** - 521 N Wood Ave, Linden, NJ
 - **Georgies Parlin Pharmacy** - 499 Ernston Rd, Parlin, NJ
 - **Georgies Outpatient Pharmacy** - 6 Earlin Dr, Browns Mills, NJ
 
 ## 🚀 Features
 
 ### Core Services
+
 - **Prescription Management** - Refills, transfers, and tracking
 - **Vaccination Hub** - Comprehensive immunization services
 - **Medication Synchronization** - Coordinated prescription management
@@ -21,6 +22,7 @@ Georgies Pharmacy Group operates four specialized locations:
 - **Online Pharmacy Store** - OTC medications and health products
 
 ### Patient Services
+
 - **Multi-location Support** - Seamless service across all locations
 - **Real-time Prescription Status** - Live updates and notifications
 - **Insurance Verification** - Comprehensive coverage checking
@@ -30,6 +32,7 @@ Georgies Pharmacy Group operates four specialized locations:
 ## 🛠 Technology Stack
 
 ### Frontend
+
 - **React 18** with TypeScript for robust development
 - **Tailwind CSS** for responsive, modern styling
 - **shadcn/ui** component library for consistent UX
@@ -38,12 +41,14 @@ Georgies Pharmacy Group operates four specialized locations:
 - **Vite** for optimized build and development experience
 
 ### Backend
+
 - **Express.js** server with TypeScript
 - **Drizzle ORM** with PostgreSQL for type-safe database operations
 - **Replit Auth** with OpenID Connect for secure authentication
 - **External API Integrations** for pharmacy systems and health services
 
 ### Deployment
+
 - **Vercel** serverless deployment with global CDN
 - **PostgreSQL** database with connection pooling
 - **Environment-based configuration** for production/development
@@ -68,24 +73,28 @@ Georgies Pharmacy Group operates four specialized locations:
 ## 🚀 Getting Started
 
 ### Prerequisites
-- Node.js 18+ 
+
+- Node.js 18+
 - PostgreSQL database
 - Environment variables (see below)
 
 ### Installation
 
 1. Clone the repository:
+
 ```bash
 git clone https://github.com/yourusername/georgies-pharmacy.git
 cd georgies-pharmacy
 ```
 
 2. Install dependencies:
+
 ```bash
 npm install
 ```
 
 3. Set up environment variables:
+
 ```bash
 # Database
 DATABASE_URL=your_postgresql_connection_string
@@ -95,6 +104,7 @@ REPLIT_AUTH_SECRET=your_auth_secret
 ```
 
 4. Start development server:
+
 ```bash
 npm run dev
 ```
@@ -118,6 +128,7 @@ The application will be available at `http://localhost:5173`
 3. Deploy automatically on push to main branch
 
 The project includes optimized Vercel configuration for:
+
 - Static frontend delivery via CDN
 - Serverless API functions
 - Automatic HTTPS and custom domain support
@@ -135,27 +146,32 @@ NODE_ENV=production
 ## 🏥 External Integrations
 
 ### Prescription Services
+
 - **Refill Requests** → `https://georgiesrxtransferrefillvaccine-1.onrender.com/refill`
 - **Transfer Requests** → `https://georgiesrxtransferrefillvaccine-1.onrender.com/transfer`
 - **Vaccination Scheduling** → `https://georgiesrxtransferrefillvaccine-1.onrender.com/vaccine`
 
 ### Authentication
+
 - **User Login/Registration** → `https://georgiesrx.streamlit.app/`
 
 ## 🔧 Development Guidelines
 
 ### Code Style
+
 - TypeScript for all new code
 - Component-based architecture with React functional components
 - Tailwind CSS for styling with design system consistency
 - Comprehensive error handling and user feedback
 
 ### Database Operations
+
 - Use Drizzle ORM for all database interactions
 - Type-safe schema definitions in `shared/schema.ts`
 - Migrations handled through `npm run db:push`
 
 ### API Development
+
 - RESTful endpoints with structured error responses
 - Input validation using Zod schemas
 - Authentication middleware for protected routes
@@ -177,6 +193,7 @@ NODE_ENV=production
 ## 📞 Support
 
 For technical support or pharmacy services:
+
 - **Website**: https://georgiesrx.com
 - **Phone**: Contact your local Georgies Pharmacy location
 - **Emergency**: Call 911 for medical emergencies
@@ -191,4 +208,4 @@ Georgies Pharmacy is a JD Power & Associates award recipient, recognized for exc
 
 ---
 
-**Georgies Pharmacy Group** - *Your health, our priority* 💊
+**Georgies Pharmacy Group** - _Your health, our priority_ 💊

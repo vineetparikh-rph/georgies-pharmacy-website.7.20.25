@@ -1,9 +1,15 @@
-import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { MapPin, Phone, Navigation, Building2, Map } from "lucide-react";
+import { useState, useEffect } from 'react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { MapPin, Phone, Navigation, Building2, Map } from 'lucide-react';
 
 interface PharmacyLocation {
   name: string;
@@ -22,11 +28,11 @@ interface PharmacyLocationSelectorProps {
   showMap?: boolean;
 }
 
-export default function PharmacyLocationSelector({ 
-  onLocationSelect, 
-  selectedLocation, 
-  className = "",
-  showMap = true 
+export default function PharmacyLocationSelector({
+  onLocationSelect,
+  selectedLocation,
+  className = '',
+  showMap = true,
 }: PharmacyLocationSelectorProps) {
   const [locations, setLocations] = useState<PharmacyLocation[]>([]);
   const [loading, setLoading] = useState(true);
@@ -38,14 +44,14 @@ export default function PharmacyLocationSelector({
 
   const fetchPharmacyLocations = async () => {
     try {
-      const response = await fetch("/api/pharmacy-system/locations");
+      const response = await fetch('/api/pharmacy-system/locations');
       const data = await response.json();
-      
+
       if (data.success) {
         setLocations(data.locations);
       }
     } catch (err) {
-      console.error("Failed to fetch pharmacy locations:", err);
+      console.error('Failed to fetch pharmacy locations:', err);
     } finally {
       setLoading(false);
     }
@@ -115,17 +121,17 @@ export default function PharmacyLocationSelector({
           )}
         </div>
       </CardHeader>
-      
+
       <CardContent>
         {viewMode === 'list' ? (
           <div className="space-y-4">
             {/* Quick Selector Dropdown */}
             <div className="space-y-2">
               <label className="text-sm font-medium text-slate-700">Quick Select:</label>
-              <Select 
-                value={selectedLocation?.nabp || ""} 
+              <Select
+                value={selectedLocation?.nabp || ''}
                 onValueChange={(nabp) => {
-                  const location = locations.find(loc => loc.nabp === nabp);
+                  const location = locations.find((loc) => loc.nabp === nabp);
                   if (location) onLocationSelect(location);
                 }}
               >
@@ -137,7 +143,9 @@ export default function PharmacyLocationSelector({
                     <SelectItem key={location.nabp} value={location.nabp}>
                       <div className="flex flex-col">
                         <span className="font-medium">{location.name}</span>
-                        <span className="text-xs text-slate-500">{parseAddress(location.address).cityStateZip}</span>
+                        <span className="text-xs text-slate-500">
+                          {parseAddress(location.address).cityStateZip}
+                        </span>
                       </div>
                     </SelectItem>
                   ))}
@@ -150,13 +158,13 @@ export default function PharmacyLocationSelector({
               {locations.map((location) => {
                 const { address, cityStateZip } = parseAddress(location.address);
                 const isSelected = selectedLocation?.nabp === location.nabp;
-                
+
                 return (
-                  <Card 
+                  <Card
                     key={location.nabp}
                     className={`cursor-pointer transition-all duration-200 ${
-                      isSelected 
-                        ? 'ring-2 ring-primary bg-primary/5' 
+                      isSelected
+                        ? 'ring-2 ring-primary bg-primary/5'
                         : 'hover:shadow-md hover:bg-slate-50'
                     }`}
                     onClick={() => onLocationSelect(location)}
@@ -170,7 +178,7 @@ export default function PharmacyLocationSelector({
                               <Badge className="bg-primary text-white text-xs">Selected</Badge>
                             )}
                           </div>
-                          
+
                           <div className="space-y-1 text-sm text-slate-600">
                             <div className="flex items-center space-x-2">
                               <MapPin className="w-3 h-3 text-slate-400" />
@@ -235,19 +243,21 @@ export default function PharmacyLocationSelector({
                 title="Georgies Pharmacy Locations"
               ></iframe>
             </div>
-            
+
             <div className="grid grid-cols-2 gap-2">
               {locations.map((location) => (
                 <Button
                   key={location.nabp}
-                  variant={selectedLocation?.nabp === location.nabp ? "default" : "outline"}
+                  variant={selectedLocation?.nabp === location.nabp ? 'default' : 'outline'}
                   size="sm"
                   onClick={() => onLocationSelect(location)}
                   className="text-xs h-auto p-2"
                 >
                   <div className="text-center">
-                    <div className="font-medium">{location.name.replace("Georgies ", "")}</div>
-                    <div className="text-xs opacity-75">{parseAddress(location.address).cityStateZip.split(',')[0]}</div>
+                    <div className="font-medium">{location.name.replace('Georgies ', '')}</div>
+                    <div className="text-xs opacity-75">
+                      {parseAddress(location.address).cityStateZip.split(',')[0]}
+                    </div>
                   </div>
                 </Button>
               ))}

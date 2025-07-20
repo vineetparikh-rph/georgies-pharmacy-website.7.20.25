@@ -1,136 +1,152 @@
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
-import { BookOpen, Download, FileText, Video, ExternalLink, Search, Heart, Pill, Shield, Users, Clock } from "lucide-react";
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
-import { useState } from "react";
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Badge } from '@/components/ui/badge';
+import {
+  BookOpen,
+  Download,
+  FileText,
+  Video,
+  ExternalLink,
+  Search,
+  Heart,
+  Pill,
+  Shield,
+  Users,
+  Clock,
+} from 'lucide-react';
+import Navigation from '@/components/Navigation';
+import Footer from '@/components/Footer';
+import { useState } from 'react';
 
 export default function Resources() {
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
 
   const resourceCategories = [
     {
-      id: "medication-guides",
-      title: "Medication Guides",
-      description: "Comprehensive guides on proper medication use and management",
+      id: 'medication-guides',
+      title: 'Medication Guides',
+      description: 'Comprehensive guides on proper medication use and management',
       icon: Pill,
       count: 47,
-      color: "bg-blue-100 text-blue-800",
+      color: 'bg-blue-100 text-blue-800',
     },
     {
-      id: "health-education",
-      title: "Health Education",
-      description: "Educational materials on various health conditions and prevention",
+      id: 'health-education',
+      title: 'Health Education',
+      description: 'Educational materials on various health conditions and prevention',
       icon: Heart,
       count: 32,
-      color: "bg-red-100 text-red-800",
+      color: 'bg-red-100 text-red-800',
     },
     {
-      id: "insurance-forms",
-      title: "Insurance & Forms",
-      description: "Insurance information and downloadable forms",
+      id: 'insurance-forms',
+      title: 'Insurance & Forms',
+      description: 'Insurance information and downloadable forms',
       icon: Shield,
       count: 18,
-      color: "bg-green-100 text-green-800",
+      color: 'bg-green-100 text-green-800',
     },
     {
-      id: "patient-resources",
-      title: "Patient Resources",
-      description: "Tools and resources for better health management",
+      id: 'patient-resources',
+      title: 'Patient Resources',
+      description: 'Tools and resources for better health management',
       icon: Users,
       count: 25,
-      color: "bg-purple-100 text-purple-800",
+      color: 'bg-purple-100 text-purple-800',
     },
     {
-      id: "emergency-info",
-      title: "Emergency Information",
-      description: "Critical information for medical emergencies",
+      id: 'emergency-info',
+      title: 'Emergency Information',
+      description: 'Critical information for medical emergencies',
       icon: Clock,
       count: 12,
-      color: "bg-orange-100 text-orange-800",
+      color: 'bg-orange-100 text-orange-800',
     },
   ];
 
   const featuredResources = [
     {
-      title: "Medication Adherence Guide",
-      description: "Learn how to properly take your medications and improve health outcomes",
-      type: "PDF Guide",
-      category: "Medication Guides",
-      downloadUrl: "#",
+      title: 'Medication Adherence Guide',
+      description: 'Learn how to properly take your medications and improve health outcomes',
+      type: 'PDF Guide',
+      category: 'Medication Guides',
+      downloadUrl: '#',
       popular: true,
     },
     {
-      title: "Understanding Your Insurance Benefits",
-      description: "Navigate your insurance coverage and maximize your benefits",
-      type: "Interactive Guide",
-      category: "Insurance & Forms",
-      downloadUrl: "#",
+      title: 'Understanding Your Insurance Benefits',
+      description: 'Navigate your insurance coverage and maximize your benefits',
+      type: 'Interactive Guide',
+      category: 'Insurance & Forms',
+      downloadUrl: '#',
       popular: true,
     },
     {
-      title: "Diabetes Management Toolkit",
-      description: "Comprehensive resources for managing diabetes effectively",
-      type: "Resource Kit",
-      category: "Health Education",
-      downloadUrl: "#",
+      title: 'Diabetes Management Toolkit',
+      description: 'Comprehensive resources for managing diabetes effectively',
+      type: 'Resource Kit',
+      category: 'Health Education',
+      downloadUrl: '#',
       popular: false,
     },
     {
-      title: "Vaccination Schedule & Records",
-      description: "Track your vaccinations and stay up-to-date with immunizations",
-      type: "Tracking Form",
-      category: "Patient Resources",
-      downloadUrl: "#",
+      title: 'Vaccination Schedule & Records',
+      description: 'Track your vaccinations and stay up-to-date with immunizations',
+      type: 'Tracking Form',
+      category: 'Patient Resources',
+      downloadUrl: '#',
       popular: false,
     },
     {
-      title: "Emergency Medication Information",
-      description: "Essential information for emergency situations and medication allergies",
-      type: "Emergency Card",
-      category: "Emergency Information",
-      downloadUrl: "#",
+      title: 'Emergency Medication Information',
+      description: 'Essential information for emergency situations and medication allergies',
+      type: 'Emergency Card',
+      category: 'Emergency Information',
+      downloadUrl: '#',
       popular: true,
     },
     {
-      title: "Senior Medication Safety",
-      description: "Special considerations for medication use in older adults",
-      type: "Safety Guide",
-      category: "Medication Guides",
-      downloadUrl: "#",
+      title: 'Senior Medication Safety',
+      description: 'Special considerations for medication use in older adults',
+      type: 'Safety Guide',
+      category: 'Medication Guides',
+      downloadUrl: '#',
       popular: false,
     },
   ];
 
   const healthTips = [
     {
-      title: "Medication Storage Tips",
-      content: "Store medications in a cool, dry place away from direct sunlight and moisture.",
-      category: "Medication Safety",
+      title: 'Medication Storage Tips',
+      content: 'Store medications in a cool, dry place away from direct sunlight and moisture.',
+      category: 'Medication Safety',
     },
     {
-      title: "Reading Prescription Labels",
-      content: "Always check the medication name, dosage, and instructions before taking any medication.",
-      category: "Patient Education",
+      title: 'Reading Prescription Labels',
+      content:
+        'Always check the medication name, dosage, and instructions before taking any medication.',
+      category: 'Patient Education',
     },
     {
-      title: "Drug Interaction Awareness",
-      content: "Always inform your pharmacist about all medications, supplements, and vitamins you're taking.",
-      category: "Safety",
+      title: 'Drug Interaction Awareness',
+      content:
+        "Always inform your pharmacist about all medications, supplements, and vitamins you're taking.",
+      category: 'Safety',
     },
     {
-      title: "Timing Your Medications",
-      content: "Take medications at the same time each day to maintain consistent levels in your system.",
-      category: "Adherence",
+      title: 'Timing Your Medications',
+      content:
+        'Take medications at the same time each day to maintain consistent levels in your system.',
+      category: 'Adherence',
     },
   ];
 
-  const filteredResources = featuredResources.filter(resource =>
-    resource.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    resource.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    resource.category.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredResources = featuredResources.filter(
+    (resource) =>
+      resource.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      resource.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      resource.category.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
@@ -144,7 +160,8 @@ export default function Resources() {
             Health <span className="text-primary">Resources</span>
           </h1>
           <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-            Access valuable health information, medication guides, and educational materials to help you manage your health effectively.
+            Access valuable health information, medication guides, and educational materials to help
+            you manage your health effectively.
           </p>
         </div>
 
@@ -168,8 +185,12 @@ export default function Resources() {
             <Card key={category.id} className="hover:shadow-lg transition-shadow cursor-pointer">
               <CardContent className="p-6">
                 <div className="flex items-start justify-between mb-4">
-                  <div className={`p-3 rounded-lg ${category.color.replace('text-', 'bg-').replace('800', '100')}`}>
-                    <category.icon className={`h-6 w-6 ${category.color.replace('bg-', 'text-').replace('100', '600')}`} />
+                  <div
+                    className={`p-3 rounded-lg ${category.color.replace('text-', 'bg-').replace('800', '100')}`}
+                  >
+                    <category.icon
+                      className={`h-6 w-6 ${category.color.replace('bg-', 'text-').replace('100', '600')}`}
+                    />
                   </div>
                   <Badge variant="secondary" className={category.color}>
                     {category.count} resources
@@ -235,9 +256,7 @@ export default function Resources() {
                   <Heart className="h-5 w-5 mr-2 text-red-500" />
                   Health Tips
                 </CardTitle>
-                <CardDescription>
-                  Quick tips for better health management
-                </CardDescription>
+                <CardDescription>Quick tips for better health management</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
@@ -315,9 +334,7 @@ export default function Resources() {
               <CardContent>
                 <div className="space-y-3">
                   <Input placeholder="Enter your email address" type="email" />
-                  <Button className="w-full">
-                    Subscribe to Newsletter
-                  </Button>
+                  <Button className="w-full">Subscribe to Newsletter</Button>
                 </div>
               </CardContent>
             </Card>

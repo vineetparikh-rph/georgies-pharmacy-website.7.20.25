@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import { Pill, ChevronDown, Menu } from "lucide-react";
+import React, { useState, useEffect } from 'react';
+import { Button } from '@/components/ui/button';
+import { Pill, ChevronDown, Menu } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from '@/components/ui/dropdown-menu';
 
 export default function Header() {
   const [currentLocationIndex, setCurrentLocationIndex] = useState(0);
-  
-  const locations = ["Family", "Specialty", "Parlin", "Outpatient"];
+
+  const locations = ['Family', 'Specialty', 'Parlin', 'Outpatient'];
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -32,10 +32,15 @@ export default function Header() {
                 <Pill className="text-white h-4 w-4" />
               </div>
               <div className="flex items-center">
-                <a href="/" className="text-xl font-bold text-slate-900">Georgies</a>
+                <a href="/" className="text-xl font-bold text-slate-900">
+                  Georgies
+                </a>
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" className="text-xl font-bold text-slate-900 px-2 py-1 h-auto hover:bg-slate-50 flex items-center min-w-[140px] justify-center">
+                    <Button
+                      variant="ghost"
+                      className="text-xl font-bold text-slate-900 px-2 py-1 h-auto hover:bg-slate-50 flex items-center min-w-[140px] justify-center"
+                    >
                       <span className="transition-all duration-500 ease-in-out transform">
                         {locations[currentLocationIndex]}
                       </span>
@@ -46,12 +51,16 @@ export default function Header() {
                     <DropdownMenuItem className="cursor-pointer py-3">
                       <div className="flex flex-col">
                         <span className="font-medium text-slate-900">Georgies Family Pharmacy</span>
-                        <span className="text-xs text-slate-500">332 W. St. Georges Ave, Linden</span>
+                        <span className="text-xs text-slate-500">
+                          332 W. St. Georges Ave, Linden
+                        </span>
                       </div>
                     </DropdownMenuItem>
                     <DropdownMenuItem className="cursor-pointer py-3">
                       <div className="flex flex-col">
-                        <span className="font-medium text-slate-900">Georgies Specialty Pharmacy</span>
+                        <span className="font-medium text-slate-900">
+                          Georgies Specialty Pharmacy
+                        </span>
                         <span className="text-xs text-slate-500">521 N Wood Ave, Linden</span>
                       </div>
                     </DropdownMenuItem>
@@ -63,7 +72,9 @@ export default function Header() {
                     </DropdownMenuItem>
                     <DropdownMenuItem className="cursor-pointer py-3">
                       <div className="flex flex-col">
-                        <span className="font-medium text-slate-900">Georgies Outpatient Pharmacy</span>
+                        <span className="font-medium text-slate-900">
+                          Georgies Outpatient Pharmacy
+                        </span>
                         <span className="text-xs text-slate-500">6 Earlin Dr, Browns Mills</span>
                       </div>
                     </DropdownMenuItem>
@@ -73,34 +84,34 @@ export default function Header() {
               </div>
             </div>
           </div>
-          
+
           {/* Bottom row - Navigation */}
           <div className="flex justify-center items-center flex-wrap gap-2 px-2">
-            <Button 
+            <Button
               asChild
               className="bg-primary text-white hover:bg-red-900 px-2 sm:px-3 py-2 text-xs sm:text-sm font-medium whitespace-nowrap"
             >
               <a href="/">Home</a>
             </Button>
-            <Button 
-              onClick={() => window.open("/api/refill", "_blank")}
+            <Button
+              onClick={() => window.open('/api/refill', '_blank')}
               className="bg-primary text-white hover:bg-red-900 px-2 sm:px-3 py-2 text-xs sm:text-sm font-medium whitespace-nowrap"
             >
               Refill Rx
             </Button>
-            <Button 
-              onClick={() => window.open("/api/transfer", "_blank")}
+            <Button
+              onClick={() => window.open('/api/transfer', '_blank')}
               className="bg-primary text-white hover:bg-red-900 px-2 sm:px-3 py-2 text-xs sm:text-sm font-medium whitespace-nowrap"
             >
               Transfer Rx
             </Button>
-            <Button 
-              onClick={() => window.open("/api/vaccine", "_blank")}
+            <Button
+              onClick={() => window.open('/api/vaccine', '_blank')}
               className="bg-primary text-white hover:bg-red-900 px-2 sm:px-3 py-2 text-xs sm:text-sm font-medium whitespace-nowrap"
             >
               Vaccination
             </Button>
-            <Button 
+            <Button
               asChild
               className="bg-primary text-white hover:bg-red-900 px-2 sm:px-3 py-2 text-xs sm:text-sm font-medium whitespace-nowrap"
             >

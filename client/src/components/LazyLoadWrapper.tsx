@@ -6,16 +6,14 @@ interface LazyLoadWrapperProps {
   delay?: number;
 }
 
-export default function LazyLoadWrapper({ 
-  children, 
+export default function LazyLoadWrapper({
+  children,
   fallback = <div className="animate-pulse bg-gray-200 h-20 rounded"></div>,
-  delay = 0 
+  delay = 0,
 }: LazyLoadWrapperProps) {
   return (
     <Suspense fallback={fallback}>
-      <div style={{ animationDelay: `${delay}ms` }}>
-        {children}
-      </div>
+      <div style={{ animationDelay: `${delay}ms` }}>{children}</div>
     </Suspense>
   );
 }

@@ -10,14 +10,14 @@ interface OptimizedImageProps {
   priority?: boolean;
 }
 
-export default function OptimizedImage({ 
-  src, 
-  alt, 
-  className = '', 
-  width, 
-  height, 
+export default function OptimizedImage({
+  src,
+  alt,
+  className = '',
+  width,
+  height,
   loading = 'lazy',
-  priority = false 
+  priority = false,
 }: OptimizedImageProps) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [imageSrc, setImageSrc] = useState('');
@@ -51,9 +51,7 @@ export default function OptimizedImage({
 
   return (
     <div className={`relative overflow-hidden ${className}`}>
-      {!isLoaded && (
-        <div className="absolute inset-0 bg-gray-200 animate-pulse" />
-      )}
+      {!isLoaded && <div className="absolute inset-0 bg-gray-200 animate-pulse" />}
       <img
         data-src={priority ? undefined : src}
         src={imageSrc}

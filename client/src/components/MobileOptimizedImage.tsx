@@ -11,15 +11,15 @@ interface MobileOptimizedImageProps {
   mobileHeight?: number;
 }
 
-export default function MobileOptimizedImage({ 
-  src, 
-  alt, 
-  className = '', 
-  width, 
-  height, 
+export default function MobileOptimizedImage({
+  src,
+  alt,
+  className = '',
+  width,
+  height,
   priority = false,
   mobileWidth,
-  mobileHeight
+  mobileHeight,
 }: MobileOptimizedImageProps) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [imageSrc, setImageSrc] = useState('');
@@ -30,7 +30,7 @@ export default function MobileOptimizedImage({
     const checkMobile = () => {
       setIsMobile(window.innerWidth <= 768);
     };
-    
+
     checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
@@ -62,14 +62,19 @@ export default function MobileOptimizedImage({
     }
   }, [src, priority, isMobile]);
 
-  const optimizedSrc = imageSrc ? `${imageSrc}${imageSrc.includes('?') ? '&' : '?'}w=${isMobile ? (mobileWidth || 400) : (width || 800)}&h=${isMobile ? (mobileHeight || 300) : (height || 600)}&q=${isMobile ? 60 : 80}&auto=format&fit=crop` : '';
+  const optimizedSrc = imageSrc
+    ? `${imageSrc}${imageSrc.includes('?') ? '&' : '?'}w=${isMobile ? mobileWidth || 400 : width || 800}&h=${isMobile ? mobileHeight || 300 : height || 600}&q=${isMobile ? 60 : 80}&auto=format&fit=crop`
+    : '';
 
   return (
     <div ref={imgRef} className={`relative overflow-hidden ${className}`}>
       {!isLoaded && (
-        <div className="absolute inset-0 bg-gray-200 animate-pulse" style={{
-          aspectRatio: `${isMobile ? (mobileWidth || 400) : (width || 800)} / ${isMobile ? (mobileHeight || 300) : (height || 600)}`
-        }} />
+        <div
+          className="absolute inset-0 bg-gray-200 animate-pulse"
+          style={{
+            aspectRatio: `${isMobile ? mobileWidth || 400 : width || 800} / ${isMobile ? mobileHeight || 300 : height || 600}`,
+          }}
+        />
       )}
       {imageSrc && (
         <img

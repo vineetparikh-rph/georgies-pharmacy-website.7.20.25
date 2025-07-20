@@ -9,7 +9,7 @@ interface UseIntersectionObserverProps {
 export const useIntersectionObserver = ({
   threshold = 0.1,
   rootMargin = '0px',
-  triggerOnce = true
+  triggerOnce = true,
 }: UseIntersectionObserverProps = {}) => {
   const [isIntersecting, setIsIntersecting] = useState(false);
   const [hasTriggered, setHasTriggered] = useState(false);
@@ -26,7 +26,7 @@ export const useIntersectionObserver = ({
       ([entry]) => {
         const isElementIntersecting = entry.isIntersecting;
         setIsIntersecting(isElementIntersecting);
-        
+
         if (isElementIntersecting && triggerOnce) {
           setHasTriggered(true);
         }

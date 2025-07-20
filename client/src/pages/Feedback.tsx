@@ -1,26 +1,39 @@
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Star, MessageCircle, ThumbsUp, Award, Send } from "lucide-react";
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Label } from '@/components/ui/label';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { Star, MessageCircle, ThumbsUp, Award, Send } from 'lucide-react';
+import Navigation from '@/components/Navigation';
+import Footer from '@/components/Footer';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
 
 const feedbackSchema = z.object({
-  name: z.string().min(2, "Name must be at least 2 characters"),
-  email: z.string().email("Please enter a valid email address"),
-  phone: z.string().min(10, "Please enter a valid phone number"),
-  location: z.string().min(1, "Please select a location"),
-  serviceType: z.string().min(1, "Please select a service type"),
-  rating: z.string().min(1, "Please provide a rating"),
-  feedback: z.string().min(10, "Feedback must be at least 10 characters"),
+  name: z.string().min(2, 'Name must be at least 2 characters'),
+  email: z.string().email('Please enter a valid email address'),
+  phone: z.string().min(10, 'Please enter a valid phone number'),
+  location: z.string().min(1, 'Please select a location'),
+  serviceType: z.string().min(1, 'Please select a service type'),
+  rating: z.string().min(1, 'Please provide a rating'),
+  feedback: z.string().min(10, 'Feedback must be at least 10 characters'),
   suggestions: z.string().optional(),
 });
 
@@ -31,40 +44,42 @@ export default function Feedback() {
   const form = useForm<z.infer<typeof feedbackSchema>>({
     resolver: zodResolver(feedbackSchema),
     defaultValues: {
-      name: "",
-      email: "",
-      phone: "",
-      location: "",
-      serviceType: "",
-      rating: "",
-      feedback: "",
-      suggestions: "",
+      name: '',
+      email: '',
+      phone: '',
+      location: '',
+      serviceType: '',
+      rating: '',
+      feedback: '',
+      suggestions: '',
     },
   });
 
   const onSubmit = (data: z.infer<typeof feedbackSchema>) => {
-    console.log("Feedback submitted:", data);
-    alert("Thank you for your feedback! We appreciate your input and will use it to improve our services.");
+    console.log('Feedback submitted:', data);
+    alert(
+      'Thank you for your feedback! We appreciate your input and will use it to improve our services.'
+    );
     form.reset();
     setRating(0);
   };
 
   const locations = [
-    { value: "family", label: "Georgies Family Pharmacy - Linden" },
-    { value: "specialty", label: "Georgies Specialty Pharmacy - Linden" },
-    { value: "parlin", label: "Georgies Parlin Pharmacy - Parlin" },
-    { value: "outpatient", label: "Georgies Outpatient Pharmacy - Browns Mills" },
+    { value: 'family', label: 'Georgies Family Pharmacy - Linden' },
+    { value: 'specialty', label: 'Georgies Specialty Pharmacy - Linden' },
+    { value: 'parlin', label: 'Georgies Parlin Pharmacy - Parlin' },
+    { value: 'outpatient', label: 'Georgies Outpatient Pharmacy - Browns Mills' },
   ];
 
   const serviceTypes = [
-    { value: "prescription", label: "Prescription Services" },
-    { value: "consultation", label: "Pharmacist Consultation" },
-    { value: "vaccination", label: "Vaccination Services" },
-    { value: "otc", label: "Over-the-Counter Products" },
-    { value: "medpack", label: "MedPack Services" },
-    { value: "delivery", label: "Delivery Services" },
-    { value: "customer-service", label: "Customer Service" },
-    { value: "other", label: "Other" },
+    { value: 'prescription', label: 'Prescription Services' },
+    { value: 'consultation', label: 'Pharmacist Consultation' },
+    { value: 'vaccination', label: 'Vaccination Services' },
+    { value: 'otc', label: 'Over-the-Counter Products' },
+    { value: 'medpack', label: 'MedPack Services' },
+    { value: 'delivery', label: 'Delivery Services' },
+    { value: 'customer-service', label: 'Customer Service' },
+    { value: 'other', label: 'Other' },
   ];
 
   return (
@@ -78,7 +93,8 @@ export default function Feedback() {
             Your Feedback <span className="text-primary">Matters</span>
           </h1>
           <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-            Help us improve our services by sharing your experience. Your feedback helps us serve you better.
+            Help us improve our services by sharing your experience. Your feedback helps us serve
+            you better.
           </p>
         </div>
 
@@ -99,7 +115,7 @@ export default function Feedback() {
                     <Star
                       key={star}
                       className={`h-5 w-5 ${
-                        star <= 4 ? "text-yellow-400 fill-current" : "text-gray-300"
+                        star <= 4 ? 'text-yellow-400 fill-current' : 'text-gray-300'
                       }`}
                     />
                   ))}
@@ -118,7 +134,9 @@ export default function Feedback() {
               <CardContent>
                 <div className="space-y-4">
                   <div className="border-l-4 border-primary pl-4">
-                    <p className="text-sm text-slate-600">"Excellent service and friendly staff!"</p>
+                    <p className="text-sm text-slate-600">
+                      "Excellent service and friendly staff!"
+                    </p>
                     <p className="text-xs text-slate-400">- Sarah M.</p>
                   </div>
                   <div className="border-l-4 border-primary pl-4">
@@ -280,8 +298,8 @@ export default function Feedback() {
                                   <Star
                                     className={`h-8 w-8 ${
                                       star <= (hoveredRating || rating)
-                                        ? "text-yellow-400 fill-current"
-                                        : "text-gray-300"
+                                        ? 'text-yellow-400 fill-current'
+                                        : 'text-gray-300'
                                     }`}
                                   />
                                 </button>

@@ -1,15 +1,27 @@
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Pill, Shield, CreditCard, FileText, Phone, CheckCircle } from "lucide-react";
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Pill, Shield, CreditCard, FileText, Phone, CheckCircle } from 'lucide-react';
+import Navigation from '@/components/Navigation';
+import Footer from '@/components/Footer';
 
 export default function Insurance() {
   const acceptedInsurance = [
-    "Aetna", "Blue Cross Blue Shield", "Cigna", "UnitedHealthcare", 
-    "Humana", "Medicare", "Medicaid", "Express Scripts", "CVS Caremark",
-    "OptumRx", "Prime Therapeutics", "Anthem", "Kaiser Permanente",
-    "Tricare", "Workers' Compensation", "Most Commercial Plans"
+    'Aetna',
+    'Blue Cross Blue Shield',
+    'Cigna',
+    'UnitedHealthcare',
+    'Humana',
+    'Medicare',
+    'Medicaid',
+    'Express Scripts',
+    'CVS Caremark',
+    'OptumRx',
+    'Prime Therapeutics',
+    'Anthem',
+    'Kaiser Permanente',
+    'Tricare',
+    "Workers' Compensation",
+    'Most Commercial Plans',
   ];
 
   return (
@@ -22,13 +34,16 @@ export default function Insurance() {
             Insurance <span className="text-primary">Information</span>
           </h1>
           <p className="text-xl text-slate-600 mb-8">
-            We accept most major insurance plans to make your prescriptions affordable and accessible.
+            We accept most major insurance plans to make your prescriptions affordable and
+            accessible.
           </p>
         </div>
 
         {/* Accepted Insurance Plans */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">Accepted Insurance Plans</h2>
+          <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+            Accepted Insurance Plans
+          </h2>
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
             {acceptedInsurance.map((insurance, index) => (
               <Card key={index} className="text-center hover:shadow-md transition-shadow">
@@ -40,7 +55,9 @@ export default function Insurance() {
             ))}
           </div>
           <div className="text-center mt-8">
-            <p className="text-slate-600 mb-4">Don't see your insurance listed? We accept many other plans too!</p>
+            <p className="text-slate-600 mb-4">
+              Don't see your insurance listed? We accept many other plans too!
+            </p>
             <Button onClick={() => window.open('tel:908-925-4567')} variant="outline">
               <Phone className="w-4 h-4 mr-2" />
               Call to Verify Coverage
@@ -50,7 +67,9 @@ export default function Insurance() {
 
         {/* Insurance Services */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">Insurance Services</h2>
+          <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+            Insurance Services
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <Card>
               <CardHeader>
@@ -61,7 +80,10 @@ export default function Insurance() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-3 text-slate-600">
-                  <p>We verify your insurance coverage before filling prescriptions to ensure accurate pricing.</p>
+                  <p>
+                    We verify your insurance coverage before filling prescriptions to ensure
+                    accurate pricing.
+                  </p>
                   <ul className="list-disc pl-6 space-y-1 text-sm">
                     <li>Real-time benefit verification</li>
                     <li>Copay and deductible information</li>
@@ -101,7 +123,9 @@ export default function Insurance() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-3 text-slate-600">
-                  <p>Our team handles all insurance claims processing efficiently and accurately.</p>
+                  <p>
+                    Our team handles all insurance claims processing efficiently and accurately.
+                  </p>
                   <ul className="list-disc pl-6 space-y-1 text-sm">
                     <li>Electronic claims submission</li>
                     <li>Rejection resolution</li>
@@ -119,21 +143,32 @@ export default function Insurance() {
           <Card className="bg-blue-50 border-blue-200">
             <CardHeader>
               <CardTitle className="text-2xl text-blue-900">Medicare Coverage</CardTitle>
-              <CardDescription className="text-blue-700">Special information for Medicare beneficiaries</CardDescription>
+              <CardDescription className="text-blue-700">
+                Special information for Medicare beneficiaries
+              </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-4 text-blue-800">
                 <div>
                   <h4 className="font-semibold mb-2">Medicare Part D</h4>
-                  <p>We participate in most Medicare Part D prescription drug plans. Our pharmacists can help you understand your coverage and find cost-effective options.</p>
+                  <p>
+                    We participate in most Medicare Part D prescription drug plans. Our pharmacists
+                    can help you understand your coverage and find cost-effective options.
+                  </p>
                 </div>
                 <div>
                   <h4 className="font-semibold mb-2">Medicare Advantage</h4>
-                  <p>We work with Medicare Advantage plans to ensure you receive the benefits you're entitled to, including any additional prescription coverage.</p>
+                  <p>
+                    We work with Medicare Advantage plans to ensure you receive the benefits you're
+                    entitled to, including any additional prescription coverage.
+                  </p>
                 </div>
                 <div>
                   <h4 className="font-semibold mb-2">Annual Enrollment</h4>
-                  <p>Our team can provide guidance during Medicare open enrollment periods to help you choose the best plan for your medication needs.</p>
+                  <p>
+                    Our team can provide guidance during Medicare open enrollment periods to help
+                    you choose the best plan for your medication needs.
+                  </p>
                 </div>
               </div>
             </CardContent>
@@ -145,21 +180,32 @@ export default function Insurance() {
           <Card className="bg-green-50 border-green-200">
             <CardHeader>
               <CardTitle className="text-2xl text-green-900">Medicaid Coverage</CardTitle>
-              <CardDescription className="text-green-700">Information for Medicaid beneficiaries</CardDescription>
+              <CardDescription className="text-green-700">
+                Information for Medicaid beneficiaries
+              </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-4 text-green-800">
                 <div>
                   <h4 className="font-semibold mb-2">New Jersey Medicaid</h4>
-                  <p>We accept New Jersey Medicaid and most Medicaid managed care plans. Bring your Medicaid card and photo ID for prescription pickup.</p>
+                  <p>
+                    We accept New Jersey Medicaid and most Medicaid managed care plans. Bring your
+                    Medicaid card and photo ID for prescription pickup.
+                  </p>
                 </div>
                 <div>
                   <h4 className="font-semibold mb-2">Medicaid Managed Care</h4>
-                  <p>We work with Medicaid managed care organizations including AmeriHealth, Horizon NJ Health, and UnitedHealthcare Community Plan.</p>
+                  <p>
+                    We work with Medicaid managed care organizations including AmeriHealth, Horizon
+                    NJ Health, and UnitedHealthcare Community Plan.
+                  </p>
                 </div>
                 <div>
                   <h4 className="font-semibold mb-2">Prior Authorizations</h4>
-                  <p>Our clinical team assists with Medicaid prior authorization requests to ensure timely access to your medications.</p>
+                  <p>
+                    Our clinical team assists with Medicaid prior authorization requests to ensure
+                    timely access to your medications.
+                  </p>
                 </div>
               </div>
             </CardContent>
@@ -173,7 +219,9 @@ export default function Insurance() {
             <CardContent className="p-8">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>
-                  <h3 className="text-xl font-semibold text-slate-900 mb-4">For New Prescriptions</h3>
+                  <h3 className="text-xl font-semibold text-slate-900 mb-4">
+                    For New Prescriptions
+                  </h3>
                   <ul className="space-y-2 text-slate-600">
                     <li className="flex items-center">
                       <CheckCircle className="w-4 h-4 text-green-600 mr-2" />
@@ -194,7 +242,9 @@ export default function Insurance() {
                   </ul>
                 </div>
                 <div>
-                  <h3 className="text-xl font-semibold text-slate-900 mb-4">For Prescription Pickups</h3>
+                  <h3 className="text-xl font-semibold text-slate-900 mb-4">
+                    For Prescription Pickups
+                  </h3>
                   <ul className="space-y-2 text-slate-600">
                     <li className="flex items-center">
                       <CheckCircle className="w-4 h-4 text-green-600 mr-2" />
@@ -223,14 +273,25 @@ export default function Insurance() {
         <section className="text-center bg-gradient-to-r from-primary to-red-600 rounded-2xl p-12 text-white">
           <h2 className="text-3xl font-bold mb-4">Insurance Questions?</h2>
           <p className="text-xl text-red-100 mb-8">
-            Our insurance specialists are here to help you understand your coverage and maximize your benefits.
+            Our insurance specialists are here to help you understand your coverage and maximize
+            your benefits.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button onClick={() => window.open('tel:908-925-4567')} size="lg" variant="secondary" className="bg-white text-primary hover:bg-gray-100">
+            <Button
+              onClick={() => window.open('tel:908-925-4567')}
+              size="lg"
+              variant="secondary"
+              className="bg-white text-primary hover:bg-gray-100"
+            >
               <Phone className="w-4 h-4 mr-2" />
               Call Insurance Team
             </Button>
-            <Button onClick={() => window.location.href = "/contact"} size="lg" variant="outline" className="border-red-500 text-red-500 bg-white hover:bg-red-50 font-semibold">
+            <Button
+              onClick={() => (window.location.href = '/contact')}
+              size="lg"
+              variant="outline"
+              className="border-red-500 text-red-500 bg-white hover:bg-red-50 font-semibold"
+            >
               Visit Our Locations
             </Button>
           </div>

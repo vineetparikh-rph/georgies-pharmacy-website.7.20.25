@@ -49,7 +49,7 @@ export const optimizeFontsGently = () => {
 export const initGentleOptimizations = () => {
   // Only run gentle optimizations
   optimizeFontsGently();
-  
+
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
       optimizeImagesGently();

@@ -1,55 +1,80 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Handshake, Building, Users, TrendingUp, Award, Phone, Mail, MapPin, CheckCircle } from "lucide-react";
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import {
+  Handshake,
+  Building,
+  Users,
+  TrendingUp,
+  Award,
+  Phone,
+  Mail,
+  MapPin,
+  CheckCircle,
+} from 'lucide-react';
+import Navigation from '@/components/Navigation';
+import Footer from '@/components/Footer';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
 
 const partnershipSchema = z.object({
-  companyName: z.string().min(2, "Company name must be at least 2 characters"),
-  contactName: z.string().min(2, "Contact name must be at least 2 characters"),
-  email: z.string().email("Please enter a valid email address"),
-  phone: z.string().min(10, "Please enter a valid phone number"),
-  partnershipType: z.string().min(1, "Please select a partnership type"),
-  description: z.string().min(10, "Description must be at least 10 characters"),
-  website: z.string().url("Please enter a valid website URL").optional().or(z.literal("")),
+  companyName: z.string().min(2, 'Company name must be at least 2 characters'),
+  contactName: z.string().min(2, 'Contact name must be at least 2 characters'),
+  email: z.string().email('Please enter a valid email address'),
+  phone: z.string().min(10, 'Please enter a valid phone number'),
+  partnershipType: z.string().min(1, 'Please select a partnership type'),
+  description: z.string().min(10, 'Description must be at least 10 characters'),
+  website: z.string().url('Please enter a valid website URL').optional().or(z.literal('')),
 });
 
 export default function PartnerWithUs() {
   const form = useForm<z.infer<typeof partnershipSchema>>({
     resolver: zodResolver(partnershipSchema),
     defaultValues: {
-      companyName: "",
-      contactName: "",
-      email: "",
-      phone: "",
-      partnershipType: "",
-      description: "",
-      website: "",
+      companyName: '',
+      contactName: '',
+      email: '',
+      phone: '',
+      partnershipType: '',
+      description: '',
+      website: '',
     },
   });
 
   const onSubmit = (data: z.infer<typeof partnershipSchema>) => {
-    console.log("Partnership inquiry submitted:", data);
-    alert("Thank you for your partnership inquiry! We'll review your proposal and get back to you within 2-3 business days.");
+    console.log('Partnership inquiry submitted:', data);
+    alert(
+      "Thank you for your partnership inquiry! We'll review your proposal and get back to you within 2-3 business days."
+    );
     form.reset();
   };
 
   const partnershipTypes = [
-    { value: "healthcare-provider", label: "Healthcare Provider" },
-    { value: "insurance-company", label: "Insurance Company" },
-    { value: "medical-device", label: "Medical Device Company" },
-    { value: "pharmaceutical", label: "Pharmaceutical Company" },
-    { value: "technology", label: "Technology Partner" },
-    { value: "delivery-service", label: "Delivery Service" },
-    { value: "wellness-program", label: "Wellness Program" },
-    { value: "other", label: "Other" },
+    { value: 'healthcare-provider', label: 'Healthcare Provider' },
+    { value: 'insurance-company', label: 'Insurance Company' },
+    { value: 'medical-device', label: 'Medical Device Company' },
+    { value: 'pharmaceutical', label: 'Pharmaceutical Company' },
+    { value: 'technology', label: 'Technology Partner' },
+    { value: 'delivery-service', label: 'Delivery Service' },
+    { value: 'wellness-program', label: 'Wellness Program' },
+    { value: 'other', label: 'Other' },
   ];
 
   return (
@@ -63,7 +88,8 @@ export default function PartnerWithUs() {
             Partner <span className="text-primary">With Us</span>
           </h1>
           <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-            Join forces with Georgies Pharmacy to expand healthcare access and improve patient outcomes across New Jersey.
+            Join forces with Georgies Pharmacy to expand healthcare access and improve patient
+            outcomes across New Jersey.
           </p>
         </div>
 
@@ -73,14 +99,18 @@ export default function PartnerWithUs() {
             <CardContent className="pt-6">
               <Building className="h-12 w-12 text-primary mx-auto mb-4" />
               <h3 className="font-semibold text-lg mb-2">Established Network</h3>
-              <p className="text-sm text-slate-600">4 pharmacy locations serving diverse communities</p>
+              <p className="text-sm text-slate-600">
+                4 pharmacy locations serving diverse communities
+              </p>
             </CardContent>
           </Card>
           <Card className="text-center">
             <CardContent className="pt-6">
               <Users className="h-12 w-12 text-primary mx-auto mb-4" />
               <h3 className="font-semibold text-lg mb-2">Patient-Centered Care</h3>
-              <p className="text-sm text-slate-600">Thousands of satisfied patients trust our services</p>
+              <p className="text-sm text-slate-600">
+                Thousands of satisfied patients trust our services
+              </p>
             </CardContent>
           </Card>
           <Card className="text-center">
@@ -103,7 +133,7 @@ export default function PartnerWithUs() {
           {/* Partnership Opportunities */}
           <div>
             <h2 className="text-3xl font-bold text-slate-900 mb-8">Partnership Opportunities</h2>
-            
+
             <div className="space-y-6">
               <Card>
                 <CardHeader>
@@ -229,7 +259,8 @@ export default function PartnerWithUs() {
               <CardHeader>
                 <CardTitle>Partnership Inquiry</CardTitle>
                 <CardDescription>
-                  Tell us about your organization and how we can work together to improve healthcare outcomes.
+                  Tell us about your organization and how we can work together to improve healthcare
+                  outcomes.
                 </CardDescription>
               </CardHeader>
               <CardContent>

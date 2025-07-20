@@ -1,7 +1,10 @@
 // Mobile-specific performance optimizations
 
 export const isMobile = () => {
-  return window.innerWidth <= 768 || /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  return (
+    window.innerWidth <= 768 ||
+    /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+  );
 };
 
 export const optimizeForMobile = () => {
@@ -23,7 +26,7 @@ export const optimizeForMobile = () => {
 
   // Optimize images for mobile
   const images = document.querySelectorAll('img');
-  images.forEach(img => {
+  images.forEach((img) => {
     if (!img.getAttribute('loading')) {
       img.setAttribute('loading', 'lazy');
     }
@@ -34,7 +37,7 @@ export const optimizeForMobile = () => {
 
   // Reduce animation complexity
   const animatedElements = document.querySelectorAll('[class*="animate-"]');
-  animatedElements.forEach(el => {
+  animatedElements.forEach((el) => {
     if (el instanceof HTMLElement) {
       el.style.animationDuration = '0.1s';
       el.style.animationIterationCount = '1';
@@ -46,8 +49,8 @@ export const deferNonCriticalResources = () => {
   // Defer testimonials and partners loading on mobile
   if (isMobile()) {
     const deferredSections = ['testimonials', 'partners', 'awards'];
-    
-    deferredSections.forEach(sectionId => {
+
+    deferredSections.forEach((sectionId) => {
       const section = document.getElementById(sectionId);
       if (section instanceof HTMLElement) {
         // Hide initially and load after 4 seconds on mobile
@@ -67,11 +70,7 @@ export const deferNonCriticalResources = () => {
 
 export const optimizeFonts = () => {
   // Preload only critical fonts
-  const criticalFonts = [
-    'system-ui',
-    '-apple-system',
-    'BlinkMacSystemFont'
-  ];
+  const criticalFonts = ['system-ui', '-apple-system', 'BlinkMacSystemFont'];
 
   // Use font-display: swap for better performance
   const style = document.createElement('style');
@@ -90,7 +89,7 @@ export const initMobileOptimizations = () => {
   // Run immediately
   optimizeForMobile();
   optimizeFonts();
-  
+
   // Run after page load
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {

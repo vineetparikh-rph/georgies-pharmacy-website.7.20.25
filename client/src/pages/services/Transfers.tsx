@@ -1,13 +1,13 @@
-import React from "react";
-import { Button } from "@/components/ui/button";
-import { Pill, ArrowRightLeft, FileText, Clock, CheckCircle, Phone } from "lucide-react";
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
+import React from 'react';
+import { Button } from '@/components/ui/button';
+import { Pill, ArrowRightLeft, FileText, Clock, CheckCircle, Phone } from 'lucide-react';
+import Navigation from '@/components/Navigation';
+import Footer from '@/components/Footer';
 
 export default function Transfers() {
-  // SEO: Update page title for prescription transfer searches  
+  // SEO: Update page title for prescription transfer searches
   React.useEffect(() => {
-    document.title = "Free Prescription Transfers | Georgies Pharmacy NJ | Transfer Prescriptions";
+    document.title = 'Free Prescription Transfers | Georgies Pharmacy NJ | Transfer Prescriptions';
   }, []);
   return (
     <div className="min-h-screen bg-gradient-to-br from-red-50 via-white to-green-50">
@@ -19,7 +19,8 @@ export default function Transfers() {
             Prescription <span className="text-primary">Transfers</span>
           </h1>
           <p className="fluid-text-xl text-slate-600 mb-8 max-w-3xl mx-auto">
-            Easily transfer your prescriptions from another pharmacy to Georgies Pharmacy. We handle all the paperwork.
+            Easily transfer your prescriptions from another pharmacy to Georgies Pharmacy. We handle
+            all the paperwork.
           </p>
         </div>
 
@@ -32,8 +33,12 @@ export default function Transfers() {
                   <span className="text-white font-bold text-sm">1</span>
                 </div>
                 <div>
-                  <h3 className="font-semibold text-slate-900 mb-2">Provide Transfer Information</h3>
-                  <p className="text-slate-600">Share your current pharmacy details, prescription numbers, and medication names.</p>
+                  <h3 className="font-semibold text-slate-900 mb-2">
+                    Provide Transfer Information
+                  </h3>
+                  <p className="text-slate-600">
+                    Share your current pharmacy details, prescription numbers, and medication names.
+                  </p>
                 </div>
               </div>
 
@@ -43,7 +48,9 @@ export default function Transfers() {
                 </div>
                 <div>
                   <h3 className="font-semibold text-slate-900 mb-2">We Contact Your Pharmacy</h3>
-                  <p className="text-slate-600">Our team contacts your current pharmacy to initiate the transfer process.</p>
+                  <p className="text-slate-600">
+                    Our team contacts your current pharmacy to initiate the transfer process.
+                  </p>
                 </div>
               </div>
 
@@ -53,7 +60,10 @@ export default function Transfers() {
                 </div>
                 <div>
                   <h3 className="font-semibold text-slate-900 mb-2">Transfer Approval</h3>
-                  <p className="text-slate-600">We handle all necessary paperwork and obtain approvals from your previous pharmacy.</p>
+                  <p className="text-slate-600">
+                    We handle all necessary paperwork and obtain approvals from your previous
+                    pharmacy.
+                  </p>
                 </div>
               </div>
 
@@ -63,7 +73,10 @@ export default function Transfers() {
                 </div>
                 <div>
                   <h3 className="font-semibold text-slate-900 mb-2">Ready for Pickup</h3>
-                  <p className="text-slate-600">Your transferred prescription is filled and ready for pickup at Georgies Pharmacy.</p>
+                  <p className="text-slate-600">
+                    Your transferred prescription is filled and ready for pickup at Georgies
+                    Pharmacy.
+                  </p>
                 </div>
               </div>
             </div>
@@ -76,7 +89,9 @@ export default function Transfers() {
                 <FileText className="text-secondary h-6 w-6 mt-1" />
                 <div>
                   <h4 className="font-semibold text-slate-900">Prescription Information</h4>
-                  <p className="text-slate-600 text-sm">Prescription numbers and medication names</p>
+                  <p className="text-slate-600 text-sm">
+                    Prescription numbers and medication names
+                  </p>
                 </div>
               </div>
               <div className="flex items-start space-x-3">
@@ -90,7 +105,9 @@ export default function Transfers() {
                 <CheckCircle className="text-secondary h-6 w-6 mt-1" />
                 <div>
                   <h4 className="font-semibold text-slate-900">Personal Information</h4>
-                  <p className="text-slate-600 text-sm">Your name and date of birth for verification</p>
+                  <p className="text-slate-600 text-sm">
+                    Your name and date of birth for verification
+                  </p>
                 </div>
               </div>
             </div>
@@ -109,13 +126,25 @@ export default function Transfers() {
 
         <section className="text-center bg-gradient-to-r from-secondary to-green-600 rounded-2xl p-12 text-white">
           <h2 className="text-3xl font-bold mb-4">Ready to Transfer Your Prescriptions?</h2>
-          <p className="text-xl text-green-100 mb-8">Start your transfer request today and experience better pharmacy care.</p>
-          <Button onClick={() => window.open("https://georgiesrxtransferrefillvaccine-1.onrender.com/transfer", "_blank")} size="lg" variant="secondary" className="bg-white text-secondary hover:bg-gray-100">
+          <p className="text-xl text-green-100 mb-8">
+            Start your transfer request today and experience better pharmacy care.
+          </p>
+          <Button
+            onClick={() =>
+              window.open(
+                'https://georgiesrxtransferrefillvaccine-1.onrender.com/transfer',
+                '_blank'
+              )
+            }
+            size="lg"
+            variant="secondary"
+            className="bg-white text-secondary hover:bg-gray-100"
+          >
             Start Transfer Request
           </Button>
         </section>
       </main>
-      
+
       <Footer />
     </div>
   );

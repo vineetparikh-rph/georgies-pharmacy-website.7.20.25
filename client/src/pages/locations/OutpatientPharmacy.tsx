@@ -1,46 +1,55 @@
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { MapPin, Phone, Clock, Navigation as NavIcon, Building2, Stethoscope, Heart, Star } from "lucide-react";
+import Navigation from '@/components/Navigation';
+import Footer from '@/components/Footer';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import {
+  MapPin,
+  Phone,
+  Clock,
+  Navigation as NavIcon,
+  Building2,
+  Stethoscope,
+  Heart,
+  Star,
+} from 'lucide-react';
 
 export default function OutpatientPharmacy() {
   const clinicalServices = [
-    "Post-Surgical Medications",
-    "Discharge Prescriptions",
-    "Pain Management",
-    "Antibiotic Therapies",
-    "Wound Care Supplies",
-    "Medical Equipment",
-    "Injectable Medications",
-    "IV Therapies",
-    "Specialized Compounds",
-    "Clinical Consultations"
+    'Post-Surgical Medications',
+    'Discharge Prescriptions',
+    'Pain Management',
+    'Antibiotic Therapies',
+    'Wound Care Supplies',
+    'Medical Equipment',
+    'Injectable Medications',
+    'IV Therapies',
+    'Specialized Compounds',
+    'Clinical Consultations',
   ];
 
   const clinicalFeatures = [
     {
       icon: <Building2 className="h-6 w-6 text-primary" />,
-      title: "Hospital-Grade Care",
-      description: "Clinical pharmacy services meeting the highest medical standards and protocols"
+      title: 'Hospital-Grade Care',
+      description: 'Clinical pharmacy services meeting the highest medical standards and protocols',
     },
     {
       icon: <Stethoscope className="h-6 w-6 text-primary" />,
-      title: "Medical Coordination",
-      description: "Seamless coordination with healthcare providers and medical facilities"
+      title: 'Medical Coordination',
+      description: 'Seamless coordination with healthcare providers and medical facilities',
     },
     {
       icon: <Heart className="h-6 w-6 text-primary" />,
-      title: "Patient-Centered Care",
-      description: "Comprehensive support for outpatient treatment and recovery needs"
-    }
+      title: 'Patient-Centered Care',
+      description: 'Comprehensive support for outpatient treatment and recovery needs',
+    },
   ];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-red-50 via-white to-green-50">
       <Navigation />
-      
+
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Hero Section */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
@@ -52,10 +61,11 @@ export default function OutpatientPharmacy() {
               Georgies <span className="text-primary">Outpatient</span> Pharmacy
             </h1>
             <p className="text-xl text-slate-600 mb-8">
-              Professional clinical pharmacy services in Browns Mills, specializing in outpatient care, 
-              post-surgical medications, and comprehensive pharmaceutical support for medical treatments.
+              Professional clinical pharmacy services in Browns Mills, specializing in outpatient
+              care, post-surgical medications, and comprehensive pharmaceutical support for medical
+              treatments.
             </p>
-            
+
             <div className="space-y-4 mb-8">
               <div className="flex items-center text-slate-700">
                 <MapPin className="h-5 w-5 text-primary mr-3" />
@@ -76,19 +86,24 @@ export default function OutpatientPharmacy() {
                 <Phone className="mr-2 h-5 w-5" />
                 Call Clinical Team
               </Button>
-              <Button 
-                size="lg" 
+              <Button
+                size="lg"
                 variant="outline"
-                onClick={() => window.open(`https://maps.google.com/?q=6+Earlin+Drive,+Suite+130,+Browns+Mills,+NJ+08015`, '_blank')}
+                onClick={() =>
+                  window.open(
+                    `https://maps.google.com/?q=6+Earlin+Drive,+Suite+130,+Browns+Mills,+NJ+08015`,
+                    '_blank'
+                  )
+                }
               >
                 <NavIcon className="mr-2 h-5 w-5" />
                 Get Directions
               </Button>
             </div>
           </div>
-          
+
           <div className="relative">
-            <img 
+            <img
               src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?q=80&w=1631&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
               alt="Georgies Outpatient Pharmacy Clinical Setting"
               className="rounded-2xl shadow-2xl w-full h-96 object-cover"
@@ -105,14 +120,14 @@ export default function OutpatientPharmacy() {
 
         {/* Clinical Features */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold text-slate-900 mb-8 text-center">Clinical Excellence Standards</h2>
+          <h2 className="text-3xl font-bold text-slate-900 mb-8 text-center">
+            Clinical Excellence Standards
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {clinicalFeatures.map((feature, index) => (
               <Card key={index} className="text-center hover:shadow-lg transition-shadow">
                 <CardHeader>
-                  <div className="flex justify-center mb-4">
-                    {feature.icon}
-                  </div>
+                  <div className="flex justify-center mb-4">{feature.icon}</div>
                   <CardTitle className="text-xl">{feature.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -125,7 +140,9 @@ export default function OutpatientPharmacy() {
 
         {/* Clinical Services */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold text-slate-900 mb-8 text-center">Specialized Clinical Services</h2>
+          <h2 className="text-3xl font-bold text-slate-900 mb-8 text-center">
+            Specialized Clinical Services
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {clinicalServices.map((service, index) => (
               <Card key={index} className="hover:shadow-md transition-shadow">
@@ -152,7 +169,9 @@ export default function OutpatientPharmacy() {
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>
-                  <h3 className="text-lg font-semibold text-slate-900 mb-4">Medical Facilities We Serve</h3>
+                  <h3 className="text-lg font-semibold text-slate-900 mb-4">
+                    Medical Facilities We Serve
+                  </h3>
                   <ul className="space-y-2 text-slate-600">
                     <li>• Outpatient surgery centers</li>
                     <li>• Specialty medical clinics</li>
@@ -162,7 +181,9 @@ export default function OutpatientPharmacy() {
                   </ul>
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-slate-900 mb-4">Clinical Specialties</h3>
+                  <h3 className="text-lg font-semibold text-slate-900 mb-4">
+                    Clinical Specialties
+                  </h3>
                   <ul className="space-y-2 text-slate-600">
                     <li>• Post-operative care</li>
                     <li>• Pain management protocols</li>
@@ -190,7 +211,9 @@ export default function OutpatientPharmacy() {
                 <div className="space-y-4">
                   <div>
                     <h4 className="font-semibold text-slate-900 mb-2">Clinical Consultation</h4>
-                    <p className="text-slate-600">Expert medication reviews and therapy optimization</p>
+                    <p className="text-slate-600">
+                      Expert medication reviews and therapy optimization
+                    </p>
                   </div>
                   <div>
                     <h4 className="font-semibold text-slate-900 mb-2">Discharge Planning</h4>
@@ -219,7 +242,9 @@ export default function OutpatientPharmacy() {
                 <div className="space-y-4">
                   <div>
                     <h4 className="font-semibold text-slate-900 mb-2">Browns Mills</h4>
-                    <p className="text-slate-600">Our home base providing comprehensive outpatient services</p>
+                    <p className="text-slate-600">
+                      Our home base providing comprehensive outpatient services
+                    </p>
                   </div>
                   <div>
                     <h4 className="font-semibold text-slate-900 mb-2">Fort Dix Area</h4>
@@ -243,14 +268,23 @@ export default function OutpatientPharmacy() {
         <section className="text-center bg-gradient-to-r from-primary to-red-600 rounded-2xl p-12 text-white">
           <h2 className="text-3xl font-bold mb-4">Professional Clinical Pharmacy Care</h2>
           <p className="text-xl text-red-100 mb-8 max-w-2xl mx-auto">
-            Experience the highest standards of pharmaceutical care with our clinical pharmacy team in Browns Mills.
+            Experience the highest standards of pharmaceutical care with our clinical pharmacy team
+            in Browns Mills.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" variant="secondary" className="bg-white text-primary hover:bg-gray-100">
+            <Button
+              size="lg"
+              variant="secondary"
+              className="bg-white text-primary hover:bg-gray-100"
+            >
               <Phone className="mr-2 h-5 w-5" />
               Call 609-726-5800
             </Button>
-            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
+            <Button
+              size="lg"
+              variant="outline"
+              className="border-white text-white hover:bg-white/10"
+            >
               Clinical Consultation
             </Button>
           </div>

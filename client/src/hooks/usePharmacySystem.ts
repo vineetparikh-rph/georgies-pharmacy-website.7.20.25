@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { apiRequest } from "@/lib/queryClient";
+import { useState, useEffect } from 'react';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { apiRequest } from '@/lib/queryClient';
 
 interface PharmacyLocation {
   name: string;
@@ -35,7 +35,7 @@ interface RefillRequest {
 
 export function usePharmacySystemStatus() {
   return useQuery({
-    queryKey: ["/api/pharmacy-system/status"],
+    queryKey: ['/api/pharmacy-system/status'],
     retry: false,
   });
 }
@@ -45,28 +45,28 @@ export function usePharmacySystemAuth() {
 
   const authenticate = useMutation({
     mutationFn: async (credentials: PharmacyCredentials) => {
-      return await apiRequest("/api/pharmacy-system/authenticate", {
-        method: "POST",
+      return await apiRequest('/api/pharmacy-system/authenticate', {
+        method: 'POST',
         body: JSON.stringify(credentials),
       });
     },
     onSuccess: () => {
       // Refresh the status query after successful authentication
-      queryClient.invalidateQueries({ queryKey: ["/api/pharmacy-system/status"] });
-      queryClient.invalidateQueries({ queryKey: ["/api/pharmacy-system/prescriptions"] });
+      queryClient.invalidateQueries({ queryKey: ['/api/pharmacy-system/status'] });
+      queryClient.invalidateQueries({ queryKey: ['/api/pharmacy-system/prescriptions'] });
     },
   });
 
   const logout = useMutation({
     mutationFn: async () => {
-      return await apiRequest("/api/pharmacy-system/logout", {
-        method: "POST",
+      return await apiRequest('/api/pharmacy-system/logout', {
+        method: 'POST',
       });
     },
     onSuccess: () => {
       // Clear all pharmacy system related queries
-      queryClient.invalidateQueries({ queryKey: ["/api/pharmacy-system/status"] });
-      queryClient.removeQueries({ queryKey: ["/api/pharmacy-system/prescriptions"] });
+      queryClient.invalidateQueries({ queryKey: ['/api/pharmacy-system/status'] });
+      queryClient.removeQueries({ queryKey: ['/api/pharmacy-system/prescriptions'] });
     },
   });
 
@@ -78,7 +78,7 @@ export function usePharmacySystemAuth() {
 
 export function usePharmacySystemPrescriptions() {
   return useQuery({
-    queryKey: ["/api/pharmacy-system/prescriptions"],
+    queryKey: ['/api/pharmacy-system/prescriptions'],
     enabled: false, // Only fetch when explicitly enabled
     retry: false,
   });
@@ -89,15 +89,15 @@ export function usePharmacySystemRefill() {
 
   return useMutation({
     mutationFn: async (refillData: RefillRequest) => {
-      return await apiRequest("/api/pharmacy-system/refill", {
-        method: "POST",
+      return await apiRequest('/api/pharmacy-system/refill', {
+        method: 'POST',
         body: JSON.stringify(refillData),
       });
     },
     onSuccess: () => {
       // Refresh prescriptions and refill requests after successful refill
-      queryClient.invalidateQueries({ queryKey: ["/api/pharmacy-system/prescriptions"] });
-      queryClient.invalidateQueries({ queryKey: ["/api/patient/1/refill-requests"] });
+      queryClient.invalidateQueries({ queryKey: ['/api/pharmacy-system/prescriptions'] });
+      queryClient.invalidateQueries({ queryKey: ['/api/patient/1/refill-requests'] });
     },
   });
 }
@@ -124,9 +124,9 @@ export function usePharmacySystem() {
       await auth.authenticate.mutateAsync(credentials);
       return { success: true };
     } catch (error) {
-      return { 
-        success: false, 
-        error: error instanceof Error ? error.message : "Authentication failed" 
+      return {
+        success: false,
+        error: error instanceof Error ? error.message : 'Authentication failed',
       };
     }
   };
@@ -137,9 +137,9 @@ export function usePharmacySystem() {
       setIsConnected(false);
       return { success: true };
     } catch (error) {
-      return { 
-        success: false, 
-        error: error instanceof Error ? error.message : "Logout failed" 
+      return {
+        success: false,
+        error: error instanceof Error ? error.message : 'Logout failed',
       };
     }
   };
@@ -149,9 +149,9 @@ export function usePharmacySystem() {
       await refill.mutateAsync(refillData);
       return { success: true };
     } catch (error) {
-      return { 
-        success: false, 
-        error: error instanceof Error ? error.message : "Refill request failed" 
+      return {
+        success: false,
+        error: error instanceof Error ? error.message : 'Refill request failed',
       };
     }
   };
@@ -161,9 +161,9 @@ export function usePharmacySystem() {
       await prescriptions.refetch();
       return { success: true };
     } catch (error) {
-      return { 
-        success: false, 
-        error: error instanceof Error ? error.message : "Sync failed" 
+      return {
+        success: false,
+        error: error instanceof Error ? error.message : 'Sync failed',
       };
     }
   };
@@ -173,17 +173,17 @@ export function usePharmacySystem() {
     isConnected,
     isLoading: status.isLoading || auth.authenticate.isPending || auth.logout.isPending,
     pharmacyStatus: status.data as PharmacySystemStatus | undefined,
-    
+
     // Data
     pharmacyPrescriptions: prescriptions.data,
     prescriptionsLoading: prescriptions.isLoading,
-    
+
     // Actions
     connectToPharmacySystem,
     disconnectFromPharmacySystem,
     submitRefillRequest,
     syncPrescriptions,
-    
+
     // Loading states
     authenticating: auth.authenticate.isPending,
     refillSubmitting: refill.isPending,

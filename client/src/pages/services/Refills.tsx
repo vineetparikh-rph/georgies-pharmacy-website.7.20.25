@@ -1,13 +1,13 @@
-import React from "react";
-import { Button } from "@/components/ui/button";
-import { Pill, Clock, Smartphone, CheckCircle, RotateCcw } from "lucide-react";
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
+import React from 'react';
+import { Button } from '@/components/ui/button';
+import { Pill, Clock, Smartphone, CheckCircle, RotateCcw } from 'lucide-react';
+import Navigation from '@/components/Navigation';
+import Footer from '@/components/Footer';
 
 export default function Refills() {
   // SEO: Update page title for prescription refill searches
   React.useEffect(() => {
-    document.title = "Prescription Refills Online | Georgies Pharmacy NJ | Fast & Easy Refills";
+    document.title = 'Prescription Refills Online | Georgies Pharmacy NJ | Fast & Easy Refills';
   }, []);
   return (
     <div className="min-h-screen bg-gradient-to-br from-red-50 via-white to-green-50">
@@ -19,7 +19,8 @@ export default function Refills() {
             Prescription <span className="text-primary">Refills</span>
           </h1>
           <p className="fluid-text-xl text-slate-600 mb-8 max-w-3xl mx-auto">
-            Quick, convenient prescription refills with multiple pickup options and automatic reminders.
+            Quick, convenient prescription refills with multiple pickup options and automatic
+            reminders.
           </p>
         </div>
 
@@ -33,7 +34,10 @@ export default function Refills() {
                 </div>
                 <div>
                   <h3 className="font-semibold text-slate-900 mb-2">Request Your Refill</h3>
-                  <p className="text-slate-600">Submit your refill request online, by phone, or through our mobile app using your prescription number.</p>
+                  <p className="text-slate-600">
+                    Submit your refill request online, by phone, or through our mobile app using
+                    your prescription number.
+                  </p>
                 </div>
               </div>
 
@@ -43,7 +47,10 @@ export default function Refills() {
                 </div>
                 <div>
                   <h3 className="font-semibold text-slate-900 mb-2">We Process Your Order</h3>
-                  <p className="text-slate-600">Our pharmacy team reviews and prepares your prescription with careful attention to accuracy and safety.</p>
+                  <p className="text-slate-600">
+                    Our pharmacy team reviews and prepares your prescription with careful attention
+                    to accuracy and safety.
+                  </p>
                 </div>
               </div>
 
@@ -53,7 +60,9 @@ export default function Refills() {
                 </div>
                 <div>
                   <h3 className="font-semibold text-slate-900 mb-2">Get Notified</h3>
-                  <p className="text-slate-600">Receive a notification when your prescription is ready for pickup or delivery.</p>
+                  <p className="text-slate-600">
+                    Receive a notification when your prescription is ready for pickup or delivery.
+                  </p>
                 </div>
               </div>
 
@@ -63,7 +72,10 @@ export default function Refills() {
                 </div>
                 <div>
                   <h3 className="font-semibold text-slate-900 mb-2">Pick Up or Receive</h3>
-                  <p className="text-slate-600">Choose from in-store pickup, curbside service, or home delivery based on your preference.</p>
+                  <p className="text-slate-600">
+                    Choose from in-store pickup, curbside service, or home delivery based on your
+                    preference.
+                  </p>
                 </div>
               </div>
             </div>
@@ -94,8 +106,17 @@ export default function Refills() {
 
         <section className="text-center bg-gradient-to-r from-primary to-red-600 rounded-2xl p-12 text-white">
           <h2 className="text-3xl font-bold mb-4">Ready to Refill Your Prescription?</h2>
-          <p className="text-xl text-red-100 mb-8">Click below to access our secure refill portal.</p>
-          <Button onClick={() => window.open("https://georgiesrxtransferrefillvaccine-1.onrender.com/refill", "_blank")} size="lg" variant="secondary" className="bg-white text-primary hover:bg-gray-100">
+          <p className="text-xl text-red-100 mb-8">
+            Click below to access our secure refill portal.
+          </p>
+          <Button
+            onClick={() =>
+              window.open('https://georgiesrxtransferrefillvaccine-1.onrender.com/refill', '_blank')
+            }
+            size="lg"
+            variant="secondary"
+            className="bg-white text-primary hover:bg-gray-100"
+          >
             Start Refill Request
           </Button>
         </section>

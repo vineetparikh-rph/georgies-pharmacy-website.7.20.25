@@ -1,26 +1,24 @@
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Phone, Clock, Calendar, Users, Heart, Shield } from "lucide-react";
+import Navigation from '@/components/Navigation';
+import Footer from '@/components/Footer';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Phone, Clock, Calendar, Users, Heart, Shield } from 'lucide-react';
 
 export default function Consultations() {
   return (
     <div className="min-h-screen bg-gray-50">
       <Navigation />
-      
+
       <main className="py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Hero Section */}
           <div className="text-center mb-12">
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">
-              Pharmacy Consultations
-            </h1>
+            <h1 className="text-4xl font-bold text-gray-900 mb-4">Pharmacy Consultations</h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Get expert medication guidance from our licensed pharmacists. 
-              We provide personalized consultations to help you understand your medications, 
-              manage side effects, and optimize your treatment plan.
+              Get expert medication guidance from our licensed pharmacists. We provide personalized
+              consultations to help you understand your medications, manage side effects, and
+              optimize your treatment plan.
             </p>
           </div>
 
@@ -33,7 +31,8 @@ export default function Consultations() {
                 </div>
                 <CardTitle>Medication Review</CardTitle>
                 <CardDescription>
-                  Comprehensive review of all your medications to identify interactions and optimize therapy
+                  Comprehensive review of all your medications to identify interactions and optimize
+                  therapy
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -103,7 +102,9 @@ export default function Consultations() {
                   <span className="text-white font-bold text-xl">2</span>
                 </div>
                 <h3 className="font-semibold mb-2">Prepare</h3>
-                <p className="text-gray-600 text-sm">Bring all medications and health information</p>
+                <p className="text-gray-600 text-sm">
+                  Bring all medications and health information
+                </p>
               </div>
               <div className="text-center">
                 <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
@@ -117,7 +118,9 @@ export default function Consultations() {
                   <span className="text-white font-bold text-xl">4</span>
                 </div>
                 <h3 className="font-semibold mb-2">Follow-up</h3>
-                <p className="text-gray-600 text-sm">Receive written recommendations and ongoing support</p>
+                <p className="text-gray-600 text-sm">
+                  Receive written recommendations and ongoing support
+                </p>
               </div>
             </div>
           </section>
@@ -136,7 +139,9 @@ export default function Consultations() {
                     <p>Monday - Friday: 9:00 AM - 6:00 PM</p>
                     <p>Saturday: 9:00 AM - 2:00 PM</p>
                     <p>Sunday: Closed</p>
-                    <Badge variant="secondary" className="mt-2">No appointment needed</Badge>
+                    <Badge variant="secondary" className="mt-2">
+                      No appointment needed
+                    </Badge>
                   </div>
                 </div>
                 <div>
@@ -148,7 +153,9 @@ export default function Consultations() {
                     <p>Monday - Friday: 9:00 AM - 7:00 PM</p>
                     <p>Saturday: 9:00 AM - 4:00 PM</p>
                     <p>Sunday: 10:00 AM - 2:00 PM</p>
-                    <Badge variant="secondary" className="mt-2">Book in advance</Badge>
+                    <Badge variant="secondary" className="mt-2">
+                      Book in advance
+                    </Badge>
                   </div>
                 </div>
               </div>

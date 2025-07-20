@@ -1,14 +1,21 @@
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { insertTransferRequestSchema } from "@shared/schema";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { apiRequest } from "@/lib/queryClient";
-import { useToast } from "@/hooks/use-toast";
-import { z } from "zod";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
+import { insertTransferRequestSchema } from '@shared/schema';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { apiRequest } from '@/lib/queryClient';
+import { useToast } from '@/hooks/use-toast';
+import { z } from 'zod';
 
 interface TransferModalProps {
   open: boolean;
@@ -24,34 +31,34 @@ export default function TransferModal({ open, onClose }: TransferModalProps) {
   const form = useForm<z.infer<typeof transferFormSchema>>({
     resolver: zodResolver(transferFormSchema),
     defaultValues: {
-      currentPharmacyName: "",
-      currentPharmacyPhone: "",
-      rxNumber: "",
-      medicationName: "",
-      patientName: "",
-      dateOfBirth: "",
+      currentPharmacyName: '',
+      currentPharmacyPhone: '',
+      rxNumber: '',
+      medicationName: '',
+      patientName: '',
+      dateOfBirth: '',
     },
   });
 
   const transferMutation = useMutation({
     mutationFn: async (data: z.infer<typeof transferFormSchema>) => {
-      const response = await apiRequest("POST", "/api/transfer-requests", data);
+      const response = await apiRequest('POST', '/api/transfer-requests', data);
       return response.json();
     },
     onSuccess: () => {
       toast({
-        title: "Transfer Request Submitted",
-        description: "Your prescription transfer request has been submitted successfully.",
+        title: 'Transfer Request Submitted',
+        description: 'Your prescription transfer request has been submitted successfully.',
       });
-      queryClient.invalidateQueries({ queryKey: ["/api/patient/1/transfer-requests"] });
+      queryClient.invalidateQueries({ queryKey: ['/api/patient/1/transfer-requests'] });
       form.reset();
       onClose();
     },
     onError: (error) => {
       toast({
-        title: "Error",
-        description: "Failed to submit transfer request. Please try again.",
-        variant: "destructive",
+        title: 'Error',
+        description: 'Failed to submit transfer request. Please try again.',
+        variant: 'destructive',
       });
     },
   });
@@ -66,7 +73,7 @@ export default function TransferModal({ open, onClose }: TransferModalProps) {
         <DialogHeader>
           <DialogTitle>Transfer Prescription</DialogTitle>
         </DialogHeader>
-        
+
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
             <FormField
@@ -82,7 +89,7 @@ export default function TransferModal({ open, onClose }: TransferModalProps) {
                 </FormItem>
               )}
             />
-            
+
             <FormField
               control={form.control}
               name="currentPharmacyPhone"
@@ -96,7 +103,7 @@ export default function TransferModal({ open, onClose }: TransferModalProps) {
                 </FormItem>
               )}
             />
-            
+
             <FormField
               control={form.control}
               name="rxNumber"
@@ -110,7 +117,7 @@ export default function TransferModal({ open, onClose }: TransferModalProps) {
                 </FormItem>
               )}
             />
-            
+
             <FormField
               control={form.control}
               name="medicationName"
@@ -152,14 +159,14 @@ export default function TransferModal({ open, onClose }: TransferModalProps) {
                 </FormItem>
               )}
             />
-            
+
             <div className="flex space-x-3 pt-4">
-              <Button 
-                type="submit" 
+              <Button
+                type="submit"
                 className="flex-1 bg-secondary text-white hover:bg-secondary/90"
                 disabled={transferMutation.isPending}
               >
-                {transferMutation.isPending ? "Submitting..." : "Submit Transfer"}
+                {transferMutation.isPending ? 'Submitting...' : 'Submit Transfer'}
               </Button>
               <Button type="button" variant="outline" onClick={onClose}>
                 Cancel

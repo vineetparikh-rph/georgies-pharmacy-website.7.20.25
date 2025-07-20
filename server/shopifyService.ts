@@ -74,12 +74,14 @@ export class ShopifyService {
    */
   async fetchProducts(limit: number = 250): Promise<ProcessedProduct[]> {
     if (!this.isConfigured()) {
-      throw new Error('Shopify credentials not configured. Please set SHOPIFY_SHOP_DOMAIN and SHOPIFY_ACCESS_TOKEN environment variables.');
+      throw new Error(
+        'Shopify credentials not configured. Please set SHOPIFY_SHOP_DOMAIN and SHOPIFY_ACCESS_TOKEN environment variables.'
+      );
     }
 
     try {
       const url = `https://${this.shopDomain}/admin/api/${this.apiVersion}/products.json?limit=${limit}&published_status=published`;
-      
+
       const response = await fetch(url, {
         method: 'GET',
         headers: {
@@ -110,7 +112,7 @@ export class ShopifyService {
 
     try {
       const url = `https://${this.shopDomain}/admin/api/${this.apiVersion}/collections/${collectionId}/products.json`;
-      
+
       const response = await fetch(url, {
         method: 'GET',
         headers: {
@@ -141,7 +143,7 @@ export class ShopifyService {
 
     try {
       const url = `https://${this.shopDomain}/admin/api/${this.apiVersion}/products.json?title=${encodeURIComponent(query)}`;
-      
+
       const response = await fetch(url, {
         method: 'GET',
         headers: {
@@ -166,7 +168,7 @@ export class ShopifyService {
    * Process raw Shopify products into our format
    */
   private processProducts(shopifyProducts: ShopifyProduct[]): ProcessedProduct[] {
-    return shopifyProducts.map(product => this.processProduct(product));
+    return shopifyProducts.map((product) => this.processProduct(product));
   }
 
   /**
@@ -175,14 +177,14 @@ export class ShopifyService {
   private processProduct(product: ShopifyProduct): ProcessedProduct {
     const mainVariant = product.variants[0] || {};
     const mainImage = product.images[0] || {};
-    
+
     return {
       id: product.id,
       title: product.title,
       description: this.stripHtml(product.body_html || ''),
       price: `$${parseFloat(mainVariant.price || '0').toFixed(2)}`,
-      comparePrice: mainVariant.compare_at_price 
-        ? `$${parseFloat(mainVariant.compare_at_price).toFixed(2)}` 
+      comparePrice: mainVariant.compare_at_price
+        ? `$${parseFloat(mainVariant.compare_at_price).toFixed(2)}`
         : undefined,
       image: mainImage.src || 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400',
       category: this.categorizeProduct(product),
@@ -190,7 +192,7 @@ export class ShopifyService {
       rating: this.generateRating(),
       reviewCount: this.generateReviewCount(),
       inStock: mainVariant.available !== false && (mainVariant.inventory_quantity || 0) > 0,
-      shopifyUrl: `https://${this.shopDomain.replace('.myshopify.com', '.com')}/products/${product.handle || product.id}`
+      shopifyUrl: `https://${this.shopDomain.replace('.myshopify.com', '.com')}/products/${product.handle || product.id}`,
     };
   }
 
@@ -208,8 +210,13 @@ export class ShopifyService {
     const title = product.title.toLowerCase();
     const tags = product.tags.toLowerCase();
     const productType = product.product_type.toLowerCase();
-    
-    if (title.includes('pain') || title.includes('tylenol') || title.includes('advil') || title.includes('ibuprofen')) {
+
+    if (
+      title.includes('pain') ||
+      title.includes('tylenol') ||
+      title.includes('advil') ||
+      title.includes('ibuprofen')
+    ) {
       return 'pain-relief';
     }
     if (title.includes('vitamin') || title.includes('supplement') || tags.includes('vitamin')) {
@@ -233,7 +240,7 @@ export class ShopifyService {
     if (title.includes('baby') || title.includes('infant') || productType.includes('baby')) {
       return 'baby';
     }
-    
+
     return 'general';
   }
 

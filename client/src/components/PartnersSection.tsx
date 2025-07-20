@@ -1,11 +1,22 @@
 import React from 'react';
-import { Badge } from "@/components/ui/badge";
+import { Badge } from '@/components/ui/badge';
 
 export default function PartnersSection() {
   const partners = [
-    "AmerisourceBergen", "Cardinal Health", "CVS Health", "Express Scripts", 
-    "McKesson", "OptumRx", "Walgreens", "Rite Aid", "Good Neighbor Pharmacy",
-    "PSAO", "Independent Pharmacy Cooperative", "Health Mart", "FDB", "Surescripts"
+    'AmerisourceBergen',
+    'Cardinal Health',
+    'CVS Health',
+    'Express Scripts',
+    'McKesson',
+    'OptumRx',
+    'Walgreens',
+    'Rite Aid',
+    'Good Neighbor Pharmacy',
+    'PSAO',
+    'Independent Pharmacy Cooperative',
+    'Health Mart',
+    'FDB',
+    'Surescripts',
   ];
 
   return (
@@ -14,7 +25,7 @@ export default function PartnersSection() {
         Our Healthcare Partners
       </h2>
       <p className="text-center text-slate-600 mb-8 max-w-3xl mx-auto">
-        We work with leading healthcare organizations to ensure you have access to the best 
+        We work with leading healthcare organizations to ensure you have access to the best
         medications and services at competitive prices.
       </p>
       <div className="flex flex-wrap justify-center gap-3">

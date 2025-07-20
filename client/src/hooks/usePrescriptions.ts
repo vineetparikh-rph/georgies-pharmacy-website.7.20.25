@@ -1,5 +1,5 @@
-import { useQuery } from "@tanstack/react-query";
-import type { Prescription } from "@/types";
+import { useQuery } from '@tanstack/react-query';
+import type { Prescription } from '@/types';
 
 export function usePrescriptions(patientId: number) {
   return useQuery<Prescription[]>({

@@ -1,17 +1,19 @@
-import { Button } from "@/components/ui/button";
-import { MapPin, Phone, Clock, Navigation } from "lucide-react";
-import { useQuery } from "@tanstack/react-query";
+import { Button } from '@/components/ui/button';
+import { MapPin, Phone, Clock, Navigation } from 'lucide-react';
+import { useQuery } from '@tanstack/react-query';
 
 export default function PharmacyInfo() {
   const { data: locations } = useQuery({
-    queryKey: ["/api/pharmacy-locations"],
+    queryKey: ['/api/pharmacy-locations'],
   });
 
   const mainLocation = locations?.[0];
 
   const handleGetDirections = () => {
     if (mainLocation) {
-      const address = encodeURIComponent(`${mainLocation.address}, ${mainLocation.city}, ${mainLocation.state} ${mainLocation.zipCode}`);
+      const address = encodeURIComponent(
+        `${mainLocation.address}, ${mainLocation.city}, ${mainLocation.state} ${mainLocation.zipCode}`
+      );
       window.open(`https://maps.google.com/?q=${address}`, '_blank');
     }
   };
@@ -38,41 +40,43 @@ export default function PharmacyInfo() {
                 <MapPin className="text-slate-400 h-5 w-5 mt-0.5" />
                 <div>
                   <p className="text-slate-900">{mainLocation.address}</p>
-                  <p className="text-slate-600">{mainLocation.city}, {mainLocation.state} {mainLocation.zipCode}</p>
+                  <p className="text-slate-600">
+                    {mainLocation.city}, {mainLocation.state} {mainLocation.zipCode}
+                  </p>
                 </div>
               </div>
-              
+
               <div className="flex items-center space-x-3">
                 <Phone className="text-slate-400 h-5 w-5" />
-                <a 
-                  href={`tel:${mainLocation.phone}`} 
+                <a
+                  href={`tel:${mainLocation.phone}`}
                   className="text-primary hover:text-red-700 transition-colors"
                 >
                   {mainLocation.phone}
                 </a>
               </div>
-              
+
               <div className="flex items-start space-x-3">
                 <Clock className="text-slate-400 h-5 w-5 mt-0.5" />
                 <div>
                   {mainLocation.hours.split('\n').map((line, index) => (
-                    <p key={index} className={index === 0 ? "text-slate-900" : "text-slate-600"}>
+                    <p key={index} className={index === 0 ? 'text-slate-900' : 'text-slate-600'}>
                       {line}
                     </p>
                   ))}
                 </div>
               </div>
             </div>
-            
+
             <div className="flex space-x-3 mt-4">
-              <Button 
+              <Button
                 onClick={handleGetDirections}
                 className="bg-primary text-white hover:bg-primary/90"
               >
                 <Navigation className="h-4 w-4 mr-2" />
                 Directions
               </Button>
-              <Button 
+              <Button
                 variant="outline"
                 onClick={handleCallPharmacy}
                 className="border-slate-300 text-slate-700 hover:bg-slate-50"
@@ -82,7 +86,7 @@ export default function PharmacyInfo() {
               </Button>
             </div>
           </div>
-          
+
           <div className="bg-slate-50 rounded-lg p-4">
             <div className="w-full h-48 bg-slate-200 rounded-lg flex items-center justify-center">
               <div className="text-center">

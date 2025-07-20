@@ -1,18 +1,10 @@
 // Service Worker for performance optimization
 const CACHE_NAME = 'georgies-pharmacy-v1';
-const CRITICAL_RESOURCES = [
-  '/',
-  '/src/main.tsx',
-  '/src/pages/Landing.tsx',
-  '/src/index.css'
-];
+const CRITICAL_RESOURCES = ['/', '/src/main.tsx', '/src/pages/Landing.tsx', '/src/index.css'];
 
 // Install event - cache critical resources
 self.addEventListener('install', (event) => {
-  event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then((cache) => cache.addAll(CRITICAL_RESOURCES))
-  );
+  event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(CRITICAL_RESOURCES)));
   self.skipWaiting();
 });
 
@@ -36,12 +28,11 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
   // Only handle GET requests
   if (event.request.method !== 'GET') return;
-  
+
   event.respondWith(
-    caches.match(event.request)
-      .then((response) => {
-        // Return cached version or fetch from network
-        return response || fetch(event.request);
-      })
+    caches.match(event.request).then((response) => {
+      // Return cached version or fetch from network
+      return response || fetch(event.request);
+    })
   );
 });

@@ -1,12 +1,18 @@
-import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Loader2, Building2, Key, User, MapPin } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
+import { useState, useEffect } from 'react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { Loader2, Building2, Key, User, MapPin } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
 
 interface PharmacySystemLoginProps {
   onAuthSuccess: (userData: any) => void;
@@ -23,17 +29,20 @@ interface PharmacyLocation {
   refillUrl: string;
 }
 
-export default function PharmacySystemLogin({ onAuthSuccess, className = "" }: PharmacySystemLoginProps) {
+export default function PharmacySystemLogin({
+  onAuthSuccess,
+  className = '',
+}: PharmacySystemLoginProps) {
   const [credentials, setCredentials] = useState({
-    username: "",
-    password: "",
-    nabp: "",
-    locationName: "",
+    username: '',
+    password: '',
+    nabp: '',
+    locationName: '',
   });
   const [locations, setLocations] = useState<PharmacyLocation[]>([]);
   const [loading, setLoading] = useState(false);
   const [locationsLoading, setLocationsLoading] = useState(true);
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const { toast } = useToast();
 
   useEffect(() => {
@@ -42,14 +51,14 @@ export default function PharmacySystemLogin({ onAuthSuccess, className = "" }: P
 
   const fetchPharmacyLocations = async () => {
     try {
-      const response = await fetch("/api/pharmacy-system/locations");
+      const response = await fetch('/api/pharmacy-system/locations');
       const data = await response.json();
-      
+
       if (data.success) {
         setLocations(data.locations);
       }
     } catch (err) {
-      console.error("Failed to fetch pharmacy locations:", err);
+      console.error('Failed to fetch pharmacy locations:', err);
     } finally {
       setLocationsLoading(false);
     }
@@ -58,13 +67,13 @@ export default function PharmacySystemLogin({ onAuthSuccess, className = "" }: P
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    setError("");
+    setError('');
 
     try {
-      const response = await fetch("/api/pharmacy-system/authenticate", {
-        method: "POST",
+      const response = await fetch('/api/pharmacy-system/authenticate', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(credentials),
       });
@@ -73,25 +82,25 @@ export default function PharmacySystemLogin({ onAuthSuccess, className = "" }: P
 
       if (response.ok && data.success) {
         toast({
-          title: "Authentication Successful",
-          description: "Connected to pharmacy system successfully.",
+          title: 'Authentication Successful',
+          description: 'Connected to pharmacy system successfully.',
         });
         onAuthSuccess(data.userData);
       } else {
-        setError(data.message || "Authentication failed");
+        setError(data.message || 'Authentication failed');
         toast({
-          title: "Authentication Failed", 
-          description: data.message || "Please check your credentials and try again.",
-          variant: "destructive",
+          title: 'Authentication Failed',
+          description: data.message || 'Please check your credentials and try again.',
+          variant: 'destructive',
         });
       }
     } catch (err) {
-      const errorMessage = "Unable to connect to pharmacy system";
+      const errorMessage = 'Unable to connect to pharmacy system';
       setError(errorMessage);
       toast({
-        title: "Connection Error",
+        title: 'Connection Error',
         description: errorMessage,
-        variant: "destructive",
+        variant: 'destructive',
       });
     } finally {
       setLoading(false);
@@ -99,8 +108,8 @@ export default function PharmacySystemLogin({ onAuthSuccess, className = "" }: P
   };
 
   const handleInputChange = (field: string, value: string) => {
-    setCredentials(prev => ({ ...prev, [field]: value }));
-    if (error) setError("");
+    setCredentials((prev) => ({ ...prev, [field]: value }));
+    if (error) setError('');
   };
 
   return (
@@ -118,21 +127,25 @@ export default function PharmacySystemLogin({ onAuthSuccess, className = "" }: P
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="location">Pharmacy Location</Label>
-            <Select 
-              value={credentials.nabp} 
+            <Select
+              value={credentials.nabp}
               onValueChange={(value) => {
-                const selectedLocation = locations.find(loc => loc.nabp === value);
-                setCredentials(prev => ({
+                const selectedLocation = locations.find((loc) => loc.nabp === value);
+                setCredentials((prev) => ({
                   ...prev,
                   nabp: value,
-                  locationName: selectedLocation?.name || ""
+                  locationName: selectedLocation?.name || '',
                 }));
-                if (error) setError("");
+                if (error) setError('');
               }}
               disabled={loading || locationsLoading}
             >
               <SelectTrigger>
-                <SelectValue placeholder={locationsLoading ? "Loading locations..." : "Select pharmacy location"} />
+                <SelectValue
+                  placeholder={
+                    locationsLoading ? 'Loading locations...' : 'Select pharmacy location'
+                  }
+                />
               </SelectTrigger>
               <SelectContent>
                 {locations.map((location) => (
@@ -155,7 +168,7 @@ export default function PharmacySystemLogin({ onAuthSuccess, className = "" }: P
                 id="username"
                 type="text"
                 value={credentials.username}
-                onChange={(e) => handleInputChange("username", e.target.value)}
+                onChange={(e) => handleInputChange('username', e.target.value)}
                 className="pl-10"
                 placeholder="Enter your pharmacy username"
                 disabled={loading}
@@ -172,7 +185,7 @@ export default function PharmacySystemLogin({ onAuthSuccess, className = "" }: P
                 id="password"
                 type="password"
                 value={credentials.password}
-                onChange={(e) => handleInputChange("password", e.target.value)}
+                onChange={(e) => handleInputChange('password', e.target.value)}
                 className="pl-10"
                 placeholder="Enter your pharmacy password"
                 disabled={loading}
@@ -190,7 +203,9 @@ export default function PharmacySystemLogin({ onAuthSuccess, className = "" }: P
           <Button
             type="submit"
             className="w-full bg-primary text-white hover:bg-primary/90"
-            disabled={loading || !credentials.username || !credentials.password || !credentials.nabp}
+            disabled={
+              loading || !credentials.username || !credentials.password || !credentials.nabp
+            }
           >
             {loading ? (
               <>
@@ -198,7 +213,7 @@ export default function PharmacySystemLogin({ onAuthSuccess, className = "" }: P
                 Connecting...
               </>
             ) : (
-              "Connect to Pharmacy System"
+              'Connect to Pharmacy System'
             )}
           </Button>
         </form>

@@ -6,16 +6,16 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { useToast } from '@/hooks/use-toast';
-import { 
-  ShoppingCart, 
-  Truck, 
-  Package, 
-  Store, 
-  CheckCircle, 
-  XCircle, 
+import {
+  ShoppingCart,
+  Truck,
+  Package,
+  Store,
+  CheckCircle,
+  XCircle,
   Loader2,
   RefreshCw,
-  ExternalLink
+  ExternalLink,
 } from 'lucide-react';
 
 interface PlatformStatus {
@@ -39,36 +39,36 @@ const platformInfo: Record<string, Platform> = {
     icon: <Package className="h-5 w-5" />,
     description: 'Global marketplace with millions of customers',
     category: 'marketplace',
-    color: 'bg-orange-500'
+    color: 'bg-orange-500',
   },
   uber: {
     name: 'Uber Direct',
     icon: <Truck className="h-5 w-5" />,
     description: 'On-demand local delivery service',
     category: 'delivery',
-    color: 'bg-black'
+    color: 'bg-black',
   },
   instacart: {
     name: 'Instacart',
     icon: <ShoppingCart className="h-5 w-5" />,
     description: 'Same-day grocery and pharmacy delivery',
     category: 'delivery',
-    color: 'bg-green-500'
+    color: 'bg-green-500',
   },
   doordash: {
     name: 'DoorDash',
     icon: <Store className="h-5 w-5" />,
     description: 'Food and retail delivery platform',
     category: 'delivery',
-    color: 'bg-red-500'
+    color: 'bg-red-500',
   },
   postmates: {
     name: 'Postmates',
     icon: <Truck className="h-5 w-5" />,
     description: 'Local delivery network',
     category: 'delivery',
-    color: 'bg-yellow-500'
-  }
+    color: 'bg-yellow-500',
+  },
 };
 
 interface MultiPlatformManagerProps {
@@ -76,14 +76,17 @@ interface MultiPlatformManagerProps {
   storeLocation?: string;
 }
 
-export default function MultiPlatformManager({ productId, storeLocation }: MultiPlatformManagerProps) {
+export default function MultiPlatformManager({
+  productId,
+  storeLocation,
+}: MultiPlatformManagerProps) {
   const { toast } = useToast();
   const [syncingPlatforms, setSyncingPlatforms] = useState<string[]>([]);
 
   // Fetch platform status
   const { data: platformData, isLoading: statusLoading } = useQuery({
     queryKey: ['/api/platforms/status'],
-    queryFn: () => apiRequest('GET', '/api/platforms/status')
+    queryFn: () => apiRequest('GET', '/api/platforms/status'),
   });
 
   // Sync product to platforms mutation
@@ -93,26 +96,26 @@ export default function MultiPlatformManager({ productId, storeLocation }: Multi
     },
     onSuccess: (data) => {
       toast({
-        title: "Platform Sync Complete",
+        title: 'Platform Sync Complete',
         description: `Product synced to ${data.platformResults ? Object.keys(data.platformResults).length : 0} platforms`,
       });
       queryClient.invalidateQueries({ queryKey: ['/api/platforms/status'] });
     },
     onError: (error: any) => {
       toast({
-        title: "Sync Failed",
-        description: error.message || "Failed to sync product to platforms",
-        variant: "destructive",
+        title: 'Sync Failed',
+        description: error.message || 'Failed to sync product to platforms',
+        variant: 'destructive',
       });
-    }
+    },
   });
 
   const handleSyncProduct = () => {
     if (!productId || !storeLocation) {
       toast({
-        title: "Missing Information",
-        description: "Product ID and store location are required for syncing",
-        variant: "destructive",
+        title: 'Missing Information',
+        description: 'Product ID and store location are required for syncing',
+        variant: 'destructive',
       });
       return;
     }
@@ -153,7 +156,8 @@ export default function MultiPlatformManager({ productId, storeLocation }: Multi
           {!hasConfigured && (
             <Alert className="mb-6">
               <AlertDescription>
-                No platforms are configured yet. Set up your API credentials to start selling across multiple channels.
+                No platforms are configured yet. Set up your API credentials to start selling across
+                multiple channels.
               </AlertDescription>
             </Alert>
           )}
@@ -180,10 +184,7 @@ export default function MultiPlatformManager({ productId, storeLocation }: Multi
                         </div>
                       </div>
                       <div className="flex flex-col gap-1">
-                        <Badge 
-                          variant={isConfigured ? "default" : "secondary"}
-                          className="text-xs"
-                        >
+                        <Badge variant={isConfigured ? 'default' : 'secondary'} className="text-xs">
                           {isConfigured ? (
                             <CheckCircle className="h-3 w-3 mr-1" />
                           ) : (
@@ -200,18 +201,12 @@ export default function MultiPlatformManager({ productId, storeLocation }: Multi
                     </div>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-sm text-muted-foreground mb-3">
-                      {platform.description}
-                    </p>
+                    <p className="text-sm text-muted-foreground mb-3">{platform.description}</p>
                     {isConfigured ? (
                       <div className="space-y-2">
-                        <div className="text-xs text-green-600">
-                          ✓ API credentials configured
-                        </div>
+                        <div className="text-xs text-green-600">✓ API credentials configured</div>
                         {isEnabled && (
-                          <div className="text-xs text-blue-600">
-                            ✓ Products can be synced
-                          </div>
+                          <div className="text-xs text-blue-600">✓ Products can be synced</div>
                         )}
                       </div>
                     ) : (
@@ -229,7 +224,7 @@ export default function MultiPlatformManager({ productId, storeLocation }: Multi
             <div className="mt-6 p-4 bg-muted rounded-lg">
               <h4 className="font-medium mb-2">Product Sync Actions</h4>
               <div className="flex items-center gap-4">
-                <Button 
+                <Button
                   onClick={handleSyncProduct}
                   disabled={syncProductMutation.isPending}
                   className="flex items-center gap-2"
@@ -242,7 +237,8 @@ export default function MultiPlatformManager({ productId, storeLocation }: Multi
                   Sync to All Platforms
                 </Button>
                 <div className="text-sm text-muted-foreground">
-                  Sync this product to {enabledPlatforms.length} enabled platform{enabledPlatforms.length !== 1 ? 's' : ''}
+                  Sync this product to {enabledPlatforms.length} enabled platform
+                  {enabledPlatforms.length !== 1 ? 's' : ''}
                 </div>
               </div>
             </div>

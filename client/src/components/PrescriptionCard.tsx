@@ -1,6 +1,6 @@
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import type { Prescription } from "@/types";
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import type { Prescription } from '@/types';
 
 interface PrescriptionCardProps {
   prescription: Prescription;
@@ -8,21 +8,21 @@ interface PrescriptionCardProps {
 }
 
 const statusColors = {
-  ready: "bg-success/10 text-success",
-  processing: "bg-warning/10 text-warning",
-  pending: "bg-slate-100 text-slate-600",
-  filled: "bg-red-100 text-red-600",
+  ready: 'bg-success/10 text-success',
+  processing: 'bg-warning/10 text-warning',
+  pending: 'bg-slate-100 text-slate-600',
+  filled: 'bg-red-100 text-red-600',
 };
 
 const statusLabels = {
-  ready: "Ready",
-  processing: "Processing",
-  pending: "Pending",
-  filled: "Filled",
+  ready: 'Ready',
+  processing: 'Processing',
+  pending: 'Pending',
+  filled: 'Filled',
 };
 
 export default function PrescriptionCard({ prescription, onRefill }: PrescriptionCardProps) {
-  const isRefillDisabled = prescription.status === "processing" || prescription.refillsLeft === 0;
+  const isRefillDisabled = prescription.status === 'processing' || prescription.refillsLeft === 0;
 
   return (
     <div className="bg-white rounded-xl p-6 shadow-sm border border-slate-200">
@@ -35,7 +35,7 @@ export default function PrescriptionCard({ prescription, onRefill }: Prescriptio
           {statusLabels[prescription.status as keyof typeof statusLabels]}
         </Badge>
       </div>
-      
+
       <div className="grid grid-cols-2 gap-4 mb-4">
         <div>
           <p className="text-xs text-slate-500 uppercase tracking-wide">Rx Number</p>
@@ -53,7 +53,7 @@ export default function PrescriptionCard({ prescription, onRefill }: Prescriptio
           disabled={isRefillDisabled}
           className="flex-1 bg-primary text-white hover:bg-primary/90 disabled:bg-slate-200 disabled:text-slate-400"
         >
-          {prescription.status === "processing" ? "Processing..." : "Refill Now"}
+          {prescription.status === 'processing' ? 'Processing...' : 'Refill Now'}
         </Button>
         <Button variant="outline" className="border-slate-300 text-slate-700 hover:bg-slate-50">
           Details

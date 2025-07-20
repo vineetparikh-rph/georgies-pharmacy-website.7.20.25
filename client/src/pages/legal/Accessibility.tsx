@@ -1,7 +1,7 @@
-import { Button } from "@/components/ui/button";
-import { Pill, Eye, Ear, Hand, Heart } from "lucide-react";
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
+import { Button } from '@/components/ui/button';
+import { Pill, Eye, Ear, Hand, Heart } from 'lucide-react';
+import Navigation from '@/components/Navigation';
+import Footer from '@/components/Footer';
 
 export default function Accessibility() {
   return (
@@ -14,7 +14,8 @@ export default function Accessibility() {
             Accessibility <span className="text-primary">Statement</span>
           </h1>
           <p className="text-xl text-slate-600 mb-8">
-            Georgies Pharmacy is committed to ensuring digital accessibility for people with disabilities.
+            Georgies Pharmacy is committed to ensuring digital accessibility for people with
+            disabilities.
           </p>
           <p className="text-sm text-slate-500">Last updated: January 1, 2025</p>
         </div>
@@ -26,7 +27,9 @@ export default function Accessibility() {
               <h2 className="text-2xl font-bold text-slate-900 m-0">Our Commitment</h2>
             </div>
             <p className="text-slate-600 leading-relaxed">
-              We are committed to providing equal access to our services for all customers, including those with disabilities. We strive to ensure that our website and digital services are accessible to everyone.
+              We are committed to providing equal access to our services for all customers,
+              including those with disabilities. We strive to ensure that our website and digital
+              services are accessible to everyone.
             </p>
           </div>
 
@@ -41,7 +44,9 @@ export default function Accessibility() {
                   <h4 className="font-semibold text-slate-900 mb-2">Visual Accessibility</h4>
                   <ul className="list-disc pl-6 space-y-1">
                     <li>High contrast color schemes for better visibility</li>
-                    <li>Scalable text that can be enlarged up to 200% without loss of functionality</li>
+                    <li>
+                      Scalable text that can be enlarged up to 200% without loss of functionality
+                    </li>
                     <li>Alternative text for all images and graphics</li>
                     <li>Clear, readable fonts and proper spacing</li>
                   </ul>
@@ -112,7 +117,9 @@ export default function Accessibility() {
             </section>
 
             <section className="bg-white rounded-xl p-8 shadow-sm border border-slate-200">
-              <h3 className="text-xl font-bold text-slate-900 mb-4">Assistive Technology Support</h3>
+              <h3 className="text-xl font-bold text-slate-900 mb-4">
+                Assistive Technology Support
+              </h3>
               <div className="space-y-4 text-slate-600">
                 <p>Our website is compatible with assistive technologies including:</p>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -134,7 +141,9 @@ export default function Accessibility() {
               <h3 className="text-xl font-bold text-slate-900 mb-4">Standards Compliance</h3>
               <div className="text-slate-600">
                 <p className="mb-4">
-                  We strive to conform to the Web Content Accessibility Guidelines (WCAG) 2.1 at the AA level. These guidelines explain how to make web content more accessible for people with disabilities.
+                  We strive to conform to the Web Content Accessibility Guidelines (WCAG) 2.1 at the
+                  AA level. These guidelines explain how to make web content more accessible for
+                  people with disabilities.
                 </p>
                 <div>
                   <h4 className="font-semibold text-slate-900 mb-2">Our Goals Include:</h4>
@@ -152,12 +161,19 @@ export default function Accessibility() {
               <h3 className="text-xl font-bold text-slate-900 mb-4">Feedback and Contact</h3>
               <div className="text-slate-600">
                 <p className="mb-4">
-                  We welcome your feedback on the accessibility of our website. If you encounter any accessibility barriers or have suggestions for improvement, please contact us:
+                  We welcome your feedback on the accessibility of our website. If you encounter any
+                  accessibility barriers or have suggestions for improvement, please contact us:
                 </p>
                 <div className="space-y-2">
-                  <p><strong>Email:</strong> accessibility@georgiespharmacy.com</p>
-                  <p><strong>Phone:</strong> (908) 925-4567</p>
-                  <p><strong>Address:</strong> 332 W. St. Georges Avenue, Linden, NJ 07036-5638</p>
+                  <p>
+                    <strong>Email:</strong> accessibility@georgiespharmacy.com
+                  </p>
+                  <p>
+                    <strong>Phone:</strong> (908) 925-4567
+                  </p>
+                  <p>
+                    <strong>Address:</strong> 332 W. St. Georges Avenue, Linden, NJ 07036-5638
+                  </p>
                 </div>
                 <p className="mt-4">
                   We aim to respond to accessibility feedback within 5 business days.
@@ -168,7 +184,10 @@ export default function Accessibility() {
             <section className="bg-blue-50 border border-blue-200 rounded-xl p-8">
               <h3 className="text-xl font-bold text-slate-900 mb-4">Ongoing Efforts</h3>
               <p className="text-slate-600">
-                Accessibility is an ongoing effort. We regularly review our website and services to identify and address accessibility barriers. We also provide training to our staff on accessibility best practices and work with disability advocacy groups to improve our services.
+                Accessibility is an ongoing effort. We regularly review our website and services to
+                identify and address accessibility barriers. We also provide training to our staff
+                on accessibility best practices and work with disability advocacy groups to improve
+                our services.
               </p>
             </section>
           </div>

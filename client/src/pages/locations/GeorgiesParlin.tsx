@@ -1,31 +1,31 @@
-import React from "react";
-import { Button } from "@/components/ui/button";
-import { MapPin, Phone, Printer, Clock, Users, Stethoscope, ArrowLeft } from "lucide-react";
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
+import React from 'react';
+import { Button } from '@/components/ui/button';
+import { MapPin, Phone, Printer, Clock, Users, Stethoscope, ArrowLeft } from 'lucide-react';
+import Navigation from '@/components/Navigation';
+import Footer from '@/components/Footer';
 
 export default function GeorgiesParlin() {
   React.useEffect(() => {
-    document.title = "Georgies Parlin Pharmacy - Parlin, NJ | Community Healthcare Services";
+    document.title = 'Georgies Parlin Pharmacy - Parlin, NJ | Community Healthcare Services';
   }, []);
 
   const handleDirections = () => {
-    const address = encodeURIComponent("3242 Washington Rd, Parlin, NJ 08859");
-    window.open(`https://www.google.com/maps/dir/?api=1&destination=${address}`, "_blank");
+    const address = encodeURIComponent('3242 Washington Rd, Parlin, NJ 08859');
+    window.open(`https://www.google.com/maps/dir/?api=1&destination=${address}`, '_blank');
   };
 
   const handleCall = () => {
-    window.open("tel:+17327212500", "_self");
+    window.open('tel:+17327212500', '_self');
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-red-50 via-white to-green-50">
       <Navigation />
-      
+
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         {/* Back Button */}
         <div className="mb-6">
-          <Button 
+          <Button
             onClick={() => window.history.back()}
             variant="ghost"
             className="text-primary hover:bg-red-50"
@@ -40,10 +40,12 @@ export default function GeorgiesParlin() {
           <h1 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-4">
             Georgies <span className="text-primary">Parlin Pharmacy</span>
           </h1>
-          <p className="text-xl text-slate-600 mb-6">Serving the Parlin and Sayreville communities</p>
+          <p className="text-xl text-slate-600 mb-6">
+            Serving the Parlin and Sayreville communities
+          </p>
           <p className="text-lg text-slate-700 max-w-3xl mx-auto">
-            Your trusted neighborhood pharmacy providing personalized care and comprehensive health services 
-            to the Parlin community since 2011.
+            Your trusted neighborhood pharmacy providing personalized care and comprehensive health
+            services to the Parlin community since 2011.
           </p>
         </div>
 
@@ -51,16 +53,20 @@ export default function GeorgiesParlin() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
           <div className="bg-white rounded-xl p-8 shadow-lg border border-slate-200">
             <h2 className="text-2xl font-bold text-slate-900 mb-6">Location & Contact</h2>
-            
+
             <div className="space-y-4">
               <div className="flex items-start space-x-3">
                 <MapPin className="text-primary h-5 w-5 mt-1" />
                 <div>
                   <p className="font-semibold text-slate-900">Address</p>
-                  <p className="text-slate-600">3242 Washington Rd<br />Parlin, NJ 08859</p>
+                  <p className="text-slate-600">
+                    3242 Washington Rd
+                    <br />
+                    Parlin, NJ 08859
+                  </p>
                 </div>
               </div>
-              
+
               <div className="flex items-start space-x-3">
                 <Phone className="text-primary h-5 w-5 mt-1" />
                 <div>
@@ -68,7 +74,7 @@ export default function GeorgiesParlin() {
                   <p className="text-slate-600">(732) 721-2500</p>
                 </div>
               </div>
-              
+
               <div className="flex items-start space-x-3">
                 <Printer className="text-primary h-5 w-5 mt-1" />
                 <div>
@@ -76,7 +82,7 @@ export default function GeorgiesParlin() {
                   <p className="text-slate-600">(732) 721-2501</p>
                 </div>
               </div>
-              
+
               <div className="flex items-start space-x-3">
                 <div className="text-primary h-5 w-5 mt-1 font-bold text-sm">#</div>
                 <div>
@@ -87,11 +93,18 @@ export default function GeorgiesParlin() {
             </div>
 
             <div className="flex space-x-3 mt-6">
-              <Button onClick={handleCall} className="flex-1 bg-primary text-white hover:bg-red-700">
+              <Button
+                onClick={handleCall}
+                className="flex-1 bg-primary text-white hover:bg-red-700"
+              >
                 <Phone className="h-4 w-4 mr-2" />
                 Call Now
               </Button>
-              <Button onClick={handleDirections} variant="outline" className="flex-1 border-primary text-primary hover:bg-red-50">
+              <Button
+                onClick={handleDirections}
+                variant="outline"
+                className="flex-1 border-primary text-primary hover:bg-red-50"
+              >
                 <MapPin className="h-4 w-4 mr-2" />
                 Get Directions
               </Button>
@@ -101,7 +114,7 @@ export default function GeorgiesParlin() {
           {/* Hours */}
           <div className="bg-white rounded-xl p-8 shadow-lg border border-slate-200">
             <h2 className="text-2xl font-bold text-slate-900 mb-6">Store Hours</h2>
-            
+
             <div className="space-y-3">
               <div className="flex justify-between">
                 <span className="font-medium text-slate-900">Monday</span>
@@ -146,7 +159,7 @@ export default function GeorgiesParlin() {
         {/* Services Offered */}
         <div className="bg-white rounded-xl p-8 shadow-lg border border-slate-200 mb-12">
           <h2 className="text-2xl font-bold text-slate-900 mb-6">Services Offered</h2>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div className="flex items-start space-x-3">
               <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
@@ -157,7 +170,7 @@ export default function GeorgiesParlin() {
                 <p className="text-slate-600 text-sm">Full prescription dispensing services</p>
               </div>
             </div>
-            
+
             <div className="flex items-start space-x-3">
               <div className="w-8 h-8 bg-secondary/10 rounded-full flex items-center justify-center">
                 <span className="text-secondary font-bold text-sm">💉</span>
@@ -167,7 +180,7 @@ export default function GeorgiesParlin() {
                 <p className="text-slate-600 text-sm">Complete vaccination services</p>
               </div>
             </div>
-            
+
             <div className="flex items-start space-x-3">
               <div className="w-8 h-8 bg-warning/10 rounded-full flex items-center justify-center">
                 <span className="text-warning font-bold text-sm">🩺</span>
@@ -177,7 +190,7 @@ export default function GeorgiesParlin() {
                 <p className="text-slate-600 text-sm">Blood glucose, cholesterol screening</p>
               </div>
             </div>
-            
+
             <div className="flex items-start space-x-3">
               <div className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
                 <span className="text-purple-600 font-bold text-sm">📦</span>
@@ -187,7 +200,7 @@ export default function GeorgiesParlin() {
                 <p className="text-slate-600 text-sm">Medication synchronization and packaging</p>
               </div>
             </div>
-            
+
             <div className="flex items-start space-x-3">
               <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
                 <span className="text-blue-600 font-bold text-sm">🚗</span>
@@ -197,7 +210,7 @@ export default function GeorgiesParlin() {
                 <p className="text-slate-600 text-sm">Convenient drive-thru service</p>
               </div>
             </div>
-            
+
             <div className="flex items-start space-x-3">
               <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
                 <span className="text-green-600 font-bold text-sm">💊</span>
@@ -213,13 +226,17 @@ export default function GeorgiesParlin() {
         {/* Community Focus */}
         <div className="bg-gradient-to-r from-blue-50 to-green-50 rounded-xl p-8 mb-12">
           <h2 className="text-2xl font-bold text-slate-900 mb-6">Community Focused Care</h2>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div>
               <h3 className="font-semibold text-slate-900 mb-4">Local Partnerships</h3>
               <div className="space-y-2">
-                <p className="text-slate-600 text-sm">• Sayreville War Memorial High School health programs</p>
-                <p className="text-slate-600 text-sm">• Local senior centers medication management</p>
+                <p className="text-slate-600 text-sm">
+                  • Sayreville War Memorial High School health programs
+                </p>
+                <p className="text-slate-600 text-sm">
+                  • Local senior centers medication management
+                </p>
                 <p className="text-slate-600 text-sm">• Community health screening events</p>
                 <p className="text-slate-600 text-sm">• School district vaccination programs</p>
               </div>
@@ -240,21 +257,31 @@ export default function GeorgiesParlin() {
         <div className="text-center">
           <h2 className="text-2xl font-bold text-slate-900 mb-6">Visit Us Today</h2>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button 
-              onClick={() => window.open("https://www.mygnp.com/pharmacies/georgies-outpatient-pharmacy-browns-mills-nj-08015/refill-request", "_blank")}
+            <Button
+              onClick={() =>
+                window.open(
+                  'https://www.mygnp.com/pharmacies/georgies-outpatient-pharmacy-browns-mills-nj-08015/refill-request',
+                  '_blank'
+                )
+              }
               className="bg-primary text-white hover:bg-red-700 px-8 py-3"
             >
               Request Refill
             </Button>
-            <Button 
-              onClick={() => window.open("https://www.mygnp.com/pharmacies/georgies-outpatient-pharmacy-browns-mills-nj-08015/transfer-request/", "_blank")}
+            <Button
+              onClick={() =>
+                window.open(
+                  'https://www.mygnp.com/pharmacies/georgies-outpatient-pharmacy-browns-mills-nj-08015/transfer-request/',
+                  '_blank'
+                )
+              }
               variant="outline"
               className="border-primary text-primary hover:bg-red-50 px-8 py-3"
             >
               Transfer Prescription
             </Button>
-            <Button 
-              onClick={() => window.location.href = '/features'}
+            <Button
+              onClick={() => (window.location.href = '/features')}
               variant="outline"
               className="border-secondary text-secondary hover:bg-green-50 px-8 py-3"
             >

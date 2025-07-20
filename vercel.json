@@ -1,38 +1,24 @@
 {
-  "version": 2,
+  "functions": {
+    "api/*.ts": {
+      "runtime": "vercel-node@canary"
+    }
+  },
   "builds": [
     {
-      "src": "package.json",
+      "src": "server/index.ts",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "client/vite.config.ts",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "dist/public"
+        "distDir": "client/dist"
       }
-    },
-    {
-      "src": "dist/index.js",
-      "use": "@vercel/node"
     }
   ],
-  "rewrites": [
-    {
-      "source": "/api/:match*",
-      "destination": "/api/index.js"
-    },
-    {
-      "source": "/refill",
-      "destination": "/"
-    },
-    {
-      "source": "/transfer",
-      "destination": "/"
-    },
-    {
-      "source": "/vaccine",
-      "destination": "/"
-    },
-    {
-      "source": "/:path*",
-      "destination": "/"
-    }
+  "routes": [
+    { "src": "/api/(.*)", "dest": "server/api/$1.ts" },
+    { "src": "/(.*)", "dest": "client/dist/index.html" }
   ]
 }

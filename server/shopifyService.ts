@@ -55,11 +55,12 @@ interface ProcessedProduct {
 export class ShopifyService {
   private shopDomain: string;
   private accessToken: string;
-  private apiVersion = '2024-01';
+  private apiVersion = "2024-01";
 
   constructor() {
-    this.shopDomain = process.env.SHOPIFY_SHOP_DOMAIN || 'georgiespharmacy.myshopify.com';
-    this.accessToken = process.env.SHOPIFY_ACCESS_TOKEN || '';
+    this.shopDomain =
+      process.env.SHOPIFY_SHOP_DOMAIN || "georgiespharmacy.myshopify.com";
+    this.accessToken = process.env.SHOPIFY_ACCESS_TOKEN || "";
   }
 
   /**
@@ -74,28 +75,32 @@ export class ShopifyService {
    */
   async fetchProducts(limit = 250): Promise<ProcessedProduct[]> {
     if (!this.isConfigured()) {
-      throw new Error('Shopify credentials not configured. Please set SHOPIFY_SHOP_DOMAIN and SHOPIFY_ACCESS_TOKEN environment variables.');
+      throw new Error(
+        "Shopify credentials not configured. Please set SHOPIFY_SHOP_DOMAIN and SHOPIFY_ACCESS_TOKEN environment variables.",
+      );
     }
 
     try {
       const url = `https://${this.shopDomain}/admin/api/${this.apiVersion}/products.json?limit=${limit}&published_status=published`;
-      
+
       const response = await fetch(url, {
-        method: 'GET',
+        method: "GET",
         headers: {
-          'X-Shopify-Access-Token': this.accessToken,
-          'Content-Type': 'application/json',
+          "X-Shopify-Access-Token": this.accessToken,
+          "Content-Type": "application/json",
         },
       });
 
       if (!response.ok) {
-        throw new Error(`Shopify API error: ${response.status} ${response.statusText}`);
+        throw new Error(
+          `Shopify API error: ${response.status} ${response.statusText}`,
+        );
       }
 
       const data: ShopifyApiResponse = await response.json();
       return this.processProducts(data.products);
     } catch (error) {
-      console.error('Error fetching products from Shopify:', error);
+      console.error("Error fetching products from Shopify:", error);
       throw error;
     }
   }
@@ -103,30 +108,34 @@ export class ShopifyService {
   /**
    * Fetch products by collection
    */
-  async fetchProductsByCollection(collectionId: string): Promise<ProcessedProduct[]> {
+  async fetchProductsByCollection(
+    collectionId: string,
+  ): Promise<ProcessedProduct[]> {
     if (!this.isConfigured()) {
-      throw new Error('Shopify credentials not configured');
+      throw new Error("Shopify credentials not configured");
     }
 
     try {
       const url = `https://${this.shopDomain}/admin/api/${this.apiVersion}/collections/${collectionId}/products.json`;
-      
+
       const response = await fetch(url, {
-        method: 'GET',
+        method: "GET",
         headers: {
-          'X-Shopify-Access-Token': this.accessToken,
-          'Content-Type': 'application/json',
+          "X-Shopify-Access-Token": this.accessToken,
+          "Content-Type": "application/json",
         },
       });
 
       if (!response.ok) {
-        throw new Error(`Shopify API error: ${response.status} ${response.statusText}`);
+        throw new Error(
+          `Shopify API error: ${response.status} ${response.statusText}`,
+        );
       }
 
       const data: ShopifyApiResponse = await response.json();
       return this.processProducts(data.products);
     } catch (error) {
-      console.error('Error fetching collection products from Shopify:', error);
+      console.error("Error fetching collection products from Shopify:", error);
       throw error;
     }
   }
@@ -136,28 +145,30 @@ export class ShopifyService {
    */
   async searchProducts(query: string): Promise<ProcessedProduct[]> {
     if (!this.isConfigured()) {
-      throw new Error('Shopify credentials not configured');
+      throw new Error("Shopify credentials not configured");
     }
 
     try {
       const url = `https://${this.shopDomain}/admin/api/${this.apiVersion}/products.json?title=${encodeURIComponent(query)}`;
-      
+
       const response = await fetch(url, {
-        method: 'GET',
+        method: "GET",
         headers: {
-          'X-Shopify-Access-Token': this.accessToken,
-          'Content-Type': 'application/json',
+          "X-Shopify-Access-Token": this.accessToken,
+          "Content-Type": "application/json",
         },
       });
 
       if (!response.ok) {
-        throw new Error(`Shopify API error: ${response.status} ${response.statusText}`);
+        throw new Error(
+          `Shopify API error: ${response.status} ${response.statusText}`,
+        );
       }
 
       const data: ShopifyApiResponse = await response.json();
       return this.processProducts(data.products);
     } catch (error) {
-      console.error('Error searching products in Shopify:', error);
+      console.error("Error searching products in Shopify:", error);
       throw error;
     }
   }
@@ -165,8 +176,10 @@ export class ShopifyService {
   /**
    * Process raw Shopify products into our format
    */
-  private processProducts(shopifyProducts: ShopifyProduct[]): ProcessedProduct[] {
-    return shopifyProducts.map(product => this.processProduct(product));
+  private processProducts(
+    shopifyProducts: ShopifyProduct[],
+  ): ProcessedProduct[] {
+    return shopifyProducts.map((product) => this.processProduct(product));
   }
 
   /**
@@ -175,22 +188,26 @@ export class ShopifyService {
   private processProduct(product: ShopifyProduct): ProcessedProduct {
     const mainVariant = product.variants[0] || {};
     const mainImage = product.images[0] || {};
-    
+
     return {
       id: product.id,
       title: product.title,
-      description: this.stripHtml(product.body_html || ''),
-      price: `$${parseFloat(mainVariant.price || '0').toFixed(2)}`,
-      comparePrice: mainVariant.compare_at_price 
-        ? `$${parseFloat(mainVariant.compare_at_price).toFixed(2)}` 
+      description: this.stripHtml(product.body_html || ""),
+      price: `$${parseFloat(mainVariant.price || "0").toFixed(2)}`,
+      comparePrice: mainVariant.compare_at_price
+        ? `$${parseFloat(mainVariant.compare_at_price).toFixed(2)}`
         : undefined,
-      image: mainImage.src || 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400',
+      image:
+        mainImage.src ||
+        "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400",
       category: this.categorizeProduct(product),
-      brand: product.vendor || 'Georgies Pharmacy',
+      brand: product.vendor || "Georgies Pharmacy",
       rating: this.generateRating(),
       reviewCount: this.generateReviewCount(),
-      inStock: mainVariant.available !== false && (mainVariant.inventory_quantity || 0) > 0,
-      shopifyUrl: `https://${this.shopDomain.replace('.myshopify.com', '.com')}/products/${product.handle || product.id}`
+      inStock:
+        mainVariant.available !== false &&
+        (mainVariant.inventory_quantity || 0) > 0,
+      shopifyUrl: `https://${this.shopDomain.replace(".myshopify.com", ".com")}/products/${product.handle || product.id}`,
     };
   }
 
@@ -198,7 +215,7 @@ export class ShopifyService {
    * Strip HTML tags from description
    */
   private stripHtml(html: string): string {
-    return html.replace(/<[^>]*>/g, '').trim();
+    return html.replace(/<[^>]*>/g, "").trim();
   }
 
   /**
@@ -208,33 +225,66 @@ export class ShopifyService {
     const title = product.title.toLowerCase();
     const tags = product.tags.toLowerCase();
     const productType = product.product_type.toLowerCase();
-    
-    if (title.includes('pain') || title.includes('tylenol') || title.includes('advil') || title.includes('ibuprofen')) {
-      return 'pain-relief';
+
+    if (
+      title.includes("pain") ||
+      title.includes("tylenol") ||
+      title.includes("advil") ||
+      title.includes("ibuprofen")
+    ) {
+      return "pain-relief";
     }
-    if (title.includes('vitamin') || title.includes('supplement') || tags.includes('vitamin')) {
-      return 'vitamins';
+    if (
+      title.includes("vitamin") ||
+      title.includes("supplement") ||
+      tags.includes("vitamin")
+    ) {
+      return "vitamins";
     }
-    if (title.includes('cold') || title.includes('flu') || title.includes('cough')) {
-      return 'cold-flu';
+    if (
+      title.includes("cold") ||
+      title.includes("flu") ||
+      title.includes("cough")
+    ) {
+      return "cold-flu";
     }
-    if (title.includes('allergy') || title.includes('claritin') || title.includes('zyrtec')) {
-      return 'allergy';
+    if (
+      title.includes("allergy") ||
+      title.includes("claritin") ||
+      title.includes("zyrtec")
+    ) {
+      return "allergy";
     }
-    if (title.includes('band') || title.includes('bandage') || title.includes('first aid')) {
-      return 'first-aid';
+    if (
+      title.includes("band") ||
+      title.includes("bandage") ||
+      title.includes("first aid")
+    ) {
+      return "first-aid";
     }
-    if (title.includes('antacid') || title.includes('tums') || title.includes('pepto')) {
-      return 'digestive';
+    if (
+      title.includes("antacid") ||
+      title.includes("tums") ||
+      title.includes("pepto")
+    ) {
+      return "digestive";
     }
-    if (title.includes('skin') || title.includes('lotion') || title.includes('cream')) {
-      return 'skincare';
+    if (
+      title.includes("skin") ||
+      title.includes("lotion") ||
+      title.includes("cream")
+    ) {
+      return "skincare";
     }
-    if (title.includes('baby') || title.includes('infant') || productType.includes('baby')) {
-      return 'baby';
+    if (
+      title.includes("baby") ||
+      title.includes("infant") ||
+      productType.includes("baby")
+    ) {
+      return "baby";
     }
-    
-    return 'general';
+
+    return "general";
   }
 
   /**
@@ -255,7 +305,7 @@ export class ShopifyService {
    * Get Shopify storefront URL for product
    */
   getProductUrl(productHandle: string): string {
-    const storefrontDomain = this.shopDomain.replace('.myshopify.com', '.com');
+    const storefrontDomain = this.shopDomain.replace(".myshopify.com", ".com");
     return `https://${storefrontDomain}/products/${productHandle}`;
   }
 
@@ -266,11 +316,11 @@ export class ShopifyService {
     const webhookSecret = process.env.SHOPIFY_WEBHOOK_SECRET;
     if (!webhookSecret) return false;
 
-    const crypto = require('crypto');
+    const crypto = require("crypto");
     const calculated = crypto
-      .createHmac('sha256', webhookSecret)
-      .update(rawBody, 'utf8')
-      .digest('base64');
+      .createHmac("sha256", webhookSecret)
+      .update(rawBody, "utf8")
+      .digest("base64");
 
     return calculated === signature;
   }

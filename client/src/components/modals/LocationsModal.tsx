@@ -1,8 +1,20 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { MapPin, Phone, Clock, Navigation, Building2 } from "lucide-react";
 
 interface PharmacyLocation {
@@ -61,16 +73,20 @@ const pharmacyLocations: PharmacyLocation[] = [
     zipCode: "08015-1768",
     phone: "609-726-5800",
     hours: "Mon-Fri: 8AM-9PM, Sat-Sun: 9AM-6PM",
-  }
+  },
 ];
 
 export default function LocationsModal({ open, onClose }: LocationsModalProps) {
-  const [selectedLocation, setSelectedLocation] = useState<PharmacyLocation | null>(null);
+  const [selectedLocation, setSelectedLocation] =
+    useState<PharmacyLocation | null>(null);
 
   const handleGetDirections = (location: PharmacyLocation) => {
     const address = `${location.address}, ${location.city}, ${location.state} ${location.zipCode}`;
     const encodedAddress = encodeURIComponent(address);
-    window.open(`https://www.google.com/maps/dir/?api=1&destination=${encodedAddress}`, '_blank');
+    window.open(
+      `https://www.google.com/maps/dir/?api=1&destination=${encodedAddress}`,
+      "_blank",
+    );
   };
 
   const handleCallPharmacy = (phone: string) => {
@@ -86,7 +102,8 @@ export default function LocationsModal({ open, onClose }: LocationsModalProps) {
             Georgies Pharmacy Locations
           </DialogTitle>
           <DialogDescription>
-            Find and get directions to any of our convenient pharmacy locations throughout New Jersey.
+            Find and get directions to any of our convenient pharmacy locations
+            throughout New Jersey.
           </DialogDescription>
         </DialogHeader>
 
@@ -119,7 +136,11 @@ export default function LocationsModal({ open, onClose }: LocationsModalProps) {
                   {pharmacyLocations.map((location) => (
                     <Button
                       key={location.id}
-                      variant={selectedLocation?.id === location.id ? "default" : "outline"}
+                      variant={
+                        selectedLocation?.id === location.id
+                          ? "default"
+                          : "outline"
+                      }
                       size="sm"
                       onClick={() => setSelectedLocation(location)}
                       className="text-xs"
@@ -134,12 +155,12 @@ export default function LocationsModal({ open, onClose }: LocationsModalProps) {
 
           {/* Location Cards */}
           {pharmacyLocations.map((location) => (
-            <Card 
-              key={location.id} 
+            <Card
+              key={location.id}
               className={`transition-all duration-200 ${
-                selectedLocation?.id === location.id 
-                  ? 'ring-2 ring-primary bg-primary/5' 
-                  : 'hover:shadow-md cursor-pointer'
+                selectedLocation?.id === location.id
+                  ? "ring-2 ring-primary bg-primary/5"
+                  : "hover:shadow-md cursor-pointer"
               }`}
               onClick={() => setSelectedLocation(location)}
             >
@@ -158,13 +179,15 @@ export default function LocationsModal({ open, onClose }: LocationsModalProps) {
                   )}
                 </div>
               </CardHeader>
-              
+
               <CardContent className="space-y-4">
                 <div className="space-y-3">
                   <div className="flex items-start space-x-3">
                     <MapPin className="w-4 h-4 text-slate-400 mt-0.5 flex-shrink-0" />
                     <div className="text-sm">
-                      <div className="font-medium text-slate-900">{location.address}</div>
+                      <div className="font-medium text-slate-900">
+                        {location.address}
+                      </div>
                       <div className="text-slate-600">
                         {location.city}, {location.state} {location.zipCode}
                       </div>
@@ -174,7 +197,7 @@ export default function LocationsModal({ open, onClose }: LocationsModalProps) {
                   <div className="flex items-center space-x-3">
                     <Phone className="w-4 h-4 text-slate-400 flex-shrink-0" />
                     <div className="text-sm">
-                      <a 
+                      <a
                         href={`tel:${location.phone}`}
                         className="font-medium text-primary hover:text-primary/80 transition-colors"
                       >
@@ -185,7 +208,9 @@ export default function LocationsModal({ open, onClose }: LocationsModalProps) {
 
                   <div className="flex items-start space-x-3">
                     <Clock className="w-4 h-4 text-slate-400 mt-0.5 flex-shrink-0" />
-                    <div className="text-sm text-slate-600">{location.hours}</div>
+                    <div className="text-sm text-slate-600">
+                      {location.hours}
+                    </div>
                   </div>
                 </div>
 
@@ -222,9 +247,13 @@ export default function LocationsModal({ open, onClose }: LocationsModalProps) {
 
         {selectedLocation && (
           <div className="mt-6 p-4 bg-primary/5 border border-primary/20 rounded-lg">
-            <h4 className="font-semibold text-primary mb-2">Selected Location</h4>
+            <h4 className="font-semibold text-primary mb-2">
+              Selected Location
+            </h4>
             <p className="text-sm text-slate-700">
-              <strong>{selectedLocation.name}</strong> - {selectedLocation.address}, {selectedLocation.city}, {selectedLocation.state}
+              <strong>{selectedLocation.name}</strong> -{" "}
+              {selectedLocation.address}, {selectedLocation.city},{" "}
+              {selectedLocation.state}
             </p>
             <div className="flex space-x-2 mt-3">
               <Button

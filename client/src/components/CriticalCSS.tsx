@@ -1,7 +1,8 @@
 // Critical CSS component for above-the-fold content
 export const CriticalCSS = () => (
-  <style dangerouslySetInnerHTML={{
-    __html: `
+  <style
+    dangerouslySetInnerHTML={{
+      __html: `
       /* Critical above-the-fold styles */
       .header-nav {
         background: #A92A2A;
@@ -65,8 +66,9 @@ export const CriticalCSS = () => (
         .hero-content { padding: 2rem 1rem; }
         .cta-buttons { flex-direction: column; align-items: center; }
       }
-    `
-  }} />
+    `,
+    }}
+  />
 );
 
 export default CriticalCSS;

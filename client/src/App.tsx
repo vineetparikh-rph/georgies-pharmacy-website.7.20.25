@@ -48,11 +48,11 @@ import Blog from "@/pages/Blog";
 // Simple redirect component
 function Redirect({ to }: { to: string }) {
   const [, setLocation] = useLocation();
-  
+
   React.useEffect(() => {
     window.location.href = to;
   }, [to]);
-  
+
   return null;
 }
 
@@ -69,16 +69,16 @@ function Router() {
       <Route path="/vaccine">
         <Redirect to="/app/vaccine" />
       </Route>
-      
+
       {/* Simple routing - same for all users */}
       <Route path="/" component={Landing} />
-      
+
       {/* SEO-optimized location landing pages */}
       <Route path="/family" component={Family} />
       <Route path="/parlin" component={Parlin} />
       <Route path="/specialty" component={Specialty} />
       <Route path="/outpatient" component={Outpatient} />
-      
+
       <Route path="/locations" component={Locations} />
       <Route path="/locations/map" component={LocationsMap} />
       <Route path="/locations/family" component={GeorgiesFamily} />
@@ -86,9 +86,15 @@ function Router() {
       <Route path="/locations/parlin" component={GeorgiesParlin} />
       <Route path="/locations/outpatient" component={GeorgiesOutpatient} />
       <Route path="/locations/family-pharmacy" component={FamilyPharmacy} />
-      <Route path="/locations/specialty-pharmacy" component={SpecialtyPharmacy} />
+      <Route
+        path="/locations/specialty-pharmacy"
+        component={SpecialtyPharmacy}
+      />
       <Route path="/locations/parlin-pharmacy" component={ParlinPharmacy} />
-      <Route path="/locations/outpatient-pharmacy" component={OutpatientPharmacy} />
+      <Route
+        path="/locations/outpatient-pharmacy"
+        component={OutpatientPharmacy}
+      />
       <Route path="/pet-medications" component={PetMedications} />
       <Route path="/best-prices" component={BestPrices} />
       <Route path="/partners" component={Partners} />
@@ -113,7 +119,7 @@ function Router() {
       <Route path="/otc-store" component={OTCProducts} />
       <Route path="/checkout" component={Checkout} />
       <Route path="/blog" component={Blog} />
-      
+
       <Route component={Redirect404} />
     </Switch>
   );

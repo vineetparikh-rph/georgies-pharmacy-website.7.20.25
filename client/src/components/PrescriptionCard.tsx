@@ -21,29 +21,45 @@ const statusLabels = {
   filled: "Filled",
 };
 
-export default function PrescriptionCard({ prescription, onRefill }: PrescriptionCardProps) {
-  const isRefillDisabled = prescription.status === "processing" || prescription.refillsLeft === 0;
+export default function PrescriptionCard({
+  prescription,
+  onRefill,
+}: PrescriptionCardProps) {
+  const isRefillDisabled =
+    prescription.status === "processing" || prescription.refillsLeft === 0;
 
   return (
     <div className="bg-white rounded-xl p-6 shadow-sm border border-slate-200">
       <div className="flex justify-between items-start mb-4">
         <div>
-          <h3 className="font-semibold text-slate-900">{prescription.medicationName}</h3>
+          <h3 className="font-semibold text-slate-900">
+            {prescription.medicationName}
+          </h3>
           <p className="text-sm text-slate-600">{prescription.instructions}</p>
         </div>
-        <Badge className={statusColors[prescription.status as keyof typeof statusColors]}>
+        <Badge
+          className={
+            statusColors[prescription.status as keyof typeof statusColors]
+          }
+        >
           {statusLabels[prescription.status as keyof typeof statusLabels]}
         </Badge>
       </div>
-      
+
       <div className="grid grid-cols-2 gap-4 mb-4">
         <div>
-          <p className="text-xs text-slate-500 uppercase tracking-wide">Rx Number</p>
+          <p className="text-xs text-slate-500 uppercase tracking-wide">
+            Rx Number
+          </p>
           <p className="font-medium text-slate-900">{prescription.rxNumber}</p>
         </div>
         <div>
-          <p className="text-xs text-slate-500 uppercase tracking-wide">Refills Left</p>
-          <p className="font-medium text-slate-900">{prescription.refillsLeft}</p>
+          <p className="text-xs text-slate-500 uppercase tracking-wide">
+            Refills Left
+          </p>
+          <p className="font-medium text-slate-900">
+            {prescription.refillsLeft}
+          </p>
         </div>
       </div>
 
@@ -53,9 +69,14 @@ export default function PrescriptionCard({ prescription, onRefill }: Prescriptio
           disabled={isRefillDisabled}
           className="flex-1 bg-primary text-white hover:bg-primary/90 disabled:bg-slate-200 disabled:text-slate-400"
         >
-          {prescription.status === "processing" ? "Processing..." : "Refill Now"}
+          {prescription.status === "processing"
+            ? "Processing..."
+            : "Refill Now"}
         </Button>
-        <Button variant="outline" className="border-slate-300 text-slate-700 hover:bg-slate-50">
+        <Button
+          variant="outline"
+          className="border-slate-300 text-slate-700 hover:bg-slate-50"
+        >
           Details
         </Button>
       </div>

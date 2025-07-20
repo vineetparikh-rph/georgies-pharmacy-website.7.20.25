@@ -1,7 +1,13 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Phone, Clock, Calendar, Users, Heart, Shield } from "lucide-react";
 
@@ -9,7 +15,7 @@ export default function Consultations() {
   return (
     <div className="min-h-screen bg-gray-50">
       <Navigation />
-      
+
       <main className="py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Hero Section */}
@@ -18,9 +24,10 @@ export default function Consultations() {
               Pharmacy Consultations
             </h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Get expert medication guidance from our licensed pharmacists. 
-              We provide personalized consultations to help you understand your medications, 
-              manage side effects, and optimize your treatment plan.
+              Get expert medication guidance from our licensed pharmacists. We
+              provide personalized consultations to help you understand your
+              medications, manage side effects, and optimize your treatment
+              plan.
             </p>
           </div>
 
@@ -33,7 +40,8 @@ export default function Consultations() {
                 </div>
                 <CardTitle>Medication Review</CardTitle>
                 <CardDescription>
-                  Comprehensive review of all your medications to identify interactions and optimize therapy
+                  Comprehensive review of all your medications to identify
+                  interactions and optimize therapy
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -73,7 +81,8 @@ export default function Consultations() {
                 </div>
                 <CardTitle>Chronic Care Management</CardTitle>
                 <CardDescription>
-                  Specialized support for managing chronic conditions through medication therapy
+                  Specialized support for managing chronic conditions through
+                  medication therapy
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -89,35 +98,45 @@ export default function Consultations() {
 
           {/* How It Works */}
           <section className="mb-12">
-            <h2 className="text-3xl font-bold text-center mb-8">How Our Consultations Work</h2>
+            <h2 className="text-3xl font-bold text-center mb-8">
+              How Our Consultations Work
+            </h2>
             <div className="grid md:grid-cols-4 gap-6">
               <div className="text-center">
                 <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
                   <span className="text-white font-bold text-xl">1</span>
                 </div>
                 <h3 className="font-semibold mb-2">Schedule</h3>
-                <p className="text-gray-600 text-sm">Book your consultation online or by phone</p>
+                <p className="text-gray-600 text-sm">
+                  Book your consultation online or by phone
+                </p>
               </div>
               <div className="text-center">
                 <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
                   <span className="text-white font-bold text-xl">2</span>
                 </div>
                 <h3 className="font-semibold mb-2">Prepare</h3>
-                <p className="text-gray-600 text-sm">Bring all medications and health information</p>
+                <p className="text-gray-600 text-sm">
+                  Bring all medications and health information
+                </p>
               </div>
               <div className="text-center">
                 <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
                   <span className="text-white font-bold text-xl">3</span>
                 </div>
                 <h3 className="font-semibold mb-2">Consult</h3>
-                <p className="text-gray-600 text-sm">Meet with our licensed pharmacist</p>
+                <p className="text-gray-600 text-sm">
+                  Meet with our licensed pharmacist
+                </p>
               </div>
               <div className="text-center">
                 <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
                   <span className="text-white font-bold text-xl">4</span>
                 </div>
                 <h3 className="font-semibold mb-2">Follow-up</h3>
-                <p className="text-gray-600 text-sm">Receive written recommendations and ongoing support</p>
+                <p className="text-gray-600 text-sm">
+                  Receive written recommendations and ongoing support
+                </p>
               </div>
             </div>
           </section>
@@ -125,7 +144,9 @@ export default function Consultations() {
           {/* Consultation Hours */}
           <section className="mb-12">
             <div className="bg-white rounded-lg shadow-sm p-8">
-              <h2 className="text-2xl font-bold mb-6 text-center">Consultation Hours</h2>
+              <h2 className="text-2xl font-bold mb-6 text-center">
+                Consultation Hours
+              </h2>
               <div className="grid md:grid-cols-2 gap-8">
                 <div>
                   <h3 className="font-semibold mb-4 flex items-center">
@@ -136,7 +157,9 @@ export default function Consultations() {
                     <p>Monday - Friday: 9:00 AM - 6:00 PM</p>
                     <p>Saturday: 9:00 AM - 2:00 PM</p>
                     <p>Sunday: Closed</p>
-                    <Badge variant="secondary" className="mt-2">No appointment needed</Badge>
+                    <Badge variant="secondary" className="mt-2">
+                      No appointment needed
+                    </Badge>
                   </div>
                 </div>
                 <div>
@@ -148,7 +171,9 @@ export default function Consultations() {
                     <p>Monday - Friday: 9:00 AM - 7:00 PM</p>
                     <p>Saturday: 9:00 AM - 4:00 PM</p>
                     <p>Sunday: 10:00 AM - 2:00 PM</p>
-                    <Badge variant="secondary" className="mt-2">Book in advance</Badge>
+                    <Badge variant="secondary" className="mt-2">
+                      Book in advance
+                    </Badge>
                   </div>
                 </div>
               </div>
@@ -157,7 +182,9 @@ export default function Consultations() {
 
           {/* Pricing */}
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-center mb-8">Consultation Pricing</h2>
+            <h2 className="text-2xl font-bold text-center mb-8">
+              Consultation Pricing
+            </h2>
             <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
               <Card>
                 <CardHeader className="text-center">
@@ -211,13 +238,21 @@ export default function Consultations() {
 
           {/* CTA Section */}
           <section className="text-center bg-gradient-to-r from-primary to-red-900 rounded-2xl p-8 text-white">
-            <h2 className="text-3xl font-bold mb-4">Ready to Schedule Your Consultation?</h2>
+            <h2 className="text-3xl font-bold mb-4">
+              Ready to Schedule Your Consultation?
+            </h2>
             <p className="text-xl text-red-100 mb-8">
-              Our licensed pharmacists are here to help you get the most from your medications.
+              Our licensed pharmacists are here to help you get the most from
+              your medications.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
-                onClick={() => window.open('https://3156177.winrxrefill.com/Secure', '_blank')}
+                onClick={() =>
+                  window.open(
+                    "https://3156177.winrxrefill.com/Secure",
+                    "_blank",
+                  )
+                }
                 size="lg"
                 variant="secondary"
                 className="bg-white text-primary hover:bg-red-50 px-8 py-4 text-lg"
@@ -226,7 +261,7 @@ export default function Consultations() {
                 Schedule Online
               </Button>
               <Button
-                onClick={() => window.open('tel:732-499-7979', '_self')}
+                onClick={() => window.open("tel:732-499-7979", "_self")}
                 size="lg"
                 variant="outline"
                 className="border-white text-white hover:bg-white hover:text-primary px-8 py-4 text-lg"

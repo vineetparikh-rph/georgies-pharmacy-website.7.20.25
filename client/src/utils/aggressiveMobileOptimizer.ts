@@ -19,37 +19,42 @@ export const eliminateRenderBlocking = () => {
     `;
 
     // Replace existing styles with minimal critical CSS
-    const existingStyles = document.querySelectorAll('style, link[rel="stylesheet"]');
-    existingStyles.forEach(style => {
-      if (style.textContent?.includes('tailwind') || style.getAttribute('href')?.includes('index.css')) {
+    const existingStyles = document.querySelectorAll(
+      'style, link[rel="stylesheet"]',
+    );
+    existingStyles.forEach((style) => {
+      if (
+        style.textContent?.includes("tailwind") ||
+        style.getAttribute("href")?.includes("index.css")
+      ) {
         return; // Keep main CSS
       }
       style.remove();
     });
 
     // Add ultra-minimal styles
-    const minimalStyle = document.createElement('style');
+    const minimalStyle = document.createElement("style");
     minimalStyle.textContent = criticalOnly;
     document.head.appendChild(minimalStyle);
   }
 };
 
 export const optimizeImages = () => {
-  const images = document.querySelectorAll('img');
-  images.forEach(img => {
+  const images = document.querySelectorAll("img");
+  images.forEach((img) => {
     // Convert to WebP if supported and reduce quality on mobile
     if (window.innerWidth <= 768) {
       const src = img.src;
-      if (src.includes('unsplash.com')) {
+      if (src.includes("unsplash.com")) {
         // Ultra-compressed mobile images
         const mobileOptimized = src
-          .replace(/w=\d+/, 'w=400')
-          .replace(/h=\d+/, 'h=250')
-          .replace(/q=\d+/, 'q=50');
-        
+          .replace(/w=\d+/, "w=400")
+          .replace(/h=\d+/, "h=250")
+          .replace(/q=\d+/, "q=50");
+
         img.src = mobileOptimized;
-        img.loading = 'lazy';
-        img.decoding = 'async';
+        img.loading = "lazy";
+        img.decoding = "async";
       }
     }
   });
@@ -57,11 +62,11 @@ export const optimizeImages = () => {
 
 export const deferNonCriticalJS = () => {
   // Defer all non-critical JavaScript
-  const scripts = document.querySelectorAll('script[src]');
-  scripts.forEach(script => {
-    const src = script.getAttribute('src');
-    if (src && !src.includes('main.tsx') && !src.includes('react')) {
-      script.setAttribute('defer', '');
+  const scripts = document.querySelectorAll("script[src]");
+  scripts.forEach((script) => {
+    const src = script.getAttribute("src");
+    if (src && !src.includes("main.tsx") && !src.includes("react")) {
+      script.setAttribute("defer", "");
     }
   });
 };
@@ -70,17 +75,31 @@ export const removeUnusedCSS = () => {
   if (window.innerWidth <= 768) {
     // Remove unused CSS classes on mobile
     const unusedClasses = [
-      'shadow-xl', 'shadow-lg', 'backdrop-blur', 'blur-', 
-      'animate-', 'transition-', 'duration-', 'ease-',
-      'hover:', 'focus:', 'group-hover:', 'lg:', 'xl:', '2xl:'
+      "shadow-xl",
+      "shadow-lg",
+      "backdrop-blur",
+      "blur-",
+      "animate-",
+      "transition-",
+      "duration-",
+      "ease-",
+      "hover:",
+      "focus:",
+      "group-hover:",
+      "lg:",
+      "xl:",
+      "2xl:",
     ];
 
-    const allElements = document.querySelectorAll('*');
-    allElements.forEach(el => {
+    const allElements = document.querySelectorAll("*");
+    allElements.forEach((el) => {
       if (el instanceof HTMLElement && el.className) {
         let className = el.className;
-        unusedClasses.forEach(unused => {
-          className = className.replace(new RegExp(`\\b[^\\s]*${unused}[^\\s]*`, 'g'), '');
+        unusedClasses.forEach((unused) => {
+          className = className.replace(
+            new RegExp(`\\b[^\\s]*${unused}[^\\s]*`, "g"),
+            "",
+          );
         });
         el.className = className;
       }
@@ -91,7 +110,7 @@ export const removeUnusedCSS = () => {
 export const optimizeFonts = () => {
   // Use only system fonts on mobile
   if (window.innerWidth <= 768) {
-    const fontStyle = document.createElement('style');
+    const fontStyle = document.createElement("style");
     fontStyle.textContent = `
       * { font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif !important; }
     `;
@@ -103,10 +122,10 @@ export const initAggressiveOptimizations = () => {
   // Run immediately for critical path
   eliminateRenderBlocking();
   optimizeFonts();
-  
+
   // Run after DOM content loaded
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", () => {
       optimizeImages();
       deferNonCriticalJS();
       removeUnusedCSS();

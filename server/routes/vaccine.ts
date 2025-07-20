@@ -9,7 +9,9 @@ router.post("/api/vaccine", async (req: Request, res: Response) => {
     res.json({ success: true });
   } catch (err) {
     console.error("Vaccine Error:", err);
-    res.status(500).json({ success: false, error: "Vaccine processing failed." });
+    res
+      .status(500)
+      .json({ success: false, error: "Vaccine processing failed." });
   }
 });
 

@@ -1,22 +1,28 @@
-import { useState } from 'react';
-import { useQuery, useMutation } from '@tanstack/react-query';
-import { apiRequest, queryClient } from '@/lib/queryClient';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { useToast } from '@/hooks/use-toast';
-import { 
-  ShoppingCart, 
-  Truck, 
-  Package, 
-  Store, 
-  CheckCircle, 
-  XCircle, 
+import { useState } from "react";
+import { useQuery, useMutation } from "@tanstack/react-query";
+import { apiRequest, queryClient } from "@/lib/queryClient";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { useToast } from "@/hooks/use-toast";
+import {
+  ShoppingCart,
+  Truck,
+  Package,
+  Store,
+  CheckCircle,
+  XCircle,
   Loader2,
   RefreshCw,
-  ExternalLink
-} from 'lucide-react';
+  ExternalLink,
+} from "lucide-react";
 
 interface PlatformStatus {
   [platform: string]: {
@@ -29,46 +35,46 @@ interface Platform {
   name: string;
   icon: React.ReactNode;
   description: string;
-  category: 'marketplace' | 'delivery' | 'retail';
+  category: "marketplace" | "delivery" | "retail";
   color: string;
 }
 
 const platformInfo: Record<string, Platform> = {
   amazon: {
-    name: 'Amazon',
+    name: "Amazon",
     icon: <Package className="h-5 w-5" />,
-    description: 'Global marketplace with millions of customers',
-    category: 'marketplace',
-    color: 'bg-orange-500'
+    description: "Global marketplace with millions of customers",
+    category: "marketplace",
+    color: "bg-orange-500",
   },
   uber: {
-    name: 'Uber Direct',
+    name: "Uber Direct",
     icon: <Truck className="h-5 w-5" />,
-    description: 'On-demand local delivery service',
-    category: 'delivery',
-    color: 'bg-black'
+    description: "On-demand local delivery service",
+    category: "delivery",
+    color: "bg-black",
   },
   instacart: {
-    name: 'Instacart',
+    name: "Instacart",
     icon: <ShoppingCart className="h-5 w-5" />,
-    description: 'Same-day grocery and pharmacy delivery',
-    category: 'delivery',
-    color: 'bg-green-500'
+    description: "Same-day grocery and pharmacy delivery",
+    category: "delivery",
+    color: "bg-green-500",
   },
   doordash: {
-    name: 'DoorDash',
+    name: "DoorDash",
     icon: <Store className="h-5 w-5" />,
-    description: 'Food and retail delivery platform',
-    category: 'delivery',
-    color: 'bg-red-500'
+    description: "Food and retail delivery platform",
+    category: "delivery",
+    color: "bg-red-500",
   },
   postmates: {
-    name: 'Postmates',
+    name: "Postmates",
     icon: <Truck className="h-5 w-5" />,
-    description: 'Local delivery network',
-    category: 'delivery',
-    color: 'bg-yellow-500'
-  }
+    description: "Local delivery network",
+    category: "delivery",
+    color: "bg-yellow-500",
+  },
 };
 
 interface MultiPlatformManagerProps {
@@ -76,27 +82,30 @@ interface MultiPlatformManagerProps {
   storeLocation?: string;
 }
 
-export default function MultiPlatformManager({ productId, storeLocation }: MultiPlatformManagerProps) {
+export default function MultiPlatformManager({
+  productId,
+  storeLocation,
+}: MultiPlatformManagerProps) {
   const { toast } = useToast();
   const [syncingPlatforms, setSyncingPlatforms] = useState<string[]>([]);
 
   // Fetch platform status
   const { data: platformData, isLoading: statusLoading } = useQuery({
-    queryKey: ['/api/platforms/status'],
-    queryFn: () => apiRequest('GET', '/api/platforms/status')
+    queryKey: ["/api/platforms/status"],
+    queryFn: () => apiRequest("GET", "/api/platforms/status"),
   });
 
   // Sync product to platforms mutation
   const syncProductMutation = useMutation({
     mutationFn: async (data: { productId: string; storeLocation: string }) => {
-      return apiRequest('POST', '/api/otc-products/sync-platforms', data);
+      return apiRequest("POST", "/api/otc-products/sync-platforms", data);
     },
     onSuccess: (data) => {
       toast({
         title: "Platform Sync Complete",
         description: `Product synced to ${data.platformResults ? Object.keys(data.platformResults).length : 0} platforms`,
       });
-      queryClient.invalidateQueries({ queryKey: ['/api/platforms/status'] });
+      queryClient.invalidateQueries({ queryKey: ["/api/platforms/status"] });
     },
     onError: (error: any) => {
       toast({
@@ -104,7 +113,7 @@ export default function MultiPlatformManager({ productId, storeLocation }: Multi
         description: error.message || "Failed to sync product to platforms",
         variant: "destructive",
       });
-    }
+    },
   });
 
   const handleSyncProduct = () => {
@@ -146,14 +155,16 @@ export default function MultiPlatformManager({ productId, storeLocation }: Multi
             Multi-Platform Sales Dashboard
           </CardTitle>
           <CardDescription>
-            Sell your OTC products across multiple online platforms and delivery services
+            Sell your OTC products across multiple online platforms and delivery
+            services
           </CardDescription>
         </CardHeader>
         <CardContent>
           {!hasConfigured && (
             <Alert className="mb-6">
               <AlertDescription>
-                No platforms are configured yet. Set up your API credentials to start selling across multiple channels.
+                No platforms are configured yet. Set up your API credentials to
+                start selling across multiple channels.
               </AlertDescription>
             </Alert>
           )}
@@ -169,18 +180,22 @@ export default function MultiPlatformManager({ productId, storeLocation }: Multi
                   <CardHeader className="pb-3">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
-                        <div className={`p-2 rounded-lg ${platform.color} text-white`}>
+                        <div
+                          className={`p-2 rounded-lg ${platform.color} text-white`}
+                        >
                           {platform.icon}
                         </div>
                         <div>
-                          <CardTitle className="text-sm">{platform.name}</CardTitle>
+                          <CardTitle className="text-sm">
+                            {platform.name}
+                          </CardTitle>
                           <p className="text-xs text-muted-foreground capitalize">
                             {platform.category}
                           </p>
                         </div>
                       </div>
                       <div className="flex flex-col gap-1">
-                        <Badge 
+                        <Badge
                           variant={isConfigured ? "default" : "secondary"}
                           className="text-xs"
                         >
@@ -189,7 +204,7 @@ export default function MultiPlatformManager({ productId, storeLocation }: Multi
                           ) : (
                             <XCircle className="h-3 w-3 mr-1" />
                           )}
-                          {isConfigured ? 'Ready' : 'Setup Required'}
+                          {isConfigured ? "Ready" : "Setup Required"}
                         </Badge>
                         {isEnabled && (
                           <Badge variant="outline" className="text-xs">
@@ -229,7 +244,7 @@ export default function MultiPlatformManager({ productId, storeLocation }: Multi
             <div className="mt-6 p-4 bg-muted rounded-lg">
               <h4 className="font-medium mb-2">Product Sync Actions</h4>
               <div className="flex items-center gap-4">
-                <Button 
+                <Button
                   onClick={handleSyncProduct}
                   disabled={syncProductMutation.isPending}
                   className="flex items-center gap-2"
@@ -242,7 +257,8 @@ export default function MultiPlatformManager({ productId, storeLocation }: Multi
                   Sync to All Platforms
                 </Button>
                 <div className="text-sm text-muted-foreground">
-                  Sync this product to {enabledPlatforms.length} enabled platform{enabledPlatforms.length !== 1 ? 's' : ''}
+                  Sync this product to {enabledPlatforms.length} enabled
+                  platform{enabledPlatforms.length !== 1 ? "s" : ""}
                 </div>
               </div>
             </div>
@@ -253,7 +269,11 @@ export default function MultiPlatformManager({ productId, storeLocation }: Multi
               <h4 className="font-medium mb-3">Active Platforms</h4>
               <div className="flex flex-wrap gap-2">
                 {enabledPlatforms.map((platformName) => (
-                  <Badge key={platformName} variant="outline" className="flex items-center gap-1">
+                  <Badge
+                    key={platformName}
+                    variant="outline"
+                    className="flex items-center gap-1"
+                  >
                     <CheckCircle className="h-3 w-3 text-green-500" />
                     {platformName}
                   </Badge>
@@ -273,7 +293,8 @@ export default function MultiPlatformManager({ productId, storeLocation }: Multi
             <div className="space-y-2">
               <h5 className="font-medium">Expanded Reach</h5>
               <p className="text-sm text-muted-foreground">
-                Access millions of customers across different platforms and demographics
+                Access millions of customers across different platforms and
+                demographics
               </p>
             </div>
             <div className="space-y-2">
@@ -291,7 +312,8 @@ export default function MultiPlatformManager({ productId, storeLocation }: Multi
             <div className="space-y-2">
               <h5 className="font-medium">Flexible Delivery</h5>
               <p className="text-sm text-muted-foreground">
-                Offer pickup, delivery, and shipping options to meet customer needs
+                Offer pickup, delivery, and shipping options to meet customer
+                needs
               </p>
             </div>
           </div>

@@ -1,5 +1,10 @@
 import { useState, useEffect, useRef } from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -34,7 +39,9 @@ export default function ChatModal({ open, onClose }: ChatModalProps) {
       return response.json();
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["/api/patient/1/chat-messages"] });
+      queryClient.invalidateQueries({
+        queryKey: ["/api/patient/1/chat-messages"],
+      });
       setMessage("");
     },
   });
@@ -60,13 +67,17 @@ export default function ChatModal({ open, onClose }: ChatModalProps) {
           <DialogTitle>Chat Support</DialogTitle>
           <p className="text-sm text-slate-600">We're here to help</p>
         </DialogHeader>
-        
+
         <ScrollArea className="flex-1 pr-4" ref={scrollAreaRef}>
           <div className="space-y-4">
             {isLoading ? (
-              <div className="text-center text-slate-500">Loading messages...</div>
+              <div className="text-center text-slate-500">
+                Loading messages...
+              </div>
             ) : messages?.length === 0 ? (
-              <div className="text-center text-slate-500">Start a conversation</div>
+              <div className="text-center text-slate-500">
+                Start a conversation
+              </div>
             ) : (
               messages?.map((msg) => (
                 <div
@@ -95,7 +106,7 @@ export default function ChatModal({ open, onClose }: ChatModalProps) {
             )}
           </div>
         </ScrollArea>
-        
+
         <form onSubmit={handleSubmit} className="flex space-x-2 pt-4 border-t">
           <Input
             value={message}
@@ -104,8 +115,8 @@ export default function ChatModal({ open, onClose }: ChatModalProps) {
             className="flex-1"
             disabled={sendMessageMutation.isPending}
           />
-          <Button 
-            type="submit" 
+          <Button
+            type="submit"
             size="icon"
             className="bg-success text-white hover:bg-success/90"
             disabled={!message.trim() || sendMessageMutation.isPending}

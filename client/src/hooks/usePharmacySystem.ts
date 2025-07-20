@@ -52,8 +52,12 @@ export function usePharmacySystemAuth() {
     },
     onSuccess: () => {
       // Refresh the status query after successful authentication
-      queryClient.invalidateQueries({ queryKey: ["/api/pharmacy-system/status"] });
-      queryClient.invalidateQueries({ queryKey: ["/api/pharmacy-system/prescriptions"] });
+      queryClient.invalidateQueries({
+        queryKey: ["/api/pharmacy-system/status"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["/api/pharmacy-system/prescriptions"],
+      });
     },
   });
 
@@ -65,8 +69,12 @@ export function usePharmacySystemAuth() {
     },
     onSuccess: () => {
       // Clear all pharmacy system related queries
-      queryClient.invalidateQueries({ queryKey: ["/api/pharmacy-system/status"] });
-      queryClient.removeQueries({ queryKey: ["/api/pharmacy-system/prescriptions"] });
+      queryClient.invalidateQueries({
+        queryKey: ["/api/pharmacy-system/status"],
+      });
+      queryClient.removeQueries({
+        queryKey: ["/api/pharmacy-system/prescriptions"],
+      });
     },
   });
 
@@ -96,8 +104,12 @@ export function usePharmacySystemRefill() {
     },
     onSuccess: () => {
       // Refresh prescriptions and refill requests after successful refill
-      queryClient.invalidateQueries({ queryKey: ["/api/pharmacy-system/prescriptions"] });
-      queryClient.invalidateQueries({ queryKey: ["/api/patient/1/refill-requests"] });
+      queryClient.invalidateQueries({
+        queryKey: ["/api/pharmacy-system/prescriptions"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["/api/patient/1/refill-requests"],
+      });
     },
   });
 }
@@ -124,9 +136,9 @@ export function usePharmacySystem() {
       await auth.authenticate.mutateAsync(credentials);
       return { success: true };
     } catch (error) {
-      return { 
-        success: false, 
-        error: error instanceof Error ? error.message : "Authentication failed" 
+      return {
+        success: false,
+        error: error instanceof Error ? error.message : "Authentication failed",
       };
     }
   };
@@ -137,9 +149,9 @@ export function usePharmacySystem() {
       setIsConnected(false);
       return { success: true };
     } catch (error) {
-      return { 
-        success: false, 
-        error: error instanceof Error ? error.message : "Logout failed" 
+      return {
+        success: false,
+        error: error instanceof Error ? error.message : "Logout failed",
       };
     }
   };
@@ -149,9 +161,9 @@ export function usePharmacySystem() {
       await refill.mutateAsync(refillData);
       return { success: true };
     } catch (error) {
-      return { 
-        success: false, 
-        error: error instanceof Error ? error.message : "Refill request failed" 
+      return {
+        success: false,
+        error: error instanceof Error ? error.message : "Refill request failed",
       };
     }
   };
@@ -161,9 +173,9 @@ export function usePharmacySystem() {
       await prescriptions.refetch();
       return { success: true };
     } catch (error) {
-      return { 
-        success: false, 
-        error: error instanceof Error ? error.message : "Sync failed" 
+      return {
+        success: false,
+        error: error instanceof Error ? error.message : "Sync failed",
       };
     }
   };
@@ -171,19 +183,20 @@ export function usePharmacySystem() {
   return {
     // Status
     isConnected,
-    isLoading: status.isLoading || auth.authenticate.isPending || auth.logout.isPending,
+    isLoading:
+      status.isLoading || auth.authenticate.isPending || auth.logout.isPending,
     pharmacyStatus: status.data as PharmacySystemStatus | undefined,
-    
+
     // Data
     pharmacyPrescriptions: prescriptions.data,
     prescriptionsLoading: prescriptions.isLoading,
-    
+
     // Actions
     connectToPharmacySystem,
     disconnectFromPharmacySystem,
     submitRefillRequest,
     syncPrescriptions,
-    
+
     // Loading states
     authenticating: auth.authenticate.isPending,
     refillSubmitting: refill.isPending,

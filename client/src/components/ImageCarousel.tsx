@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
-import LazyImage from './LazyImage';
+import React, { useState, useEffect } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import LazyImage from "./LazyImage";
 
 interface CarouselImage {
   id: number;
@@ -25,7 +25,7 @@ export default function ImageCarousel({
   autoPlayInterval = 5000,
   showIndicators = true,
   showArrows = true,
-  className = ""
+  className = "",
 }: ImageCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
@@ -51,7 +51,9 @@ export default function ImageCarousel({
   const prevSlide = () => {
     if (isTransitioning) return;
     setIsTransitioning(true);
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
+    setCurrentIndex(
+      (prevIndex) => (prevIndex - 1 + images.length) % images.length,
+    );
     setTimeout(() => setIsTransitioning(false), 600);
   };
 
@@ -67,14 +69,16 @@ export default function ImageCarousel({
   }
 
   return (
-    <div className={`relative w-full h-full overflow-hidden rounded-lg shadow-lg ${className}`}>
+    <div
+      className={`relative w-full h-full overflow-hidden rounded-lg shadow-lg ${className}`}
+    >
       {/* Image Container */}
       <div className="relative w-full h-full">
         {images.map((image, index) => (
           <div
             key={image.id}
             className={`absolute inset-0 transition-opacity duration-600 ease-in-out ${
-              index === currentIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'
+              index === currentIndex ? "opacity-100 z-10" : "opacity-0 z-0"
             }`}
           >
             <LazyImage
@@ -83,8 +87,6 @@ export default function ImageCarousel({
               className="w-full h-full object-cover"
               loading={index === currentIndex ? "eager" : "lazy"}
             />
-            
-
           </div>
         ))}
       </div>
@@ -100,7 +102,7 @@ export default function ImageCarousel({
           >
             <ChevronLeft className="w-4 h-4 sm:w-6 sm:h-6 text-white" />
           </button>
-          
+
           <button
             onClick={nextSlide}
             disabled={isTransitioning}
@@ -122,8 +124,8 @@ export default function ImageCarousel({
               disabled={isTransitioning}
               className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all duration-300 ${
                 index === currentIndex
-                  ? 'bg-white scale-125'
-                  : 'bg-white/50 hover:bg-white/75'
+                  ? "bg-white scale-125"
+                  : "bg-white/50 hover:bg-white/75"
               }`}
               aria-label={`Go to slide ${index + 1}`}
             />

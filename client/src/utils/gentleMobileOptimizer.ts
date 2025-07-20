@@ -9,12 +9,12 @@ export const optimizeImagesGently = () => {
 
   // Add loading="lazy" to non-critical images
   setTimeout(() => {
-    const images = document.querySelectorAll('img');
+    const images = document.querySelectorAll("img");
     images.forEach((img, index) => {
       // Keep first 2 images eager, make rest lazy
       if (index > 1) {
-        img.setAttribute('loading', 'lazy');
-        img.setAttribute('decoding', 'async');
+        img.setAttribute("loading", "lazy");
+        img.setAttribute("decoding", "async");
       }
     });
   }, 1000);
@@ -23,7 +23,7 @@ export const optimizeImagesGently = () => {
 export const reduceMobileAnimations = () => {
   if (!isMobile()) return;
 
-  const style = document.createElement('style');
+  const style = document.createElement("style");
   style.textContent = `
     @media (max-width: 768px) {
       .animate-pulse { animation-duration: 2s; }
@@ -37,7 +37,7 @@ export const reduceMobileAnimations = () => {
 
 export const optimizeFontsGently = () => {
   // Add font-display: swap for better loading
-  const style = document.createElement('style');
+  const style = document.createElement("style");
   style.textContent = `
     @font-face {
       font-display: swap;
@@ -49,9 +49,9 @@ export const optimizeFontsGently = () => {
 export const initGentleOptimizations = () => {
   // Only run gentle optimizations
   optimizeFontsGently();
-  
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", () => {
       optimizeImagesGently();
       reduceMobileAnimations();
     });
